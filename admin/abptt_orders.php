@@ -147,7 +147,7 @@
                                     <div class="_group_content">
                                         <?php do_action('abptt_order_action', ($booking_list['id'] ?? ''));
                                             if (in_array($order_status, $booked_status, true)) { ?>
-                                                <button class="_btn_light_danger_xxs item_cancel" data-item_id="<?php echo esc_attr($booking_list['id'] ?? ''); ?>" title="<?php esc_attr_e('Ticket Cancel', 'abp-tour-travel'); ?>" type="button"><?php ABPTT_Static::icon_svg('close_2'); ?></button>
+                                                <button class="_btn_light_danger_xxs item_cancel" data-item_id="<?php echo esc_attr($booking_list['id'] ?? ''); ?>" title="<?php esc_attr_e('Ticket Cancel', 'abp-tour-travel'); ?>" type="button"><?php ABPTT_Static::svg('close_2'); ?></button>
                                             <?php } ?>
                                     </div>
                                 </th>

@@ -9,7 +9,7 @@
 				add_shortcode( 'abptt-post', array( $this, 'post_list' ) );
 				add_shortcode( 'abptt-gallery', array( $this, 'gallery' ) );
 			}
-			public function booking( $attribute ): bool|string {
+			public function booking( $attribute ) {
 				$params  = self::normalize_attributes( $attribute );
 				$post_id = absint( $params['post_id'] ?? 0 );
 				nocache_headers();
@@ -49,7 +49,7 @@
 				}
 				return ob_get_clean();
 			}
-			public function post_list( $attribute ): bool|string {
+			public function post_list( $attribute ) {
 				$params  = self::normalize_attributes( $attribute );
 				$post_id = absint( $params['post_id'] ?? 0 );
 				nocache_headers();
@@ -89,7 +89,7 @@
 				}
 				return ob_get_clean();
 			}
-			public function gallery( $attribute ): bool|string {
+			public function gallery( $attribute ) {
 				$params           = self::normalize_attributes( $attribute );
 				$post_id          = absint( $params['post_id'] ?? 0 );
 				$normalize_images = static function ( $images ): string {

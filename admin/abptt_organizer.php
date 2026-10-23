@@ -17,11 +17,12 @@
 				if ( ABPTT_Function::on_off( 'organizer' ) ) {
 					$label = ABPTT_Function::organizer_label(); ?>
                     <div class="_fj_between">
-                        <h5 class="abp"><span class="_mar_r_xs">🏢</span><?php echo esc_html( $label ); ?></h5>
+                        <h4 class="abp_color_theme_gap_xs">🏢<?php echo esc_html( __( 'Global', 'abp-tour-travel' ) . ' ' . $label . ' ' . __( 'Configuration', 'abp-tour-travel' ) ); ?></h4>
 						<?php ABPTT_Layout::button_global_popup( 'tax_organizer', __( 'Add New', 'abp-tour-travel' ) . ' ' . $label ); ?>
                     </div>
 					<?php ABPTT_Layout::info_text( 'abptt_organizer' ); ?>
-                    <div class="tax_organizer _ov_auto_mar_t_xs">
+                    <div class="_divider_xxs"></div>
+                    <div class="tax_organizer _ov_auto">
 						<?php $this->organizer_list(); ?>
                     </div>
 					<?php
@@ -191,8 +192,8 @@
                                 <th>
                                     <div class="_fj_center">
                                         <div class="_group_content">
-                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('tax_organizer','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::icon_svg( 'edit' ); ?></button>
-                                            <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('tax_organizer','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::icon_svg( 'close_1' ); ?></button>
+                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('tax_organizer','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::svg( 'edit' ); ?></button>
+                                            <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('tax_organizer','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::svg( 'close_1' ); ?></button>
                                         </div>
                                     </div>
                                 </th>

@@ -5,6 +5,8 @@
     add_action('abptt_ticket_type_template', function ($post_infos, $form_data = []) {
         if (!empty($post_infos)) {
             $start_date = $form_data['tour_date'] ?? ( $form_data['start_date'] ?? '' );
+            $start_date = !empty($start_date) ? gmdate('Y-m-d', strtotime($start_date)) : '';
+            $session_time = $form_data['session_time'] ?? ( $form_data['start_time'] ?? '' );
             $display_ticket_type = $post_infos['display_ticket_type'] ?? 'on';
             $display_ticket_type = ABPTT_Function::on_off('ticket_type') ? $display_ticket_type : 'off';
             $ticket_infos = [];
@@ -18,12 +20,21 @@
                     $ticket_infos = $_ticket_infos;
                 }
 	            $sold_infos = ABPTT_Query::get_sold_ticket($form_data);
+                $slot_available = ABPTT_Function::slot_available(
+                    absint($post_infos['post_id'] ?? 0),
+                    ABPTT_Function::schedule_time_infos($post_infos),
+                    $start_date,
+                    $session_time
+                );
                 foreach ($ticket_infos as $key => $ticket_info) {
                     $price = ABPTT_Function::get_price($post_infos, $key, $start_date);
                     $sold = $sold_infos[$key] ?? 0;
-                    $qty = $ticket_info['qty'] ?? 0;
-                    $reserve = $ticket_info['reserve'] ?? 0;
-                    $available = $qty - $sold - $reserve;
+                    $qty = intval($ticket_info['qty'] ?? 0);
+                    $reserve = intval($ticket_info['reserve'] ?? 0);
+                    $available = max(0, $qty - $sold - $reserve);
+                    if (null !== $slot_available) {
+                        $available = min($available, $slot_available);
+                    }
                     $ticket_info['available'] = $available;
                     ?>
                     <div class="ticket_item _section_card_xs_w_full">

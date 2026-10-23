@@ -79,15 +79,37 @@
 			//==============================//
 			public static function button_add( $button_text, $class = '', $button_class = '' ): void {
 				$class        = $class ?: 'add_new_hook';
-				$button_class = $button_class ?: '_btn_light_active_xs';
+				$button_class = $button_class ?: '_btn_light_active_xs_br_no';
 				$button_text  = $button_text ?: __( 'Add New', 'abp-tour-travel' );
 				?>
                 <button class="<?php echo esc_attr( $button_class . ' ' . $class ); ?>" type="button">
-					<?php ABPTT_Static::icon_svg( 'plus' );
+					<?php ABPTT_Static::svg( 'plus' );
 						echo esc_html( $button_text ); ?>
                 </button>
 				<?php
 			}
+            public static function button_save($text = '', $class = ''): void {
+                $class = $class ?: '_btn_green_pale_xs_br_no';
+                $text = $text ?: __('save', 'abp-tour-travel');
+                ?>
+                <button class="<?php echo esc_attr($class); ?>" type="submit">
+                    <?php ABPTT_Static::svg('save');
+                        echo esc_html($text); ?>
+                </button>
+                <?php
+            }
+            public static function button_global_save( $action, $text = '', $class = '' ): void {
+                if ( ! empty( $action ) ) {
+                    $class = $class ?: '_btn_green_pale_xs_br_no';
+                    $text  = $text ?: __( 'save', 'abp-tour-travel' );
+                    ?>
+                    <button class="<?php echo esc_attr( $class ); ?>" type="button" onclick="abptt_save_global('<?php echo esc_attr( $action ); ?>',this)">
+                        <?php ABPTT_Static::svg( 'save' );
+                            echo esc_html( $text ); ?>
+                    </button>
+                    <?php
+                }
+            }
 			public static function button_delete_sort_edit(): void {
 				?>
                 <div class="_all_center">
@@ -116,41 +138,30 @@
 			public static function button_edit( $class_edit = 'edit_hook' ): void {
 				?>
                 <button class="_btn_light_navy_blue_xs <?php echo esc_attr( $class_edit ); ?>" type="button" title="<?php esc_attr_e( 'Edit This Item', 'abp-tour-travel' ); ?>">
-					<?php ABPTT_Static::icon_svg( 'edit' ); ?>
+					<?php ABPTT_Static::svg( 'edit' ); ?>
                 </button>
 				<?php
 			}
 			public static function button_delete( $class = 'delete_hook' ): void {
 				?>
-                <button class="_btn_light_danger_xxs <?php echo esc_attr( $class ); ?>" type="button" title="<?php esc_attr_e( 'Delete This Item', 'abp-tour-travel' ); ?>"><?php ABPTT_Static::icon_svg( 'close_1' ); ?></button>
+                <button class="_btn_light_danger_xxs <?php echo esc_attr( $class ); ?>" type="button" title="<?php esc_attr_e( 'Delete This Item', 'abp-tour-travel' ); ?>"><?php ABPTT_Static::svg( 'close_1' ); ?></button>
 				<?php
 			}
 			public static function button_sort(): void {
 				?>
                 <div class="_btn_light_info_xxs sortable_handle" type="button" title="<?php esc_attr_e( 'Move This Item', 'abp-tour-travel' ); ?>">
-					<?php ABPTT_Static::icon_svg( 'drag' ); ?>
+					<?php ABPTT_Static::svg( 'drag' ); ?>
                 </div>
 				<?php
 			}
-			public static function button_global_save( $action, $text = '', $class = '' ): void {
-				if ( ! empty( $action ) ) {
-					$class = $class ?: '_btn_theme_xs';
-					$text  = $text ?: __( 'save', 'abp-tour-travel' );
-					?>
-                    <button class="<?php echo esc_attr( $class ); ?>" type="button" onclick="abptt_save_global('<?php echo esc_attr( $action ); ?>',this)">
-						<?php ABPTT_Static::icon_svg( 'save' );
-							echo esc_html( $text ); ?>
-                    </button>
-					<?php
-				}
-			}
+
 			public static function button_global_popup( $action, $text = '', $class = '' ): void {
 				if ( ! empty( $action ) ) {
 					$class = $class ?: '_btn_light_active_xs';
 					$text  = $text ?: __( 'Add New', 'abp-tour-travel' );
 					?>
                     <button type="button" class="<?php echo esc_attr( $class ) ?>" onclick="abptt_popup_open_global('<?php echo esc_attr( $action ); ?>')">
-						<?php ABPTT_Static::icon_svg( 'plus' );
+						<?php ABPTT_Static::svg( 'plus' );
 							echo esc_html( $text ); ?>
                     </button>
 					<?php
@@ -196,14 +207,14 @@
 					echo '<div class="abp_bg_info_padding_xxs _all_center _color_5">' . esc_html( $data ) . '</div>';
 				}
 			}
-			public static function on(): bool|string {
+			public static function on() {
 				ob_start();
 				?>
                 <strong class="abp_color_theme"> <?php esc_html_e( 'ON', 'abp-tour-travel' ); ?></strong>
 				<?php
 				return ob_get_clean();
 			}
-			public static function off(): bool|string {
+			public static function off() {
 				ob_start();
 				?>
                 <strong class="abp_color_theme"> <?php esc_html_e( 'OFF', 'abp-tour-travel' ); ?></strong>
@@ -224,14 +235,14 @@
 					}
 					?>
                     <div class="_group_content qty_input">
-                        <div class="qty_decrease _ag_content"><?php ABPTT_Static::icon_svg( 'minus_1' ); ?></div>
+                        <div class="qty_decrease _ag_content"><?php ABPTT_Static::svg( 'minus_1' ); ?></div>
                         <label>
                             <input type="text" class="_form_control  validation_number <?php echo esc_attr( $class ); ?>"
                                    name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $min_qty ); ?>"
                                    data-price="<?php echo esc_attr( $price ); ?>" data-min="<?php echo esc_attr( $min_qty ); ?>" data-max="<?php echo esc_attr( $max_qty ); ?>"
                             />
                         </label>
-                        <div class="qty_increase _ag_content"><?php ABPTT_Static::icon_svg( 'plus' ); ?></div>
+                        <div class="qty_increase _ag_content"><?php ABPTT_Static::svg( 'plus' ); ?></div>
                     </div>
 					<?php
 					if ( ! empty( $collapse_id ) ) {
@@ -402,7 +413,7 @@
                         <img class="_img_control" src="<?php echo esc_url( wp_get_attachment_image_url( $image_id, 'medium' ) ); ?>" alt="<?php echo esc_attr( $image_id ); ?>"/>
                     </div>
                     <button type="button" class="_btn_light_active_xs <?php echo esc_attr( $image_id ? '_d_none' : '' ); ?>" onclick="abptt_image_selection(this)">
-                        <span class="fas fa-image _mar_r_xs"></span><?php esc_html_e( 'Select Image', 'abp-tour-travel' ); ?>
+                        <span class="fas fa-image"></span><?php esc_html_e( 'Select Image', 'abp-tour-travel' ); ?>
                     </button>
                 </div>
 				<?php
@@ -569,7 +580,7 @@
 					$capacity = $post_infos['capacity'] ?? ABPTT_Function::get_total_qty( $post_id, $post_infos );
 					if ( ! empty( $capacity ) && $display === 'on' ) { ?>
                         <div class="abp_tag <?php echo esc_attr( $class ); ?>">
-							<?php ABPTT_Static::icon_svg( 'user_group_2' );
+							<?php ABPTT_Static::svg( 'user_group_2' );
 								echo esc_html( $capacity . ' ' . __( 'Guests   ', 'abp-tour-travel' ) ); ?>
                         </div>
 						<?php
@@ -587,11 +598,13 @@
 					return;
 				}
 				$type  = $post_infos['abptt_duration_type'] ?? ABPTT_Function::get_post_info( $post_id, 'abptt_duration_type', 'day' );
-				$label = match ( $type ) {
-					'hour' => __( 'Hours', 'abp-tour-travel' ),
-					'min'  => __( 'Minutes', 'abp-tour-travel' ),
-					default => _n( 'Day', 'Days', $value, 'abp-tour-travel' ),
-				};
+				if ( 'hour' === $type ) {
+					$label = __( 'Hours', 'abp-tour-travel' );
+				} elseif ( 'min' === $type ) {
+					$label = __( 'Minutes', 'abp-tour-travel' );
+				} else {
+					$label = _n( 'Day', 'Days', $value, 'abp-tour-travel' );
+				}
 				?>
                 <div class="abp_tag <?php echo esc_attr( $class ); ?>" title="<?php esc_attr_e( 'Tour Duration', 'abp-tour-travel' ); ?>">
                     <i class="fas fa-clock" aria-hidden="true"></i>
@@ -734,7 +747,7 @@
 							foreach ( $values as $value ) {
 								$value = ABPTT_Function::category_value( $value ); ?>
                                 <div class="abp_tag <?php echo esc_attr( $class ); ?>" title="<?php echo esc_attr( ABPTT_Function::category_label() . ' : ' . $value ); ?>">
-									<?php ABPTT_Static::icon_svg( 'category_1' );
+									<?php ABPTT_Static::svg( 'category_1' );
 										echo esc_html( $value ); ?>
                                 </div>
 								<?php
@@ -755,7 +768,7 @@
 								$value = ABPTT_Function::organizer_value( $value );
 								?>
                                 <div class="abp_tag <?php echo esc_attr( $class ); ?>" title="<?php echo esc_attr( ABPTT_Function::organizer_label() . ' : ' . $value ); ?>">
-									<?php ABPTT_Static::icon_svg( 'organizer_2' );
+									<?php ABPTT_Static::svg( 'organizer_2' );
 										echo esc_html( $value ); ?>
                                 </div>
 								<?php
@@ -776,7 +789,7 @@
 								foreach ( $values as $value ) {
 									$value = ABPTT_Function::location_value( $value );
 									echo '<div class="abp_tag ' . esc_attr( $class ) . '" title="' . esc_attr( ABPTT_Function::location_label() . ' : ' . $value ) . '">';
-									ABPTT_Static::icon_svg( 'location_1' );
+									ABPTT_Static::svg( 'location_1' );
 									echo esc_html( $value ) . '</div>';
 								}
 							}
@@ -793,29 +806,80 @@
 					}
 				}
 			}
-			public static function start_date( $all_dates, $date = '' ): void {
-				//echo '<pre>';print_r($all_dates);					echo '</pre>';
+			public static function date_select_limit(): int {
+				return max( 1, (int) apply_filters( 'abptt_date_select_limit', 7 ) );
+			}
+			public static function use_date_select( int $count ): bool {
+				return $count > 1 && $count <= self::date_select_limit();
+			}
+			public static function use_date_picker( int $count ): bool {
+				return $count > self::date_select_limit();
+			}
+			public static function start_date( $all_dates, $date = '', $all_times = [], $time_infos = [], $post_id = 0, $start_time = '' ): void {
+				$all_dates = is_array( $all_dates ) ? array_values( $all_dates ) : [];
+				$all_times = is_array( $all_times ) ? array_values( array_filter( array_map( 'strval', $all_times ), 'strlen' ) ) : [];
+				$time_infos = is_array( $time_infos ) ? $time_infos : [];
+				$post_id    = absint( $post_id );
+				$start_time = is_scalar( $start_time ) ? (string) $start_time : '';
 				if ( sizeof( $all_dates ) > 0 ) {
 					$now          = ABPTT_Function::date_format( current_time( 'Y-m-d' ) );
 					$date         = $date ?: current( $all_dates );
 					$hidden_date  = ! empty( $date ) ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
 					$visible_date = ! empty( $date ) ? ABPTT_Function::date_format( $date, 'date' ) : '';
-					if ( sizeof( $all_dates ) > 1 ) {
+					$date_count   = sizeof( $all_dates );
+					if ( $date_count > 1 && ! self::use_date_select( $date_count ) ) {
 						?>
                         <label>
-                            <span class="_gap_xxs"><?php ABPTT_Static::icon_svg( 'date_1' ); ?><?php esc_html_e( 'Select Tour Date', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
+                            <span class="_gap_xxs"><?php ABPTT_Static::svg( 'date_1' ); ?><?php esc_html_e( 'Select Tour Date', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
                             <input type="hidden" name="start_date" value="<?php echo esc_attr( $hidden_date ); ?>" required/>
                             <input id="start_date" type="text" value="<?php echo esc_attr( $visible_date ); ?>" class="_form_control" placeholder="<?php echo esc_attr( $now ); ?>" data-alert="<?php esc_attr_e( 'Please Select Tour Date', 'abp-tour-travel' ); ?>" readonly required/>
                             <span class="fas fa-times date_close_icon" title="<?php esc_attr_e( 'Clear Date', 'abp-tour-travel' ); ?>"></span>
                         </label>
 						<?php
 						do_action( 'abptt_load_date_picker', '#start_date', $all_dates );
-					} else {
+					} elseif ( $date_count > 1 ) {
 						?>
                         <label>
-                            <span class="_gap_xxs"><?php ABPTT_Static::icon_svg( 'date_1' ); ?><?php esc_html_e( 'Tour Date', 'abp-tour-travel' ); ?></span>
+                            <span class="_gap_xxs"><?php ABPTT_Static::svg( 'date_1' ); ?><?php esc_html_e( 'Select Tour Date', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
+                            <select id="abptt_start_date_select" name="start_date" class="_form_control" data-alert="<?php esc_attr_e( 'Please Select Tour Date', 'abp-tour-travel' ); ?>" required>
+								<?php foreach ( $all_dates as $available_date ) {
+									$date_value = gmdate( 'Y-m-d', strtotime( $available_date ) );
+									$date_times = [];
+									if ( $post_id > 0 && ! empty( $time_infos ) ) {
+										$date_times = ABPTT_Function::available_times( $post_id, $time_infos, $date_value );
+									}
+									if ( empty( $date_times ) ) {
+										?>
+                                        <option value="<?php echo esc_attr( $date_value ); ?>" <?php selected( $date_value, $hidden_date ); ?>><?php echo esc_html( ABPTT_Function::date_format( $date_value, 'date' ) ); ?></option>
+										<?php
+									} else {
+										foreach ( $date_times as $date_time ) {
+											$option_value = $date_value . '|' . $date_time;
+											$is_selected  = $date_value === $hidden_date && ( '' === $start_time || $date_time === $start_time );
+											?>
+                                            <option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $is_selected, true ); ?>><?php echo esc_html( ABPTT_Function::date_format( $date_value . ' ' . $date_time, 'full' ) ); ?></option>
+											<?php
+										}
+									}
+								} ?>
+                            </select>
+                        </label>
+						<?php
+					} else {
+						$single_time  = 1 === sizeof( $all_times ) ? (string) $all_times[0] : '';
+						$display_date = $visible_date;
+						if ( $single_time !== '' ) {
+							$base_date    = gmdate( 'Y-m-d', strtotime( $date ) );
+							$display_date = ABPTT_Function::date_format( $base_date . ' ' . $single_time, 'full' );
+						}
+						?>
+                        <label>
+                            <span><?php ABPTT_Static::svg( 'date_1' ); ?><?php esc_html_e( 'Tour Date', 'abp-tour-travel' ); ?></span>
                             <input type="hidden" name="start_date" value="<?php echo esc_attr( $hidden_date ); ?>" required/>
-                            <span class="_color_theme_fs_h5"><?php echo esc_html( $visible_date ); ?></span>
+                            <?php if ( $single_time !== '' ) { ?>
+                                <input type="hidden" name="session_time" value="<?php echo esc_attr( $single_time ); ?>"/>
+                            <?php } ?>
+                            <span class="_color_theme_fs_h5"><?php echo esc_html( $display_date ); ?></span>
                         </label>
 						<?php
 					}
@@ -825,23 +889,38 @@
 			}
 			public static function start_time( $form_data=[]): void {
 				$all_times  = $form_data['all_times'] ?? [];
+				$all_times  = is_array( $all_times ) ? array_values( array_filter( array_map( 'strval', $all_times ), 'strlen' ) ) : [];
 				$start_date = $form_data['start_date'] ?? '';
 				$start_time = $form_data['start_time'] ?? '';
-				if ( ! empty( $all_times ) && sizeof( $all_times ) > 0 ) { ?>
-                    <label class="_text_nowrap">
-                        <span class="_gap_xxs">⏰ <?php esc_html_e( 'Time :', 'abp-tour-travel' ); ?></span>
+				$date_count = is_array( $form_data['all_dates'] ?? null ) ? count( $form_data['all_dates'] ) : 0;
+				if ( $date_count > 1 && self::use_date_select( $date_count ) ) {
+					return;
+				}
+				if ( empty( $all_times ) ) {
+					return;
+				}
+				$selected_time = in_array( $start_time, $all_times, true ) ? $start_time : (string) $all_times[0];
+				$base_date     = ! empty( $start_date ) ? gmdate( 'Y-m-d', strtotime( $start_date ) ) : current_time( 'Y-m-d' );
+				if ( 1 === sizeof( $all_times ) && 1 === $date_count ) {
+					return;
+				}
+				?>
+                    <label class="_text_nowrap abptt_top_time">
+                        <span>⏰ <?php esc_html_e( 'Time :', 'abp-tour-travel' ); ?></span>
 						<?php if ( sizeof( $all_times ) > 1 ) { ?>
                             <select class="_form_control" name="session_time">
 								<?php foreach ( $all_times as $time ) { ?>
-                                    <option value="<?php echo esc_attr( $time ); ?>" <?php selected( $time, $start_time ) ?>><?php echo esc_html( ABPTT_Function::date_format( $start_date . ' ' . $time ) ); ?></option>
+                                    <option value="<?php echo esc_attr( $time ); ?>" <?php selected( $time, $selected_time ) ?>><?php echo esc_html( ABPTT_Function::date_format( $base_date . ' ' . $time ) ); ?></option>
 								<?php } ?>
                             </select>
-						<?php } else { ?>
-							<?php echo esc_html( ABPTT_Function::date_format( $start_date . ' ' . $start_time ) ); ?>
-                            <input type="hidden" name="session_time" value="<?php echo esc_attr( $start_time ); ?>">
+						<?php } else {
+							$time_label = $base_date . ' ' . $selected_time;
+							?>
+                            <input type="hidden" name="session_time" value="<?php echo esc_attr( $selected_time ); ?>"/>
+                            <span class="_color_theme_fs_h5"><?php echo esc_html( ABPTT_Function::date_format( $time_label, 'time' ) ); ?></span>
 						<?php } ?>
                     </label>
-				<?php }
+				<?php
 			}
 
 			public static function item_feature( $features = '' ): void {
@@ -961,11 +1040,13 @@
 				$label    = $form['label'] ?? '';
 				$d_value  = $form['d_value'] ?? '';
 				if ( $type === 'text' || $type === 'number' || $type === 'email' ) {
-					$validation_class = match ( $type ) {
-						'text' => 'validation_name',
-						'number' => 'validation_number',
-						default => '',
-					};
+					if ( 'text' === $type ) {
+						$validation_class = 'validation_name';
+					} elseif ( 'number' === $type ) {
+						$validation_class = 'validation_number';
+					} else {
+						$validation_class = '';
+					}
 					?>
                     <label class="_input_item">
 						<?php ABPTT_Layout::input_title( $label, $required ); ?>
@@ -992,12 +1073,13 @@
 				if ( $type === 'select' || $type === 'checkbox' || $type === 'radio' ) {
 					$options_str = $form['option'] ?? '';
 					$options     = ( $options_str !== '' ) ? explode( ',', $options_str ) : [];
-					match ( $type ) {
-						'select' => ABPTT_Layout::select( $name, $d_value, $label, $required, $options ),
-						'checkbox' => ABPTT_Layout::checkbox( $name, $d_value, $label, $required, $options ),
-						'radio' => ABPTT_Layout::radio( $name, $d_value, $label, $required, $options ),
-						default => null,
-					};
+					if ( 'select' === $type ) {
+						ABPTT_Layout::select( $name, $d_value, $label, $required, $options );
+					} elseif ( 'checkbox' === $type ) {
+						ABPTT_Layout::checkbox( $name, $d_value, $label, $required, $options );
+					} elseif ( 'radio' === $type ) {
+						ABPTT_Layout::radio( $name, $d_value, $label, $required, $options );
+					}
 				}
 			}
 			public static function sp( $id = '', $sp_info = [], $post_infos = [], $form_data = [] ): void {
@@ -1246,7 +1328,7 @@
 				?>
                 <div class="_input_item">
                     <label>
-                        <span class="_gap_xs"><?php ABPTT_Static::icon_svg( 'date_1' ); ?><?php esc_html_e( 'Tour Date', 'abp-tour-travel' ) ?></span>
+                        <span class="_gap_xs"><?php ABPTT_Static::svg( 'date_1' ); ?><?php esc_html_e( 'Tour Date', 'abp-tour-travel' ) ?></span>
                         <input type="hidden" name="tour_date" value=""/>
                         <input type="text" value="" class="_form_control abp_datepicker" placeholder="<?php echo esc_attr( $now ); ?>" readonly/>
                         <span class="fas fa-times date_close_icon" title="<?php esc_attr_e( 'Clear Date', 'abp-tour-travel' ); ?>"></span>
@@ -1258,7 +1340,7 @@
 				$now         = ABPTT_Function::date_format( current_time( 'Y-m-d' ) );
 				?>
                 <div class="_g_input_input_item_fd_column">
-                    <label><span class="_gap_xs"><?php ABPTT_Static::icon_svg( 'date_2' ); ?><?php esc_html_e( 'Tour Date Between', 'abp-tour-travel' ) ?></span></label>
+                    <label><span class="_gap_xs"><?php ABPTT_Static::svg( 'date_2' ); ?><?php esc_html_e( 'Tour Date Between', 'abp-tour-travel' ) ?></span></label>
                     <div class="_f_equal">
                         <label>
                             <input type="hidden" name="tour_date_from" value=""/>

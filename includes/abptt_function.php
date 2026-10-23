@@ -100,7 +100,7 @@
 				return $result;
 			}
 
-			public static function get_taxonomy( $name ): array|WP_Error|string {
+			public static function get_taxonomy( $name ) {
 				return get_terms( array( 'taxonomy' => $name, 'hide_empty' => false ) );
 			}
 
@@ -156,7 +156,11 @@
 
 			public static function category_label() { return ( ABPTT_Configuration['category_label'] ?? null ) ?: __( 'Category', 'abp-tour-travel' ); }
 
-			public static function category_slug() { $slug = ( ABPTT_Configuration['cat_slug'] ?? null ) ?: 'tour-category'; return 'category' === $slug ? 'tour-category' : $slug; }
+			public static function category_slug() {
+				$slug = ( ABPTT_Configuration['cat_slug'] ?? null ) ?: 'tour-category';
+
+				return 'category' === $slug ? 'tour-category' : $slug;
+			}
 
 			public static function category_value( $id ) { return ( ABPTT_Category[ $id ]['label'] ?? null ) ?: $id; }
 
@@ -440,7 +444,7 @@
 						}
 					}
 				}
-				$initials = (string) apply_filters( 'abptt_guide_initials', mb_strtoupper( $initials ), $name, $profile );
+				$initials   = (string) apply_filters( 'abptt_guide_initials', mb_strtoupper( $initials ), $name, $profile );
 				$role_parts = array_map( 'esc_html', array_filter( [ $profile['designation'] ?? '', $profile['company'] ?? '' ] ) );
 				/** This filter is documented in the method docblock. */
 				$role_parts = (array) apply_filters( 'abptt_guide_role', $role_parts, $profile );
@@ -475,12 +479,12 @@
 				/** This filter is documented in the method docblock. */
 				$facts = (array) apply_filters( 'abptt_guide_facts', $facts, $profile );
 				/** This filter is documented in the method docblock. */
-				$socials = (array) apply_filters( 'abptt_guide_socials', (array) ( $profile['social'] ?? [] ), $profile );
+				$socials   = (array) apply_filters( 'abptt_guide_socials', (array) ( $profile['social'] ?? [] ), $profile );
 				$photo_id  = (int) ( $profile['photo_id'] ?? 0 );
 				$photo_img = self::guide_photo_img( $photo_id, 'medium_large', $name, 'attachment-medium_large size-medium_large' );
 				/** This filter is documented in the method docblock. */
 				$photo_img = (string) apply_filters( 'abptt_guide_photo_img', $photo_img, $profile );
-				$data = [
+				$data      = [
 					'id'         => (int) ( $profile['id'] ?? 0 ),
 					'name'       => $name,
 					'slug'       => (string) ( $profile['slug'] ?? '' ),
@@ -557,7 +561,7 @@
 				return array_values( $items );
 			}
 
-			public static function event_schedule_selection( array $dates, array $time_infos ): array {
+			public static function event_schedule_selection( array $dates, array $time_infos, int $post_id = 0 ): array {
 				$dates      = array_values( array_unique( array_map( static function ( $date ): string {
 					return gmdate( 'Y-m-d', strtotime( (string) $date ) );
 				}, $dates ) ) );
@@ -567,7 +571,7 @@
 				if ( $requested_date && in_array( $requested_date, $dates, true ) ) {
 					$start_date = $requested_date;
 				}
-				$all_times  = array_values( array_unique( array_filter( array_map( 'sanitize_text_field', (array) self::time( $time_infos, $start_date ) ) ) ) );
+				$all_times  = self::available_times( $post_id, $time_infos, $start_date );
 				$start_time = (string) ( $all_times[0] ?? '' );
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL pre-select for display; no state change.
 				$requested_time = isset( $_GET['session_time'] ) ? sanitize_text_field( wp_unslash( $_GET['session_time'] ) ) : '';
@@ -602,13 +606,13 @@
 				return add_query_arg( $final_args, admin_url( 'admin.php' ) );
 			}
 
-			public static function get_image_url( $post_id = '', $image_id = '', $size = 'full' ): bool|string {
+			public static function get_image_url( $post_id = '', $image_id = '', $size = 'full' ) {
 				$image_id = $post_id && $post_id > 0 ? get_post_thumbnail_id( $post_id ) : $image_id;
 
 				return wp_get_attachment_image_url( $image_id, $size );
 			}
 
-			public static function get_page_by_slug( $slug ): bool|WP_Post {
+			public static function get_page_by_slug( $slug ) {
 				if ( $pages = get_pages() ) {
 					foreach ( $pages as $page ) {
 						if ( $slug === $page->post_name ) {
@@ -623,11 +627,17 @@
 			public static function get_id_by_slug( $page_slug ): ?int {
 				$page = get_page_by_path( $page_slug );
 
-				return $page?->ID;
+				return $page ? $page->ID : null;
 			}
 
 			public static function check_wc(): int {
-				if ( class_exists( 'WooCommerce' ) || is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+				if ( class_exists( 'WooCommerce' ) ) {
+					return 2;
+				}
+				if ( ! function_exists( 'is_plugin_active' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/plugin.php';
+				}
+				if ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 					return 2;
 				}
 				$wc_dir = trailingslashit( WP_PLUGIN_DIR ) . 'woocommerce';
@@ -713,7 +723,7 @@
 					$tour_date      = ! empty( $cart_item['tour_date'] ) ? gmdate( 'Y-m-d', strtotime( $cart_item['tour_date'] ) ) : '';
 					$session_time   = ! empty( $cart_item['session_time'] ) ? gmdate( 'H:i:s', strtotime( '1970-01-01 ' . $cart_item['session_time'] ) ) : '';
 					$seat_type      = $cart_item['seat_type'] ?? '';
-					$time_infos     = $post_infos['time_infos'] ?? [];
+					$time_infos     = self::schedule_time_infos( $post_infos );
 					$all_start_time = ABPTT_Function::time( $time_infos, $tour_date );
 					$ticket_infos   = $cart_item['info'] ?? [];
 					// Early return if schedule or date validation fails.
@@ -766,7 +776,8 @@
 					if ( empty( $order_tickets ) ) {
 						return false;
 					}
-					$sold_infos = ABPTT_Query::get_sold_ticket( $form_data );
+					$sold_infos      = ABPTT_Query::get_sold_ticket( $form_data );
+					$requested_total = 0;
 					foreach ( $order_tickets as $tic_id => $order_ticket ) {
 						if ( ! isset( $_ticket_infos[ $tic_id ] ) ) {
 							return false;
@@ -783,6 +794,11 @@
 						if ( $qty < $min_qty || $qty > $max_qty ) {
 							return false;
 						}
+						$requested_total += $qty;
+					}
+					$slot_available = self::slot_available( (int) $post_id, $time_infos, $tour_date, $session_time );
+					if ( null !== $slot_available && $requested_total > $slot_available ) {
+						return false;
 					}
 				}
 
@@ -830,12 +846,16 @@
 							}
 						}
 					} else {
-						$start_date  = $date_infos['repeat_start_date'] ?? '';
-						$start_date  = ! empty( $_date ) ? $_date : $start_date;
+						$anchor      = $date_infos['repeat_start_date'] ?? '';
+						$anchor      = $anchor ? gmdate( 'Y-m-d', strtotime( $anchor ) ) : '';
+						$start_date  = ! empty( $_date ) ? gmdate( 'Y-m-d', strtotime( $_date ) ) : $anchor;
 						$start_date  = $start_date ?: $now;
 						$active_days = ( ABPTT_Date_Config['advance_date_number'] ?? null ) ?: 28;
-						if ( strtotime( $now ) >= strtotime( $start_date ) ) {
-							$start_date = $now;
+						$repeat      = max( (int) ( $date_infos['repeat_after'] ?? 1 ), 1 );
+						if ( strtotime( $now ) > strtotime( $start_date ) ) {
+							$day_diff   = (int) floor( ( strtotime( $now ) - strtotime( $start_date ) ) / DAY_IN_SECONDS );
+							$steps      = (int) ceil( $day_diff / $repeat );
+							$start_date = gmdate( 'Y-m-d', strtotime( $start_date . ' +' . ( $steps * $repeat ) . ' day' ) );
 						}
 						$end_date  = gmdate( 'Y-m-d', strtotime( $start_date . ' +' . $active_days . ' day' ) );
 						$end_date  = self::repeat_end_date( $date_infos, $start_date, $end_date );
@@ -845,11 +865,11 @@
 					usort( $all_dates, "ABPTT_Function::sort_date" );
 					$current_date = current( $all_dates );
 					$now          = strtotime( current_time( 'Y-m-d' ) );
-					if ( $now == strtotime( $current_date ) ) {
+					if ( $current_date && $now == strtotime( $current_date ) ) {
 						$time_info = self::date_session_times( $post_id, $date_infos, $current_date );
 						if ( ! empty( $time_info ) ) {
 							$exit        = false;
-							$buffer_time = ABPTT_Dates['sale_close_after'] ?? 0;
+							$buffer_time = (int) ( ABPTT_Date_Config['sale_close_before'] ?? 0 ) * 60;
 							$now_time    = strtotime( current_time( 'Y-m-d H:i' ) );
 							foreach ( $time_info as $_time ) {
 								$date = $current_date . ' ' . $_time;
@@ -865,7 +885,7 @@
 					}
 				}
 
-				return $all_dates;
+				return array_values( $all_dates );
 			}
 
 			public static function registration_open( array $particular_date, string $now = '' ): bool {
@@ -955,6 +975,96 @@
 				}
 
 				return $time_infos;
+			}
+
+			public static function normalize_time( $time ): string {
+				$time = is_scalar( $time ) ? (string) $time : '';
+				if ( '' === trim( $time ) ) {
+					return '';
+				}
+				$timestamp = strtotime( '1970-01-01 ' . $time );
+
+				return $timestamp ? gmdate( 'H:i', $timestamp ) : '';
+			}
+
+			public static function date_slots( array $time_infos, string $date ): array {
+				$date = '' !== $date ? gmdate( 'Y-m-d', strtotime( $date ) ) : '';
+				if ( '' !== $date ) {
+					foreach ( (array) ( $time_infos['date_times'] ?? [] ) as $date_time ) {
+						if ( ! is_array( $date_time ) ) {
+							continue;
+						}
+						$slot_date = (string) ( $date_time['date'] ?? '' );
+						if ( '' !== $slot_date && gmdate( 'Y-m-d', strtotime( $slot_date ) ) === $date ) {
+							return (array) ( $date_time['time'] ?? [] );
+						}
+					}
+					$day_name  = strtolower( gmdate( 'l', strtotime( $date ) ) );
+					$day_times = (array) ( $time_infos['day_time'] ?? [] );
+					foreach ( $day_times as $day_key => $slots ) {
+						if ( strtolower( (string) $day_key ) === $day_name ) {
+							return (array) $slots;
+						}
+					}
+				}
+
+				return (array) ( $time_infos['time'] ?? [] );
+			}
+
+			public static function slot_stock( array $time_infos, string $date, string $time ): ?int {
+				if ( ( $time_infos['timewise_stock'] ?? 'off' ) !== 'on' ) {
+					return null;
+				}
+				$time = self::normalize_time( $time );
+				if ( '' === $time ) {
+					return null;
+				}
+				foreach ( self::date_slots( $time_infos, $date ) as $slot ) {
+					if ( ! is_array( $slot ) || self::normalize_time( $slot['time'] ?? '' ) !== $time ) {
+						continue;
+					}
+					$stock = $slot['stock'] ?? '';
+
+					return ( '' === $stock || null === $stock ) ? null : max( 0, (int) $stock );
+				}
+
+				return null;
+			}
+
+			public static function slot_available( int $post_id, array $time_infos, string $date, string $time ): ?int {
+				if ( '' === $date || '' === self::normalize_time( $time ) ) {
+					return null;
+				}
+				$stock = self::slot_stock( $time_infos, $date, $time );
+				if ( null === $stock ) {
+					return null;
+				}
+				if ( $post_id <= 0 ) {
+					return $stock;
+				}
+				$sold = ABPTT_Query::get_sold_ticket( [
+					'post_id'      => $post_id,
+					'tour_date'    => gmdate( 'Y-m-d', strtotime( $date ) ),
+					'session_time' => $time,
+				] );
+
+				return max( 0, $stock - (int) ( $sold['total'] ?? 0 ) );
+			}
+
+			public static function available_times( int $post_id, array $time_infos, string $date ): array {
+				$times = array_values( array_unique( array_filter( array_map( 'sanitize_text_field', (array) self::time( $time_infos, $date ) ) ) ) );
+				if ( $post_id <= 0 || empty( $times ) ) {
+					return $times;
+				}
+				$available = [];
+				foreach ( $times as $time ) {
+					$remaining = self::slot_available( $post_id, $time_infos, $date, $time );
+					if ( null === $remaining || $remaining > 0 ) {
+						$available[] = $time;
+					}
+				}
+
+				return $available;
 			}
 
 			public static function date_list_modify( $start_date, $end_date, $date_infos ): array {
@@ -1250,14 +1360,12 @@
 			}
 
 			public static function booking_buffer( $time, $end = '' ): string {
-				$date_infos = ABPTT_Dates;
+				$date_infos = ABPTT_Date_Config;
 				if ( ! empty( $end ) ) {
-					$buffer_time = $date_infos['sale_close_after'] ?? 0;
-					$buffer_time = $buffer_time * 60;
+					$buffer_time = (int) ( $date_infos['sale_close_after'] ?? 0 ) * 60;
 					$time        = gmdate( 'Y-m-d H:i', strtotime( $time ) + $buffer_time );
 				} else {
-					$buffer_time = $date_infos['sale_close_before'] ?? 0;
-					$buffer_time = $buffer_time * 60;
+					$buffer_time = (int) ( $date_infos['sale_close_before'] ?? 0 ) * 60;
 					$time        = gmdate( 'Y-m-d H:i', strtotime( $time ) - $buffer_time );
 				}
 
@@ -1290,7 +1398,7 @@
 				return $return_price;
 			}
 
-			public static function get_price( $post_infos, $type = 'price', $date = '' ): bool|int|string|null {
+			public static function get_price( $post_infos, $type = 'price', $date = '' ) {
 				if ( ! empty( $type ) && ! empty( $post_infos ) ) {
 					$price   = 0;
 					$post_id = absint( $post_infos['post_id'] ?? 0 );
@@ -1311,7 +1419,7 @@
 				return null;
 			}
 
-			public static function get_additional_price( $post_infos = [], $i_d = '' ): int|string {
+			public static function get_additional_price( $post_infos = [], $i_d = '' ) {
 				$services = ABPTT_Function::additional_data( $post_infos );
 				$price    = 0;
 				$post_id  = $post_infos['post_id'] ?? '';
@@ -1327,7 +1435,7 @@
 				return $price > 0 ? self::tax_with_price( $post_id, $price ) : 0;
 			}
 
-			public static function get_min_price( $post_id = 0 ): int|string {
+			public static function get_min_price( $post_id = 0 ) {
 				$price = 0;
 				if ( ! empty( $post_id ) && $post_id > 0 ) {
 					$price_infos = ABPTT_Function::get_post_info( $post_id, 'ticket_infos', [] );

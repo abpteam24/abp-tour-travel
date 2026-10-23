@@ -74,7 +74,7 @@
                     <h5 class="abp_text_nowrap_gap_xs">💺 <?php esc_html_e('Seat Plan', 'abp-tour-travel'); ?><sup class="_circle_icon_xs"><?php echo esc_html(ABPTT_Query::get_sp('', true)); ?></sup></h5>
                     <div class="color_control"><?php $this->color_control(); ?></div>
                     <button class="_btn_light_active_xs" onclick="abptt_sp_add()">
-                        <?php ABPTT_Static::icon_svg('plus');
+                        <?php ABPTT_Static::svg('plus');
                             esc_html_e('Add New Seat Plan', 'abp-tour-travel'); ?>
                     </button>
                 </div>
@@ -114,10 +114,10 @@
                                 <th><?php echo esc_html(($others['width'] ?? 50) . ' X ' . ($others['height'] ?? 50) . ' X ' . ($others['gap'] ?? 0)); ?></th>
                                 <td>
                                     <div class="_group_content">
-                                        <button type="button" class="_btn_light_theme_xxs" onclick="abptt_popup_open_global('view_sp','<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('View : ', 'abp-tour-travel') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPTT_Static::icon_svg('view_1'); ?></button>
-                                        <button type="button" class="_btn_light_navy_blue_xxs" onclick="abptt_sp_add('<?php echo esc_attr($sp_info['id'] ?? ''); ?>','1')" title="<?php echo esc_attr__('Copy/Clone : ', 'abp-tour-travel') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPTT_Static::icon_svg('clone_1'); ?></button>
-                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_sp_add('<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('Edit : ', 'abp-tour-travel') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPTT_Static::icon_svg('edit'); ?></button>
-                                        <button type="button" class="_btn_light_danger_xxs" onclick="abptt_sp_delete('<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('Permanent Remove : ', 'abp-tour-travel') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPTT_Static::icon_svg('close_1'); ?></button>
+                                        <button type="button" class="_btn_light_theme_xxs" onclick="abptt_popup_open_global('view_sp','<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('View : ', 'abp-tour-travel') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPTT_Static::svg('view_1'); ?></button>
+                                        <button type="button" class="_btn_light_navy_blue_xxs" onclick="abptt_sp_add('<?php echo esc_attr($sp_info['id'] ?? ''); ?>','1')" title="<?php echo esc_attr__('Copy/Clone : ', 'abp-tour-travel') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPTT_Static::svg('clone_1'); ?></button>
+                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_sp_add('<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('Edit : ', 'abp-tour-travel') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPTT_Static::svg('edit'); ?></button>
+                                        <button type="button" class="_btn_light_danger_xxs" onclick="abptt_sp_delete('<?php echo esc_attr($sp_info['id'] ?? ''); ?>')" title="<?php echo esc_attr__('Permanent Remove : ', 'abp-tour-travel') . ' ' . esc_attr($sp_info['name'] ?? ''); ?>"><?php ABPTT_Static::svg('close_1'); ?></button>
                                     </div>
                                 </td>
                             </tr>
@@ -235,9 +235,9 @@
                             </div>
                         </div>
                         <div class="sp_section_card_xs _group_content_f_equal">
-                            <button type="button" class="_btn_active_xs" onclick="abptt_sp_save()"><?php ABPTT_Static::icon_svg('save');
+                            <button type="button" class="_btn_active_xs" onclick="abptt_sp_save()"><?php ABPTT_Static::svg('save');
                                     esc_html_e('Save Seat Plan', 'abp-tour-travel'); ?></button>
-                            <button type="button" class="_btn_warning_xs" onclick="abptt_sp_clear()"><?php ABPTT_Static::icon_svg('close_1');
+                            <button type="button" class="_btn_warning_xs" onclick="abptt_sp_clear()"><?php ABPTT_Static::svg('close_1');
                                     esc_html_e('Clear Layout', 'abp-tour-travel'); ?></button>
                         </div>
                     </div>
@@ -500,7 +500,7 @@
                     <button type="button" class="_btn_light_default_xs"><span class="color_badge" style="background-color: <?php echo esc_attr($sold) ?>"></span><?php esc_html_e('Sold', 'abp-tour-travel'); ?></button>
                     <button type="button" class="_btn_light_default_xs"><span class="color_badge" style="background-color: <?php echo esc_attr($booked) ?>"></span><?php esc_html_e('Booked', 'abp-tour-travel'); ?></button>
                     <button type="button" class="_btn_light_default_xs"><span class="color_badge" style="background-color: <?php echo esc_attr($selected) ?>"></span><?php esc_html_e('Selected', 'abp-tour-travel'); ?></button>
-                    <button type="button" class="_btn_light_default_xs" onclick="abptt_popup_open_global('color_control')"><?php ABPTT_Static::icon_svg('edit'); ?><?php esc_html_e('Edit/Modify', 'abp-tour-travel'); ?></button>
+                    <button type="button" class="_btn_light_default_xs" onclick="abptt_popup_open_global('color_control')"><?php ABPTT_Static::svg('edit'); ?><?php esc_html_e('Edit/Modify', 'abp-tour-travel'); ?></button>
                 </div>
                 <?php
             }
@@ -607,8 +607,8 @@
                                                     echo esc_html($label . ' ' . (!empty($prefix) ? '(' . $prefix . ')' : '')); ?>
                                             </h6>
                                             <div class="_group_content">
-                                                <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('ticket_type','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Edit : ', 'abp-tour-travel') . ' ' . esc_attr($label); ?>"><?php ABPTT_Static::icon_svg('edit'); ?></button>
-                                                <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('ticket_type','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Trash : ', 'abp-tour-travel') . ' ' . esc_attr($label); ?>"><?php ABPTT_Static::icon_svg('close_1'); ?></button>
+                                                <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('ticket_type','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Edit : ', 'abp-tour-travel') . ' ' . esc_attr($label); ?>"><?php ABPTT_Static::svg('edit'); ?></button>
+                                                <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('ticket_type','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Trash : ', 'abp-tour-travel') . ' ' . esc_attr($label); ?>"><?php ABPTT_Static::svg('close_1'); ?></button>
                                             </div>
                                         </div>
                                         <?php
@@ -795,8 +795,8 @@
                                     <h6 class="abp_gap_xxs" style="color:<?php echo esc_attr($item['color'] ?? ''); ?>"><?php ABPTT_Layout::image_icon($item['icon'] ?? '');
                                             echo esc_html($label); ?></h6>
                                     <div class="_group_content">
-                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('decor_item')" title="<?php echo esc_attr__('Edit : ', 'abp-tour-travel') . ' ' . esc_attr($label); ?>"><?php ABPTT_Static::icon_svg('edit'); ?></button>
-                                        <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('decor_item','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Trash : ', 'abp-tour-travel') . ' ' . esc_attr($label); ?>"><?php ABPTT_Static::icon_svg('close_1'); ?></button>
+                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('decor_item')" title="<?php echo esc_attr__('Edit : ', 'abp-tour-travel') . ' ' . esc_attr($label); ?>"><?php ABPTT_Static::svg('edit'); ?></button>
+                                        <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('decor_item','<?php echo esc_attr($key); ?>')" title="<?php echo esc_attr__('Trash : ', 'abp-tour-travel') . ' ' . esc_attr($label); ?>"><?php ABPTT_Static::svg('close_1'); ?></button>
                                     </div>
                                 </div>
                             <?php }

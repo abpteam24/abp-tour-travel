@@ -17,11 +17,12 @@
                 if ( ABPTT_Function::on_off( 'guide' ) ) {
                     $label = ABPTT_Function::guide_label(); ?>
                     <div class="_fj_between">
-                        <h5 class="abp"><span class="_mar_r_xs">🎤</span><?php echo esc_html( $label ); ?></h5>
+                        <h4 class="abp_color_theme_gap_xs">🎤<?php echo esc_html( __( 'Global', 'abp-tour-travel' ) . ' ' . $label . ' ' . __( 'Configuration', 'abp-tour-travel' ) ); ?></h4>
                         <?php ABPTT_Layout::button_global_popup( 'tax_guide', __( 'Add New', 'abp-tour-travel' ) . ' ' . $label ); ?>
                     </div>
                     <?php ABPTT_Layout::info_text( 'abptt_guide' ); ?>
-                    <div class="tax_guide _ov_auto_mar_t_xs">
+                    <div class="_divider_xxs"></div>
+                    <div class="tax_guide _ov_auto">
                         <?php $this->guide_list(); ?>
                     </div>
                     <?php
@@ -30,7 +31,7 @@
 
             public function post_guide( $post_infos = [] ): void {
                 if ( ABPTT_Function::on_off( 'guide' ) ) {
-                    $display=$post_infos['display_guide'] ?? 'on';
+                    $display       = $post_infos['display_guide'] ?? 'on';
                     $display       = $display === 'off' ? 'off' : 'on';
                     $switch_active = $display === 'on' ? 'abp_active' : '';
                     ?>
@@ -86,29 +87,66 @@
                 }
                 ?>
                 <div class="abp_form">
-                    <h5 class="abp"><span class="_mar_r_xs">🎤</span><?php echo esc_html( $title ); ?></h5>
-                    <div class="_divider_xs"></div>
+                    <div class="_fj_between">
+                        <h5 class="abp_color_theme_gap_xs">🎤<?php echo esc_html( $title ); ?></h5>
+                        <?php ABPTT_Layout::button_global_save( 'tax_guide', $btn_label ); ?>
+                    </div>
+                    <div class="_divider_xxs"></div>
                     <input type="hidden" name="id" value="<?php echo esc_attr( $term_id ); ?>"/>
                     <div class="group_setting">
-                        <div class="setting_item full_width">
-                            <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Name', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
+                        <div class="setting_item">
+                            <label class="_fj_between_f_wrap">
+                                <span><?php echo esc_html( $label ) . ' ' . esc_html__( 'Name', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
                                 <input class="_form_control" name="name" value="<?php echo esc_attr( $name ); ?>" placeholder="<?php esc_attr_e( 'Name', 'abp-tour-travel' ); ?>" required/>
                             </label>
-                            <div class="_divider_xs"></div>
+                            <div class="_divider_xxs"></div>
                             <?php ABPTT_Layout::info_text( 'guide_name' ); ?>
                         </div>
-                        <div class="setting_item full_width">
-                            <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Slug (Optional)', 'abp-tour-travel' ); ?></span>
+                        <div class="setting_item">
+                            <label class="_fj_between_f_wrap">
+                                <span><?php echo esc_html( $label ) . ' ' . esc_html__( 'Slug (Optional)', 'abp-tour-travel' ); ?></span>
                                 <input class="_form_control" name="slug" value="<?php echo esc_attr( $slug ); ?>" placeholder="<?php esc_attr_e( 'Slug', 'abp-tour-travel' ); ?>"/>
                             </label>
-                            <div class="_divider_xs"></div>
+                            <div class="_divider_xxs"></div>
                             <?php ABPTT_Layout::info_text( 'guide_slug' ); ?>
                         </div>
+                        <div class="setting_item">
+                            <div class="_fj_between_f_wrap">
+                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Photo', 'abp-tour-travel' ); ?></span>
+                                <div class="guide_photo_selection">
+                                    <?php do_action( 'abptt_image_selection', 'meta[photo]', absint( $meta['photo'] ?? 0 ) ); ?>
+                                </div>
+                            </div>
+                            <div class="_divider_xxs"></div>
+                            <?php ABPTT_Layout::info_text( 'guide_photo' ); ?>
+                        </div>
+                        <div class="setting_item">
+                            <label class="_fj_between_f_wrap">
+                                <span><?php echo esc_html( $label ) . ' ' . esc_html__( 'Designation', 'abp-tour-travel' ); ?></span>
+                                <input class="_form_control" name="meta[designation]" value="<?php echo esc_attr( $meta['designation'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'e.g., CEO, CTO, Professor', 'abp-tour-travel' ); ?>"/>
+                            </label>
+                            <div class="_divider_xxs"></div>
+                            <?php ABPTT_Layout::info_text( 'guide_designation' ); ?>
+                        </div>
+                        <div class="setting_item">
+                            <label class="_fj_between_f_wrap">
+                                <span><?php echo esc_html( $label ) . ' ' . esc_html__( 'Company', 'abp-tour-travel' ); ?></span>
+                                <input class="_form_control" name="meta[company]" value="<?php echo esc_attr( $meta['company'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Company/Organization', 'abp-tour-travel' ); ?>"/>
+                            </label>
+                            <div class="_divider_xxs"></div>
+                            <?php ABPTT_Layout::info_text( 'guide_company' ); ?>
+                        </div>
+                        <div class="setting_item">
+                            <label class="_fj_between_f_wrap">
+                                <span><?php echo esc_html( $label ) . ' ' . esc_html__( 'Website', 'abp-tour-travel' ); ?></span>
+                                <input type="url" class="_form_control" name="meta[website]" value="<?php echo esc_attr( $meta['website'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'https://example.com', 'abp-tour-travel' ); ?>"/>
+                            </label>
+                            <div class="_divider_xxs"></div>
+                            <?php ABPTT_Layout::info_text( 'guide_website' ); ?>
+                        </div>
                         <div class="setting_item full_width">
-                            <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Bio', 'abp-tour-travel' ); ?></span>
+                            <label class="_fj_between_f_wrap">
+                                <span><?php echo esc_html( $label ) . ' ' . esc_html__( 'Bio', 'abp-tour-travel' ); ?></span>
                                 <?php
                                     $editor_id = 'abptt_guide_bio_' . $term_id;
                                     wp_editor(
@@ -116,7 +154,7 @@
                                         $editor_id,
                                         array(
                                             'textarea_name' => 'description',
-                                            'textarea_rows' => 6,
+                                            'textarea_rows' => 4,
                                             'media_buttons' => true,
                                             'teeny'         => false,
                                             'quicktags'     => true,
@@ -124,66 +162,32 @@
                                     );
                                 ?>
                             </label>
-                            <div class="_divider_xs"></div>
+                            <div class="_divider_xxs"></div>
                             <?php ABPTT_Layout::info_text( 'guide_bio' ); ?>
                         </div>
-                        <div class="setting_item full_width">
-                            <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Photo', 'abp-tour-travel' ); ?></span>
-                            <div class="guide_photo_selection">
-                                <?php do_action( 'abptt_image_selection', 'meta[photo]', absint( $meta['photo'] ?? 0 ) ); ?>
-                            </div>
-                            <div class="_divider_xs"></div>
-                            <?php ABPTT_Layout::info_text( 'guide_photo' ); ?>
-                        </div>
-                        <div class="setting_item full_width">
-                            <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Designation', 'abp-tour-travel' ); ?></span>
-                                <input class="_form_control" name="meta[designation]" value="<?php echo esc_attr( $meta['designation'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'e.g., CEO, CTO, Professor', 'abp-tour-travel' ); ?>"/>
-                            </label>
-                            <div class="_divider_xs"></div>
-                            <?php ABPTT_Layout::info_text( 'guide_designation' ); ?>
-                        </div>
-                        <div class="setting_item full_width">
-                            <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Company', 'abp-tour-travel' ); ?></span>
-                                <input class="_form_control" name="meta[company]" value="<?php echo esc_attr( $meta['company'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Company/Organization', 'abp-tour-travel' ); ?>"/>
-                            </label>
-                            <div class="_divider_xs"></div>
-                            <?php ABPTT_Layout::info_text( 'guide_company' ); ?>
-                        </div>
-                        <div class="setting_item full_width">
-                            <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php echo esc_html( $label ) . ' ' . esc_html__( 'Website', 'abp-tour-travel' ); ?></span>
-                                <input type="url" class="_form_control" name="meta[website]" value="<?php echo esc_attr( $meta['website'] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'https://example.com', 'abp-tour-travel' ); ?>"/>
-                            </label>
-                            <div class="_divider_xs"></div>
-                            <?php ABPTT_Layout::info_text( 'guide_website' ); ?>
-                        </div>
-                        <div class="setting_item full_width">
-                            <strong><?php esc_html_e( 'Social Links', 'abp-tour-travel' ); ?></strong>
-                            <div class="_divider_xxs"></div>
-                            <?php
-                                $social        = $meta['social'] ?? [];
-                                $social_fields = [
-                                    'twitter'   => [ 'icon' => 'fab fa-twitter', 'label' => 'Twitter/X', 'info' => 'guide_social_twitter' ],
-                                    'linkedin'  => [ 'icon' => 'fab fa-linkedin', 'label' => 'LinkedIn', 'info' => 'guide_social_linkedin' ],
-                                    'facebook'  => [ 'icon' => 'fab fa-facebook', 'label' => 'Facebook', 'info' => 'guide_social_facebook' ],
-                                    'instagram' => [ 'icon' => 'fab fa-instagram', 'label' => 'Instagram', 'info' => 'guide_social_instagram' ],
-                                ];
-                                foreach ( $social_fields as $key => $info ) { ?>
-                                    <div class="setting_item full_width _mar_t_xxs">
-                                        <label class="_f_equal_f_wrap">
-                                            <span class="abp_label"><i class="<?php echo esc_attr( $info['icon'] ); ?>"></i> <?php echo esc_html( $info['label'] ); ?></span>
-                                            <input type="url" class="_form_control" name="meta[social][<?php echo esc_attr( $key ); ?>]" value="<?php echo esc_attr( $social[ $key ] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Profile URL', 'abp-tour-travel' ); ?>"/>
-                                        </label>
-                                        <div class="_divider_xxs"></div>
-                                        <?php ABPTT_Layout::info_text( $info['info'] ); ?>
-                                    </div>
-                                <?php } ?>
-                        </div>
                     </div>
-                    <div class="_divider_xs"></div>
-                    <?php ABPTT_Layout::button_global_save( 'tax_guide', $btn_label ); ?>
+                    <h6 class="abp_color_theme_gap_xs"><?php esc_html_e( 'Social Links', 'abp-tour-travel' ); ?></h6>
+                    <div class="_divider_xxs"></div>
+                    <div class="group_setting">
+                        <?php
+                            $social        = $meta['social'] ?? [];
+                            $social_fields = [
+                                'twitter'   => [ 'icon' => 'fab fa-twitter', 'label' => 'Twitter/X', 'info' => 'guide_social_twitter' ],
+                                'linkedin'  => [ 'icon' => 'fab fa-linkedin', 'label' => 'LinkedIn', 'info' => 'guide_social_linkedin' ],
+                                'facebook'  => [ 'icon' => 'fab fa-facebook', 'label' => 'Facebook', 'info' => 'guide_social_facebook' ],
+                                'instagram' => [ 'icon' => 'fab fa-instagram', 'label' => 'Instagram', 'info' => 'guide_social_instagram' ],
+                            ];
+                            foreach ( $social_fields as $key => $info ) { ?>
+                                <div class="setting_item">
+                                    <label class="_fj_between_f_wrap">
+                                        <span><i class="<?php echo esc_attr( $info['icon'] ); ?>"></i> <?php echo esc_html( $info['label'] ); ?></span>
+                                        <input type="url" class="_form_control" name="meta[social][<?php echo esc_attr( $key ); ?>]" value="<?php echo esc_attr( $social[ $key ] ?? '' ); ?>" placeholder="<?php esc_attr_e( 'Profile URL', 'abp-tour-travel' ); ?>"/>
+                                    </label>
+                                    <div class="_divider_xxs"></div>
+                                    <?php ABPTT_Layout::info_text( $info['info'] ); ?>
+                                </div>
+                            <?php } ?>
+                    </div>
                 </div>
                 <?php
                 $html = ob_get_clean();
@@ -323,7 +327,7 @@
                                 $photo_url = wp_get_attachment_url( $meta['photo'] );
                             } ?>
                             <tr>
-                                <td><?php echo esc_html( $count ++ ); ?></td>
+                                <th><?php echo esc_html( $count ++ ); ?></th>
                                 <td>
                                     <div class="_gap_xs">
                                         <?php if ( $photo_url ) { ?>
@@ -336,9 +340,11 @@
                                 <td><?php echo esc_html( $meta['designation'] ?? '' ); ?></td>
                                 <td><?php echo esc_html( $meta['company'] ?? '' ); ?></td>
                                 <td>
-                                    <div class="_group_content">
-                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('tax_guide','<?php echo esc_attr( $id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $guide['label'] ); ?>"><?php ABPTT_Static::icon_svg( 'edit' ); ?></button>
-                                        <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('tax_guide','<?php echo esc_attr( $id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $guide['label'] ); ?>"><?php ABPTT_Static::icon_svg( 'close_1' ); ?></button>
+                                    <div class="_fj_center">
+                                        <div class="_group_content">
+                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('tax_guide','<?php echo esc_attr( $id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $guide['label'] ); ?>"><?php ABPTT_Static::svg( 'edit' ); ?></button>
+                                            <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('tax_guide','<?php echo esc_attr( $id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $guide['label'] ); ?>"><?php ABPTT_Static::svg( 'close_1' ); ?></button>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

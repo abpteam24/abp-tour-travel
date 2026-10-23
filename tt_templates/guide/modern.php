@@ -56,7 +56,7 @@
 							<div class="abptt_sp_modern_role">
 								<?php
 									$role = array_map( 'esc_html', array_filter( [ $designation, $company ] ) );
-									echo implode( ' <span aria-hidden="true">&bull;</span> ', $role ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Each part is escaped via esc_html() above; the separator is static markup.
+									echo wp_kses_post( implode( ' <span aria-hidden="true">&bull;</span> ', $role ) );
 								?>
 							</div>
 						<?php } ?>

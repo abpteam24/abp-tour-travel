@@ -566,14 +566,14 @@
 							} ?>
                             <div class="dash_status_checklist">
 								<?php $this->checklist_item( __( 'WooCommerce Plugin', 'abp-tour-travel' ), ABPTT_WC >= 2, ABPTT_WC == 1 ? 'wc_active' : 'wc_install_active' ); ?>
-								<?php $this->checklist_item( __( 'Booking Page', 'abp-tour-travel' ), (bool) ABPTT_Function::get_page_by_slug( 'tf_booking' ), 'tf_booking' ); ?>
+								<?php $this->checklist_item( __( 'Booking Page', 'abp-tour-travel' ), (bool) ABPTT_Function::get_page_by_slug( 'tt_booking' ), 'tt_booking' ); ?>
 								<?php $this->checklist_item(
 								/* translators: %s: transport label. */
 									sprintf( esc_html__( '%s List Page', 'abp-tour-travel' ), esc_html( $label ) ),
-									(bool) ABPTT_Function::get_page_by_slug( 'tf_post' ),
-									'tf_post'
+									(bool) ABPTT_Function::get_page_by_slug( 'tt_post' ),
+									'tt_post'
 								); ?>
-								<?php $this->checklist_item( __( 'Gallery Page', 'abp-tour-travel' ), (bool) ABPTT_Function::get_page_by_slug( 'tf_gallery' ), 'tf_gallery' ); ?>
+								<?php $this->checklist_item( __( 'Gallery Page', 'abp-tour-travel' ), (bool) ABPTT_Function::get_page_by_slug( 'tt_gallery' ), 'tt_gallery' ); ?>
 								<?php if ( ABPTT_WC > 1 ) {
 									do_action( 'abptt_add_page' );
 									do_action( 'abptt_add_tools' );

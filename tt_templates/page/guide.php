@@ -51,7 +51,7 @@
                         </div>
                         <h1 class="abptt_guide_hero_name"><?php echo esc_html( $abptt_name ); ?></h1>
 					<?php if ( ! empty( $abptt_guide['role_parts'] ) ) { ?>
-                        <div class="abptt_guide_hero_role"><?php echo implode( ' <span aria-hidden="true">&bull;</span> ', $abptt_guide['role_parts'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Each part is escaped via esc_html() above; the separator is static markup. ?></div>
+                        <div class="abptt_guide_hero_role"><?php echo wp_kses_post( implode( ' <span aria-hidden="true">&bull;</span> ', $abptt_guide['role_parts'] ) ); ?></div>
 						<?php } ?>
 						<?php if ( ! empty( $abptt_guide['facts'] ) ) { ?>
                             <dl class="abptt_guide_facts">

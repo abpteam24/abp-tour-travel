@@ -98,7 +98,7 @@
 				) + ABPTT_Function::polylang_query_args());
 				return array_unique($all_data);
 			}
-			public static function get_booking_query($filters = array(), $limit = 0, $offset = 0, $count = false): array|int|string {
+			public static function get_booking_query($filters = array(), $limit = 0, $offset = 0, $count = false) {
 				global $wpdb;
 				$table_name = $wpdb->prefix . 'abptt_orders';
 				$conditions = array();

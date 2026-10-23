@@ -169,8 +169,7 @@
                     'abptt_additional'            => __( 'Note: Add extra services for products/equipment with your Tour—import or set per Post (also usable globally); stock applies per Post, empty quantity = unlimited, empty max qty = no limit, empty/Zero price = free.', 'abp-tour-travel' ),
                     'abptt_form'                  => __( 'Note: This is a flexibility global form system. Once you design the structure here, it serves as a global form. You can effortlessly import this form into any Tour or use this setting at any Tour,', 'abp-tour-travel' ),
                     'abptt_faq'                   => __( 'Note: You can set all Tour-related FAQs here and use them globally across all Tours. You can also import these FAQs into any individual Tour and customize them as needed.', 'abp-tour-travel' ),
-                    'abptt_why_book'              => __( 'Note: Add the reasons why guests should book with you. Each reason has its own Icon, Title and Description. You can drag the items to change their display order, and the list is shown on every Tour details page.', 'abp-tour-travel' ),
-                    'why_book_item'               => __( 'Pick an icon or emoji, then add a short Title and a Description for this reason. Any item with an empty Title will not be saved or displayed.', 'abp-tour-travel' ),
+                    'abptt_why_book'              => __( 'Note: Add the reasons why guests should book with you. Each reason has its own Icon, Title and Description. You can drag the items to change their display order, and the list is shown on every Tour details page. Pick an icon or emoji, then add a short Title and a Description for this reason. Any item with an empty Title will not be saved or displayed.', 'abp-tour-travel' ),
                     'abptt_tc'                    => __( 'Note: You can set all Tour-related Term & Condition here and use them globally across all Tour. You can also import these Term & Condition into any individual Tour and customize them as needed.', 'abp-tour-travel' ),
                     'abptt_location'              => __( 'Note: Here, you can add all of your Tour Location, which can then be used across any Tour . You can edit or delete them at any time. However, please note that deleting a location that is already assigned to a Tour may affect the existing configuration. If a location is not currently assigned anywhere, deleting it will not cause any issues.', 'abp-tour-travel' ),
                     'abptt_category'              => __( 'Note : Here you can create and manage all Tour types or categories. You can assign  categories to each Tour while creating or editing a post. Every category has a unique ID, which can also be used in shortcodes to display specific post types anywhere on your website. You can edit or delete categories at any time, but removing a category that is already assigned to a post may affect its existing configuration.', 'abp-tour-travel' ),
@@ -189,7 +188,7 @@
                 return $des[ $key ] ?? '';
             }
 
-            public static function icon_svg( $key ): void {
+            public static function svg( $key ): void {
                 $des              = [
                     'user_group_1' => '<svg  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"  d="M17 20c0-1.657-2.239-3-5-3s-5 1.343-5 3m14-3c0-1.23-1.234-2.287-3-2.75M3 17c0-1.23 1.234-2.287 3-2.75m12-4.014a3 3 0 1 0-4-4.472m-8 4.472a3 3 0 0 1 4-4.472M12 14a3 3 0 1 1 0-6a3 3 0 0 1 0 6Z"/></svg>',
                     'user_group_2' => '<svg  viewBox="0 0 24 24"> <path fill="currentColor" fill-rule="evenodd" d="M12 6a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7m-1.5 8a4 4 0 0 0-4 4c0 1.1.9 2 2 2h7a2 2 0 0 0 2-2a4 4 0 0 0-4-4zm6.8-3.1a5.5 5.5 0 0 0-2.8-6.3c.6-.4 1.3-.6 2-.6a3.5 3.5 0 0 1 .8 6.9m2.2 7.1h.5a2 2 0 0 0 2-2a4 4 0 0 0-4-4h-1.1l-.5.8c1.9 1 3.1 3 3.1 5.2M4 7.5a3.5 3.5 0 0 1 5.5-2.9A5.5 5.5 0 0 0 6.7 11A3.5 3.5 0 0 1 4 7.5M7.1 12H6a4 4 0 0 0-4 4c0 1.1.9 2 2 2h.5a6 6 0 0 1 3-5.2z" clip-rule="evenodd"/></svg>',
@@ -479,7 +478,7 @@
                 ];
             }
 
-            public static function tc(): false|string {
+            public static function tc() {
                 ob_start(); ?>
                 <h6>1. Acceptance of Terms</h6>
                 By purchasing or using a tour ticket through this website, you agree to comply with these terms and conditions. If you do not agree with any part of these terms, please do not purchase or use the ticket.

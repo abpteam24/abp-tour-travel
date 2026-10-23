@@ -348,7 +348,7 @@
                     <td>
                         <div class="_all_center">
                             <div class="_group_content">
-                                <button type="button" class="_btn_light_theme_xxs sp_id_change" onclick="abptt_popup_open_global('view_sp','<?php echo esc_attr( $id ); ?>')" title="<?php esc_attr_e( 'View : Seat Plan', 'abp-tour-travel' ); ?>"><?php ABPTT_Static::icon_svg( 'view_1' ); ?></button>
+                                <button type="button" class="_btn_light_theme_xxs sp_id_change" onclick="abptt_popup_open_global('view_sp','<?php echo esc_attr( $id ); ?>')" title="<?php esc_attr_e( 'View : Seat Plan', 'abp-tour-travel' ); ?>"><?php ABPTT_Static::svg( 'view_1' ); ?></button>
                                 <?php
                                     ABPTT_Layout::button_sort();
                                     ABPTT_Layout::button_delete();

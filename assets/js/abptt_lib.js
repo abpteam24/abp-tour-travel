@@ -348,16 +348,16 @@ window.abptt_date_close = function (element, e) {
 };
 //==============================================================================Collapse & Tabs & Modal / Popup=================//
 function abptt_target_close(close_id, $this) {
-    if ($this.closest('.tf_close_area').length > 0) {
-        $this.closest('.tf_close_area').find('[data-close="' + close_id + '"]').slideUp(250);
+    if ($this.closest('.tt_close_area').length > 0) {
+        $this.closest('.tt_close_area').find('[data-close="' + close_id + '"]').slideUp(250);
     } else {
         jQuery('body').find('[data-close="' + close_id + '"]').slideUp(250);
     }
     return true;
 }
 function abptt_target_open(close_id, $this) {
-    if ($this.closest('.tf_close_area').length > 0) {
-        $this.closest('.tf_close_area').find('[data-close="' + close_id + '"]').slideDown(250);
+    if ($this.closest('.tt_close_area').length > 0) {
+        $this.closest('.tt_close_area').find('[data-close="' + close_id + '"]').slideDown(250);
     } else {
         jQuery('body').find('[data-close="' + close_id + '"]').slideDown(250);
     }

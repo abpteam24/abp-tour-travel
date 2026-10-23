@@ -37,7 +37,7 @@
                             }
 
                             $time_infos=ABPTT_Function::schedule_time_infos($post_infos);
-                            $all_times = ABPTT_Function::time($time_infos, $start_date);
+                            $all_times = ABPTT_Function::available_times($post_id, $time_infos, $start_date);
 	                        $start_time = !empty($all_times) ? current($all_times) : '';
                             $upcoming_date='';
                             if(!empty($start_date)) {
@@ -112,6 +112,7 @@
                     $post_infos = ABPTT_Function::get_all_meta($post_id);
                     $form_data['post_id'] = $post_id;
                     $sale_continue = $post_infos['sale_continue'] ?? 'on';
+                    $time_html = '';
                     ob_start();
                     if ($sale_continue == 'on') {
 	                    $start_date = $post_val('tour_date') ?: $post_val('start_date');
@@ -123,16 +124,26 @@
 	                    }
 
 	                    $time_infos=ABPTT_Function::schedule_time_infos($post_infos);
-	                    $all_times = ABPTT_Function::time($time_infos, $start_date);
-	                    $session_time = $session_time ?: (!empty($all_times) ? current($all_times) : '');
+	                    $all_times = ABPTT_Function::available_times($post_id, $time_infos, $start_date);
+	                    if (!isset($all_dates) || !is_array($all_dates)) {
+		                    $all_dates = ABPTT_Function::date($post_id);
+	                    }
+	                    if (!in_array($session_time, $all_times, true)) {
+		                    $session_time = !empty($all_times) ? current($all_times) : '';
+	                    }
 	                    $upcoming_date='';
 	                    if(!empty($start_date)) {
 		                    $upcoming_date=!empty($session_time) ? gmdate('Y-m-d H:i', strtotime($start_date.' '.$session_time)) : $start_date;
 	                    }
+	                    $form_data['all_dates'] = $all_dates;
+	                    $form_data['all_times'] = $all_times;
 	                    $form_data['start_date'] = $start_date;
 	                    $form_data['start_time'] = $session_time;
 	                    $form_data['tour_date'] = $start_date;
 	                    $form_data['session_time'] = $session_time;
+	                    ob_start();
+	                    ABPTT_Layout::start_time( $form_data );
+	                    $time_html = ob_get_clean();
 	                    $selected_sp_id = $post_int( 'sp_id', 0 );
 	                    if ( $selected_sp_id > 0 ) {
 	                        $available_sp_ids = array_map(
@@ -164,6 +175,7 @@
                     }
                     wp_send_json_success([
                         'html' => $html,
+                        'time_html' => $time_html,
                         'times' => $time_options,
                         'selected_time' => $session_time,
                         'msg' => (get_the_title($post_id) . ' ' . __('data loaded....!', 'abp-tour-travel')),
@@ -187,12 +199,11 @@
                 //echo '<pre>';                    print_r($all_dates);                    echo '</pre>';
                 ABPTT_Layout::start_date($all_dates, $upcoming_date);
                 $html_journey = ob_get_clean();
-                $new_picker_config = !empty($all_dates) ? ABPTT_Layout::create_datepicker_array($all_dates) : '';
+                $new_picker_config = ABPTT_Layout::use_date_picker(count($all_dates)) ? ABPTT_Layout::create_datepicker_array($all_dates) : '';
                 wp_send_json_success([
                     'html_journey' => $html_journey, 'type' => 'success',
                     'msg' => esc_html__('Date Loaded successfully.', 'abp-tour-travel'),
                     'picker_config' => $new_picker_config,
-                    'return' => '#return_date',
                     'journey' => '#start_date'
                 ]);
             }

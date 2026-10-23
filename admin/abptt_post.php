@@ -39,7 +39,7 @@
                             <button type="button" class="_btn_light_active_xs <?php echo esc_attr( $status == 'trash' ? 'abp_active' : '' ); ?>" data-href="<?php echo esc_url( ABPTT_Function::build_url( 'posts', [ 'status' => 'trash' ] ) ); ?>"><?php esc_html_e( 'Trash', 'abp-tour-travel' ); ?> ( <?php echo esc_html( $total_trash ); ?> )</button>
                         </div>
                         <a class="_btn_navy_blue_xs" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . ABPTT_Function::get_cpt() ) ); ?>">
-                            <?php ABPTT_Static::icon_svg( 'plus' );
+                            <?php ABPTT_Static::svg( 'plus' );
                                 esc_html_e( 'Add New Tour', 'abp-tour-travel' ); ?>
                         </a>
                     </div>
@@ -124,14 +124,14 @@
                                     <th><code> [abptt-post post_id="<?php echo esc_attr( $post_id ); ?>"]</code></th>
                                     <th>
                                         <div class="_group_content">
-                                            <button type="button" class="_btn_light_navy_blue_xxs" data-href="<?php echo esc_url( $new_post_url ); ?>" data-blank="_blank" title="<?php echo esc_html__( 'Copy/Clone : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::icon_svg( 'clone_1' ); ?></button>
+                                            <button type="button" class="_btn_light_navy_blue_xxs" data-href="<?php echo esc_url( $new_post_url ); ?>" data-blank="_blank" title="<?php echo esc_html__( 'Copy/Clone : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::svg( 'clone_1' ); ?></button>
                                             <?php if ( $post_status == 'trash' ) { ?>
                                                 <button type="button" class="_btn_light_success_xxs " onclick="abptt_post_action('restore','<?php echo esc_attr( $post_id ); ?>')" title="<?php echo esc_html__( 'Restore : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>">♻️</button>
-                                                <button type="button" class="_btn_light_danger_xxs" onclick="abptt_post_action('permanent_remove','<?php echo esc_attr( $post_id ); ?>')" title="<?php echo esc_html__( 'Permanent Remove : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::icon_svg( 'close_2' ); ?></button>
+                                                <button type="button" class="_btn_light_danger_xxs" onclick="abptt_post_action('permanent_remove','<?php echo esc_attr( $post_id ); ?>')" title="<?php echo esc_html__( 'Permanent Remove : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::svg( 'close_2' ); ?></button>
                                             <?php } else { ?>
-                                                <button type="button" class="_btn_light_yellow_xxs" data-href="<?php echo esc_url( $edit_link ); ?>" data-blank="_blank" title="<?php echo esc_html__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::icon_svg( 'edit' ); ?></button>
-                                                <button type="button" class="_btn_light_theme_xxs" data-href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" data-blank="_blank" title="<?php echo esc_html__( 'View : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::icon_svg( 'view_1' ); ?></button>
-                                                <button type="button" class="_btn_light_danger_xxs" onclick="abptt_post_action('move_trash','<?php echo esc_attr( $post_id ); ?>')" title="<?php echo esc_html__( 'Move to Trash : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::icon_svg( 'close_1' ); ?></button>
+                                                <button type="button" class="_btn_light_yellow_xxs" data-href="<?php echo esc_url( $edit_link ); ?>" data-blank="_blank" title="<?php echo esc_html__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::svg( 'edit' ); ?></button>
+                                                <button type="button" class="_btn_light_theme_xxs" data-href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" data-blank="_blank" title="<?php echo esc_html__( 'View : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::svg( 'view_1' ); ?></button>
+                                                <button type="button" class="_btn_light_danger_xxs" onclick="abptt_post_action('move_trash','<?php echo esc_attr( $post_id ); ?>')" title="<?php echo esc_html__( 'Move to Trash : ', 'abp-tour-travel' ) . ' ' . esc_html( $title ); ?>"><?php ABPTT_Static::svg( 'close_1' ); ?></button>
                                             <?php } ?>
                                         </div>
                                     </th>
@@ -207,6 +207,7 @@
                                 $this->general_configuration( $post_infos );
                                 $this->related_configuration( $post_infos );
                                 $this->gallery_configuration( $post_infos );
+                                $this->tax_configuration( $post_infos );
                                 do_action( 'abptt_post_content', $post_infos );
                             ?>
                         </div>
@@ -222,7 +223,7 @@
                 <div class="tab_item" data-tabs="#abptt_general">
                     <h4 class="abp_color_theme"><?php esc_html_e( 'General Configuration', 'abp-tour-travel' ); ?></h4>
                     <?php ABPTT_Layout::info_text( 'general_config' ); ?>
-                    <div class="_divider_xs"></div>
+                    <div class="_divider_xxs"></div>
                     <div class="group_setting">
                         <div class="setting_item">
                             <label>
@@ -470,6 +471,51 @@
                     <?php ABPTT_Layout::info_text( 'display_slider' ); ?>
                     <div class="_divider_xxs"></div>
                     <?php do_action( 'abptt_add_image_multiple', 'abptt_slider', ( $post_infos['abptt_slider'] ?? '' ) ); ?>
+                </div>
+                <?php
+            }
+
+            public function tax_configuration( $post_infos = [] ): void {
+                $tax_status  = $post_infos['_tax_status'] ?? '';
+                $tax_classes = WC_Tax::get_tax_rate_classes();
+                $tax_class   = $post_infos['_tax_class'] ?? '';
+                ?>
+                <div class="tab_item" data-tabs="#abptt_tax">
+                    <h5 class="abp_color_theme_gap_xs">🧾<?php esc_html_e( 'Tax Configuration', 'abp-tour-travel' ); ?></h5>
+                    <div class="_divider_xxs"></div>
+                    <?php if ( get_option( 'woocommerce_calc_taxes' ) != 'yes' ) {
+                        ABPTT_Layout::layout_warning_info( 'enable_tax_msg' );
+                    } else { ?>
+                        <div class="group_setting">
+                            <div class="setting_item">
+                                <label class="_f_equal_f_wrap">
+                                    <span><?php esc_html_e( 'Tax Status', 'abp-tour-travel' ); ?></span>
+                                    <select class="_form_control" name="_tax_status">
+                                        <option disabled selected><?php esc_html_e( 'Please Select', 'abp-tour-travel' ); ?></option>
+                                        <option value="taxable" <?php echo esc_attr( $tax_status == 'taxable' ? 'selected' : '' ); ?>><?php esc_html_e( 'Taxable', 'abp-tour-travel' ); ?></option>
+                                        <option value="shipping" <?php echo esc_attr( $tax_status == 'shipping' ? 'selected' : '' ); ?>><?php esc_html_e( 'Shipping only', 'abp-tour-travel' ); ?></option>
+                                        <option value="none" <?php echo esc_attr( $tax_status == 'none' ? 'selected' : '' ); ?>><?php esc_html_e( 'None', 'abp-tour-travel' ); ?></option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="setting_item">
+                                <label class="_f_equal_f_wrap">
+                                    <span><?php esc_html_e( 'Tax Class', 'abp-tour-travel' ); ?></span>
+                                    <select class="_form_control" name="_tax_class">
+                                        <option disabled selected><?php esc_html_e( 'Please Select', 'abp-tour-travel' ); ?></option>
+                                        <option value="standard" <?php echo esc_attr( $tax_class == 'standard' ? 'selected' : '' ); ?>><?php esc_html_e( 'Standard', 'abp-tour-travel' ); ?></option>
+                                        <?php if ( sizeof( $tax_classes ) > 0 ) { ?>
+                                            <?php foreach ( $tax_classes as $class ) { ?>
+                                                <option value="<?php echo esc_attr( $class->slug ); ?>" <?php echo esc_attr( $tax_class == $class->slug ? 'selected' : '' ); ?>><?php echo esc_html( $class->name ); ?></option>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </select>
+                                    <div class="_divider_xs"></div>
+                                    <?php ABPTT_Layout::info_text( '_tax_class' ); ?>
+                                </label>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
                 <?php
             }

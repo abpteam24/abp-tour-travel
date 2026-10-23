@@ -8,8 +8,9 @@ add_action( 'abptt_details_modern_template', function ( $post_id, $form_data = [
 	}
 	$post_infos = ABPTT_Function::get_all_meta( $post_id );
 	$all_dates  = ABPTT_Function::date( $post_id );
-	$time_infos = $post_infos['time_infos'] ?? [];
-	[ $all_dates, $start_date, $all_times, $start_time ] = ABPTT_Function::event_schedule_selection( $all_dates, $time_infos );
+	$time_infos = ABPTT_Function::schedule_time_infos( $post_infos );
+	[ $all_dates, $start_date, $all_times, $start_time ] = ABPTT_Function::event_schedule_selection( $all_dates, $time_infos, $post_id );
+	$upcoming_date  = ! empty( $start_date ) && ! empty( $start_time ) ? gmdate( 'Y-m-d H:i', strtotime( $start_date . ' ' . $start_time ) ) : $start_date;
 	$show_date_list = ABPTT_Function::on_off( 'tour_date_list' ) && count( ABPTT_Function::event_schedule_items( $post_id, $all_dates, $time_infos ) ) > 1;
 	$content = get_post_field( 'post_content', $post_id );
 	$sale_continue = $post_infos['sale_continue'] ?? 'on';
@@ -20,7 +21,7 @@ add_action( 'abptt_details_modern_template', function ( $post_id, $form_data = [
 		'all_times' => $all_times,
 		'start_date' => $start_date,
 		'start_time' => $start_time,
-		'tour_date' => $start_date,
+		'tour_date' => $upcoming_date,
 		'session_time' => $start_time,
 	] );
 	?>
@@ -38,14 +39,14 @@ add_action( 'abptt_details_modern_template', function ( $post_id, $form_data = [
 					<div class="abptt_modern_copy">
 						<div class="abptt_modern_kicker">
 							<?php if ( ! empty( $form_data['tour_date'] ) ) { ?>
-								<span class="abptt_modern_kicker_date"><?php ABPTT_Static::icon_svg( 'date_1' ); ?><?php echo esc_html( ABPTT_Function::date_format( $form_data['tour_date'] ) ); ?></span>
+								<span class="abptt_modern_kicker_date"><?php ABPTT_Static::svg( 'date_1' ); ?><?php echo esc_html( ABPTT_Function::date_format( $form_data['tour_date'] ) ); ?></span>
 							<?php } ?>
 							<?php if ( $sale_continue === 'on' ) { ?>
 								<span class="abptt_modern_kicker_live"><?php esc_html_e( 'Booking Open', 'abp-tour-travel' ); ?></span>
 							<?php } ?>
 							<?php ABPTT_Layout::top_pick( $post_infos, 'top_pick modern_top_pick' ); ?>
 						</div>
-						<h1 class="abptt_details_title"><?php ABPTT_Layout::title( $post_infos ); ?></h1>
+						<h1 class="abp_color_theme_gap_xs"><?php ABPTT_Layout::title( $post_infos ); ?></h1>
 						<?php ABPTT_Layout::sub_title( $post_infos, 'sub_title abptt_modern_subtitle' ); ?>
 						<div class="abptt_modern_meta _gap_xs_mar_t_xs">
 							<?php ABPTT_Layout::capacity( $post_infos ); ABPTT_Layout::category( $post_infos ); ABPTT_Layout::organizer( $post_infos, 'publish' ); ABPTT_Layout::location( $post_infos ); ABPTT_Layout::tour_duration( $post_infos ); ABPTT_Layout::tour_night( $post_infos ); ABPTT_Layout::max_people( $post_infos ); ABPTT_Layout::min_age( $post_infos ); ABPTT_Layout::start_place( $post_infos ); ABPTT_Layout::rating( $post_infos ); ?>
@@ -64,7 +65,7 @@ add_action( 'abptt_details_modern_template', function ( $post_id, $form_data = [
 					</div>
 				<?php } ?>
 				<?php if ( $sale_continue === 'on' ) { ?>
-					<div class="post_top_filter"><?php ABPTT_Layout::start_date( $all_dates, $start_date ); ABPTT_Layout::start_time( $form_data ); ?></div>
+					<div class="post_top_filter"><?php ABPTT_Layout::start_date( $all_dates, $start_date, $all_times, $time_infos, $post_id, $start_time ); ABPTT_Layout::start_time( $form_data ); ?></div>
 					<?php do_action( 'abptt_registration', $post_infos, $form_data ); ?>
 				<?php } else { ABPTT_Layout::layout_warning_info( 'sale_close_msg' ); } ?>
 			</div>

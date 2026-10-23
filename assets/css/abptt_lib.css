@@ -127,7 +127,7 @@
 	}
 }
 @media only screen and (max-width: 1100px) {
-	:root {
+	html:root {
 		--tt_fs_small: 10px;
 		--tt_fs: 12px;
 		--tt_fs_label: 14px;
@@ -145,7 +145,7 @@
 	}
 }
 @media only screen and (max-width: 700px) {
-	:root {
+	html:root {
 		--tt_fs: 11px;
 		--tt_fs_label: 12px;
 		--tt_button_fs: 12px;
@@ -271,7 +271,7 @@
 /******************************************************************** Image/slider Section ************************************************/
 @media only screen and (min-width: 10px) {
 	div.abptt_area img.emoji {height: 14px !important; min-height: auto !important; width: auto !important; min-width: auto !important;}
-	div.abptt_area svg {height: var(--tt_fs_label);}
+	div.abptt_area svg {height: var(--tt_fs_label);width: auto;}
 	div.abptt_area [class*="_img_control"] {width: 100%;height: auto;max-width: 100%;-webkit-border-radius: var(--tt_br); border-radius: var(--tt_br);line-height: 1;display: block;-webkit-transition: var(--tt_transition); transition: var(--tt_transition);}
 	div.abptt_area [class*="_img_control"]:hover { -ms-transform: scale(1.05); transform: scale(1.05); }
 	div.abptt_area .abp_image { width: 100%; overflow: hidden; position: relative; height: auto;line-height: 1; }
@@ -519,7 +519,7 @@
 	.abptt_area ol[class*="abp"] { margin: 0; padding: 0; line-height: 1.25; }
 	.abptt_area ol[class*="abp"] li,
 	.abptt_area ul[class*="abp"] li { margin: 0; padding: 0; line-height: inherit; }
-	div.abptt_area ul[class*="abp"] li.abp_active { background-color: var(--tt_color_active) }
+	.abptt_area ul[class*="abp"] li.abp_active { background-color: var(--tt_color_active) }
 	/******List inline**********/
 	div.abptt_area ul[class*="abp_list_inline"] {display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap;}
 	div.abptt_area ul[class*="abp_list_inline"] li { text-align: center; border-right: 1px solid; }
@@ -649,7 +649,7 @@
 	div.abptt_area .tab_top .tab_lists [data-tabs-target]:last-child { border-right: none; }
 	/*=============================*/
 	div.abptt_area .abp_tabs.tab_left { display: -webkit-flex; display: flex; background-color: var(--tt_color_white);}
-	div.abptt_area .abp_tabs.tab_left .tab_lists { -webkit-flex-flow: column; flex-flow: column; width: 40%; max-width: 200px; border-right: var(--tt_gap_xxs) solid var(--tt_color_theme);}
+	div.abptt_area .abp_tabs.tab_left .tab_lists { -webkit-flex-flow: column; flex-flow: column; width: 40%; max-width: 220px; border-right: var(--tt_gap_xxs) solid var(--tt_color_theme);}
 	div.abptt_area .tab_left .tab_lists li,
 	div.abptt_area .tab_left .tab_lists [data-tabs-target] { border-bottom: 1px solid var(--tt_color_border); }
 	/*=============================*/
@@ -1021,12 +1021,12 @@
 		-webkit-border-radius: var(--tt_br); border-radius: var(--tt_br);-webkit-transition: var(--tt_transition); transition: var(--tt_transition);
 	}
 	.abptt_area [class*="_btn"]:hover,
-	.abptt_area [class*="_btn"]:focus { text-decoration: none; opacity: 0.5; color: var(--tt_color_theme);outline: none; }
+	.abptt_area [class*="_btn"]:focus { text-decoration: none; opacity: 0.5; color: initial;outline: none; }
 	.abptt_area [class*="_btn"]:hover span,
 	.abptt_area [class*="_btn"]:focus span { color: inherit; }
 	div.abptt_area [class*="_btn"][disabled] { cursor: not-allowed; opacity: 0.7; background-color: #DDD5; pointer-events: none;}
 	div.abptt_area [class*="_btn"] svg,
-	div.abptt_area [class*="_btn"] img.emoji {height: var(--tt_fs_h6) !important;}
+	div.abptt_area [class*="_btn"] img.emoji {height: var(--tt_button_fs) !important;}
 	/*=============================*/
 	div.abptt_area [class*="_btn_default"] {-webkit-box-shadow: var(--tt_shadow_5); box-shadow: var(--tt_shadow_5);}
 	div.abptt_area [class*="_btn_default"],

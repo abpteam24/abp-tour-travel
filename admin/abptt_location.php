@@ -17,11 +17,12 @@
             public function global_location(): void {
                 $label = ABPTT_Function::location_label(); ?>
                 <div class="_fj_between">
-                    <h5 class="abp_color_theme_gap_xs"><span class="fas fa-map-marker-alt"></span><?php echo esc_html( $label ); ?></h5>
+                    <h4 class="abp_color_theme_gap_xs"><span class="fas fa-map-marker-alt"></span><?php echo esc_html( __( 'Global', 'abp-tour-travel' ) . ' ' . $label . ' ' . __( 'Configuration', 'abp-tour-travel' ) ); ?></h4>
                     <?php ABPTT_Layout::button_global_popup( 'tax_location', __( 'Add New', 'abp-tour-travel' ) . ' ' . $label ); ?>
                 </div>
                 <?php ABPTT_Layout::info_text( 'abptt_location' ); ?>
-                <div class="tax_location _ov_auto_mar_t_xs">
+                <div class="_divider_xxs"></div>
+                <div class="tax_location _ov_auto">
                     <?php $this->location_list(); ?>
                 </div>
                 <?php
@@ -254,8 +255,8 @@
                                 <td>
                                     <div class="_fj_center">
                                         <div class="_group_content">
-                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('tax_location','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::icon_svg( 'edit' ); ?></button>
-                                            <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('tax_location','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::icon_svg( 'close_2' ); ?></button>
+                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('tax_location','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::svg( 'edit' ); ?></button>
+                                            <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('tax_location','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::svg( 'close_2' ); ?></button>
                                         </div>
                                     </div>
                                 </td>
@@ -285,8 +286,9 @@
                 }
                 ?>
                 <div class="tab_item configuration_content abptt_place" data-tabs="#abptt_places_you_see">
-                    <h4 class="abp_color_theme_gap_xs">📍<?php echo esc_html( ABPTT_Function::label_place_you_see() ); ?> <?php esc_html_e( 'Configuration', 'abp-tour-travel' ); ?></h4>
-                    <div class="_divider_xs"></div>
+                    <h5 class="abp_color_theme_gap_xs">📍<?php echo esc_html( ABPTT_Function::label_place_you_see() ); ?> <?php esc_html_e( 'Configuration', 'abp-tour-travel' ); ?></h5>
+                    <?php ABPTT_Layout::info_text( 'place_you_see_item' ); ?>
+                    <div class="_divider_xxs"></div>
                     <div class="setting_item">
                         <div class="_fj_between_fa_center">
                             <label>
@@ -307,14 +309,13 @@
                         </div>
                     </div>
                     <div data-collapse="#display_places_you_see" class=" _mar_t_xs <?php echo esc_attr( $display == 'on' ? 'abp_active' : '' ); ?>">
-                        <div class="place_you_see_list_wrap">
-                            <div class="insertable_area sortable_area place_you_see_list">
-                                <?php
-                                    foreach ( $places as $place ) {
-                                        $this->place_you_see_item( $place );
-                                    }
-                                ?>
-                            </div>
+
+                        <div class="insertable_area sortable_area place_you_see_list">
+                            <?php
+                                foreach ( $places as $place ) {
+                                    $this->place_you_see_item( $place );
+                                }
+                            ?>
                         </div>
                         <div class="abp_hidden">
                             <div class="hidden_content">
@@ -333,36 +334,27 @@
                 $description = (string) ( $place['des'] ?? '' );
                 $editor_id   = uniqid( 'abptt_place_editor_' );
                 ?>
-                <div class="delete_area place_you_see_item _mar_b_xs <?php echo esc_attr( empty( $place ) ? 'active' : '' ); ?>" data-place-id="<?php echo esc_attr( $place_id ); ?>">
+                <div class="delete_area place_you_see_item <?php echo esc_attr( empty( $place ) ? 'active' : '' ); ?>" data-place-id="<?php echo esc_attr( $place_id ); ?>">
                     <div class="place_you_see_head">
                         <h6 class="abp edit_hook"><?php echo esc_html( $name ); ?></h6>
                         <?php ABPTT_Layout::button_delete_sort_edit(); ?>
                     </div>
                     <div class="edit_area">
                         <div class="place_you_see_body">
-                            <?php ABPTT_Layout::info_text( 'place_you_see_item' ); ?>
-                            <div class="_divider_xs"></div>
                             <input type="hidden" name="place_you_see_id[]" value="<?php echo esc_attr( $place_id ); ?>"/>
-                            <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php esc_html_e( 'Place Name', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
-                                <input type="text" class="_form_control" name="place_you_see_name[]" value="<?php echo esc_attr( $name ); ?>" readonly/>
-                            </label>
-                            <div class="_fd_column_mar_t_xs">
-                                <span class="abp_label"><?php esc_html_e( 'Description', 'abp-tour-travel' ); ?></span>
-                                <?php
-                                    wp_editor(
-                                        $description,
-                                        $editor_id,
-                                        array(
-                                            'textarea_name' => 'place_you_see_des[]',
-                                            'textarea_rows' => 5,
-                                            'media_buttons' => true,
-                                            'teeny'         => false,
-                                            'quicktags'     => true
-                                        )
-                                    );
-                                ?>
-                            </div>
+                            <?php
+                                wp_editor(
+                                    $description,
+                                    $editor_id,
+                                    array(
+                                        'textarea_name' => 'place_you_see_des[]',
+                                        'textarea_rows' => 5,
+                                        'media_buttons' => true,
+                                        'teeny'         => false,
+                                        'quicktags'     => true
+                                    )
+                                );
+                            ?>
                         </div>
                     </div>
                 </div>

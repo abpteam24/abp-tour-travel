@@ -30,7 +30,7 @@
 	$term = get_queried_object();
 	if ( $term instanceof WP_Term ) {
 		printf(
-			'<main class="abptt_area"><div class="abp_container"><h1 class="abptt_details_title">%s</h1>%s</div></main>',
+			'<main class="abptt_area"><div class="abp_container"><h1 class="abp_color_theme_gap_xs">%s</h1>%s</div></main>',
 			esc_html( $term->name ),
 			do_shortcode( '[abptt-post organizer_id="' . absint( $term->term_id ) . '"]' )
 		);

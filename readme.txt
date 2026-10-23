@@ -1,4 +1,4 @@
-=== ABP Tour and Travel ===
+=== ABP Tour & Travel ===
 Contributors: abpteam
 Tags: tour tickets, ticket booking, seat reservation, tour registration, seat plan
 Requires at least: 6.2
@@ -14,9 +14,9 @@ Sell tour tickets online with WooCommerce using general admission, reserved seat
 
 == Description ==
 
-ABP Tour and Travel turns WooCommerce into a complete tour ticketing and registration system. Create tours, configure ticket types and prices, publish tour details, collect guest information, and sell tickets through the standard WooCommerce checkout. It is the simplest way to sell tour tickets, concert tickets, conference tickets, festival tickets, and workshop registration online.
+ABP Tour and Travel turns WooCommerce into a complete tour ticketing and registration system. Create tours, configure ticket types and prices, publish tour details, collect guest information, and sell tickets through the standard WooCommerce checkout for tours, concerts, conferences, festivals, and workshops.
 
-The plugin supports both general admission and reserved seating. Administrators can build reusable seat plans with drag-and-drop controls, automatic numbering, custom labels, ticket-type assignment, and flexible layouts. Seat availability is updated in real time as tickets are booked, so you never oversell a tour.
+The plugin supports both general admission and reserved seating. Administrators can build reusable seat plans with drag-and-drop controls, automatic numbering, custom labels, ticket-type assignment, and flexible layouts. Seat availability is updated in real time as tickets are booked, keeping seat inventory in sync with each booking.
 
 Create reusable global configuration for ticket types, seat plans, dates, locations, categories, operators, features, additional services, guest forms, FAQs, Terms & Conditions, tour timelines, and guides. Global configuration can be imported into an individual tour and customized when needed. Customers can book from any page with a lightweight shortcode, and a Bookings tab appears automatically in their WooCommerce account.
 
@@ -96,7 +96,7 @@ Configure when tickets are available for each tour:
 
 == Google Location Map ==
 
-Show a Google Map for the locations assigned to a tour. With a Google Maps JavaScript API key the interactive map is rendered via the JavaScript API and Places library. When no API key is saved, the map is rendered as an embedded iframe (no API key required), so the location still displays as long as the global Google Location Map switch is on.
+Show a Google Map for the locations assigned to a tour. With a Google Maps JavaScript API key the interactive map renders via the JavaScript API and Places library; without a key, an embedded iframe renders instead, so the location still displays while the global switch is on.
 
 Setup:
 
@@ -105,36 +105,21 @@ Setup:
 3. Open a Location in the global data, search for the address or place, and select it on the map to save its latitude, longitude, address, and place data.
 4. Assign that location to a tour.
 
-When the global switch is on, the tour has a location, and that location has saved map data, the map is displayed on the tour details page. With an API key saved, the interactive JavaScript map renders; without a key, an embedded iframe map renders instead. If the switch is off or no map data exists for the location, no map is rendered.
-
-The map appears in the tour details templates and includes:
-
-* Search-and-select map picker in the Location admin screen
-* Draggable marker to fine-tune the saved coordinates
-* Per-location map data (latitude, longitude, address, and place ID)
-* Three frontend map styles: default, light, and modern
-* Clickable marker with location name and address info window
-* "Get Directions" links to Google Maps
+The map appears on the tour details page when the switch is on, the tour has a location, and the location has saved map data. It includes a search-and-select picker, a draggable marker, per-location data, three frontend styles (default, light, modern), an info window on click, and "Get Directions" links to Google Maps.
 
 == Tour Timeline ==
 
-Display a visual tour timeline on the tour details page showing the schedule of activities in chronological order. Each timeline entry consists of a time, a title, and a rich-text description.
+Display a visual timeline on the tour details page showing activities in chronological order. Each entry has a time, title, and rich-text description.
 
 Setup:
 
 1. Enable Tour Timeline under the plugin's global ON/OFF settings.
 2. Open a tour and go to the Timeline tab.
 3. Turn on the "Active Timeline" switch for that tour.
-4. Click "Add New Timeline Item" and fill in the time, title, and description for each schedule entry.
+4. Click "Add New Timeline Item" and fill in the time, title, and description for each entry.
 5. Save the tour.
 
-The timeline appears on the tour details page when the tour has at least one timeline entry with a title. It supports three display styles that match the tour details template:
-
-* **Default** - Vertical line with dot markers and a bordered card layout
-* **Light** - Vertical line with circle markers and shadowed card layout
-* **Modern** - Header banner with badge markers and dashed card layout within a rounded container
-
-The timeline section is gated by the global Tour Timeline switch. When the switch is OFF, no timeline is displayed anywhere on the site even if tours have timeline entries saved. The per-tour "Active Timeline" switch controls whether the timeline is shown for that specific tour.
+The timeline appears when the tour has at least one titled entry and follows the details template: Default uses a vertical line with dot markers and bordered cards, Light uses circle markers and shadowed cards, and Modern uses a header banner with badge markers and dashed cards. The global switch hides all timelines when OFF; the per-tour switch controls each tour.
 
 == Tour Guides ==
 
@@ -167,58 +152,19 @@ Guides are stored as terms in the `abptt_guide` taxonomy, which is registered ag
 
 = Frontend Display =
 
-Linked guides are displayed automatically on the tour details page, directly below the tour timeline. No shortcode is required.
-
-The section follows the active tour details template, so it matches your site automatically:
-
-* Default - vertical list with a round photo, name, designation, company, bio, and social links
-* Light - responsive card grid with a large photo, centred text, and a social footer
-* Modern - centred avatar row inside a bordered panel
-
-A guide with no photo shows their initials in a coloured circle instead. Guides with no bio, website, or social links render cleanly without empty gaps.
-
-The section is skipped entirely when the tour has no guides linked, when the global Tour Guide switch is OFF, or when the per-tour "Active Guide" switch is OFF. The per-tour switch is ON by default, so guides appear as soon as you link them.
+Linked guides appear automatically on the tour details page below the timeline, following the active details template: Default is a vertical list with photo, name, role, bio, and social links; Light is a responsive card grid; Modern is a centred avatar row in a bordered panel. Guides without a photo show their initials. The section is skipped when no guides are linked, the global Tour Guide switch is OFF, or the per-tour "Active Guide" switch is OFF (ON by default).
 
 = Guide Page =
 
-Every guide has its own page at `/guide/{guide-slug}/`, for example `/guide/dr-sarah-chen/`. The slug defaults to `guide` and can be changed in Configuration.
-
-Unlike the other taxonomy pages, the guide page does not run a tour list. It is a dedicated profile page that shows only the guide information entered in the admin:
-
-* Photo, or the guide's initials in a coloured circle when no photo is set
-* Name
-* Designation and company
-* Website
-* Full bio, with rich text formatting preserved
-* Every saved social profile, shown with its network name and icon
-
-Sections with no data are omitted entirely, so a guide with only a name shows only their name.
-
-The page template can be overridden the same way as the other templates: copy `page/guide.php` from the plugin's `tt_templates` folder into `wp-content/tt_templates/page/`.
-
-To list a guide's tours somewhere, for example on a normal WordPress page or inside your own template, use the shortcode:
-
-`[abptt-post guide_id="TERM_ID"]`
-
-The term ID is shown in the Global Data > Guide list.
+Each guide has a profile page at `/guide/{guide-slug}/` (the `guide` slug is configurable). It shows only the guide's saved data: photo or initials, name, designation and company, website, full bio, and social profiles, omitting empty fields. Override `page/guide.php` by copying it into `wp-content/tt_templates/page/`. To list a guide's tours elsewhere, use `[abptt-post guide_id="TERM_ID"]`; the term ID appears in Global Data > Guide.
 
 = Display Hook =
 
-If you want to place the guide section somewhere else, or restyle it, use the `abptt_guide` action:
-
-`<?php do_action( 'abptt_guide', $post_infos, $post_id, 'default' ); ?>`
-
-Accepted arguments: the tour meta array, the tour post ID, and the style (`default`, `light`, or `modern`).
-
-Each style also fires its own template action after rendering, for example `abptt_guide_default_template`.
+To reposition or restyle the guide section, use `do_action( 'abptt_guide', $post_infos, $post_id, 'default' );` with the tour meta array, tour post ID, and style (`default`, `light`, or `modern`). Each style also fires `abptt_guide_{style}_template` after rendering.
 
 = Template Overrides =
 
-All three designs live in separate template files and can be overridden without touching the plugin:
-
-1. Create a `tt_templates/guide` folder inside your `wp-content` directory.
-2. Copy `default.php`, `light.php`, or `modern.php` from the plugin's `tt_templates/guide` folder into it.
-3. Edit your copy. The plugin uses your file instead of its own.
+Copy `default.php`, `light.php`, or `modern.php` from the plugin's `tt_templates/guide` folder into `wp-content/tt_templates/guide/` and edit your copy; the plugin uses it automatically.
 
 == Why Book With Us ==
 
@@ -286,6 +232,22 @@ Minimal tour list example:
 == My Account Bookings ==
 
 When used with WooCommerce, a "Bookings" tab is added automatically to the WooCommerce My Account area. Logged-in customers can view their tour bookings, tour dates, ticket details, additional services, guest information, and order totals in one place, with pagination for large histories.
+
+== External services ==
+
+This plugin can connect to third-party services to display maps, route maps, and a searchable location picker. A service is only contacted when the related feature is used, and never while the related options are disabled. The plugin itself does not collect, store, or forward this data to the plugin author.
+
+= Google Maps Platform (JavaScript API and Places library) =
+Used for the interactive location map, the frontend route map, and the searchable location picker. When the Google Location Map option is enabled and a Google Maps API key has been saved, the site loads the Google Maps JavaScript API and the Places library. The visitor's browser sends map requests, the coordinates of the locations being displayed, and any address or place text typed into the location search directly to Google. This service is provided by Google LLC. Terms of Service: https://cloud.google.com/maps-platform/terms. Privacy Policy: https://policies.google.com/privacy.
+
+= Google Maps embed =
+Used to display a key-free map for a tour location when the Google Location Map option is enabled but no Google Maps API key has been saved. The visitor's browser loads a map iframe from maps.google.com and sends the saved coordinates of the tour location to Google. This service is provided by Google LLC. Terms of Service: https://cloud.google.com/maps-platform/terms. Privacy Policy: https://policies.google.com/privacy.
+
+= OpenStreetMap tiles =
+Used as the map background for the frontend route map. The visitor's browser requests map tile images for the visible map area from the OpenStreetMap tile servers and sends the requested tile coordinates and the visitor's IP address. This service is provided by the OpenStreetMap Foundation. Tile usage policy: https://operations.osmfoundation.org/policies/tiles/. Privacy Policy: https://wiki.osmfoundation.org/wiki/Privacy_Policy.
+
+= OSRM demo server =
+Used to calculate the driving route drawn between the tour stops on the frontend route map. The visitor's browser sends the latitude and longitude of the stops to the OSRM demo server at router.project-osrm.org. No account information or personal details are sent. This service is provided by the OSRM project. Usage policy: https://github.com/Project-OSRM/osrm-backend/wiki/Demo-server. Project website: https://project-osrm.org/.
 
 == Requirements ==
 

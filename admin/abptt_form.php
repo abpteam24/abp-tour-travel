@@ -23,8 +23,9 @@
                     $forms = ABPTT_Function::get_option('abptt_form', ABPTT_Static::form());
                     ?>
                     <div class="abp_form">
-                        <h4 class="abp"><span class="_mar_r_xxs">📋</span> <?php esc_html_e('Global Traveler Forms Configuration', 'abp-tour-travel'); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs">📋 <?php esc_html_e('Global Traveler Forms Configuration', 'abp-tour-travel'); ?></h4>
                         <?php ABPTT_Layout::info_text('abptt_form'); ?>
+                        <div class="_divider_xxs"></div>
                         <?php $this->passenger_form_settings($forms, true); ?>
                     </div>
                     <?php
@@ -91,7 +92,7 @@
             }
             public function passenger_form_settings($passenger_forms, $global = false): void {
                 ?>
-                <div class="configuration_content _mar_t_xs">
+                <div class="configuration_content">
                     <div class="_ov_auto">
                         <table class=" abp">
                             <thead>
@@ -119,7 +120,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="_divider_xs"></div>
+                    <div class="_divider_xxs"></div>
                     <div class="_fj_between">
                         <?php ABPTT_Layout::button_add(__('Add New Form Item', 'abp-tour-travel'));
                             if ($global) {
@@ -208,7 +209,10 @@
             }
             //=============================//
             public function get_form_array(array $form_infos = []): array {
-                $has_post_nonce = isset($_POST['abptt_post_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['abptt_post_nonce'])), 'abptt_post_nonce');
+                $has_post_nonce = false;
+                if (isset($_POST['abptt_post_nonce'])) {
+                    $has_post_nonce = wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['abptt_post_nonce'])), 'abptt_post_nonce');
+                }
                 $has_ajax_nonce = check_ajax_referer('abptt_admin_ajax_nonce', 'nonce', false);
                 if (($has_post_nonce || $has_ajax_nonce) && current_user_can('manage_options')) {
                     $post_array = fn($key) => (isset($_POST[$key]) && is_array($_POST[$key])) ? array_map('sanitize_text_field', wp_unslash($_POST[$key])) : [];

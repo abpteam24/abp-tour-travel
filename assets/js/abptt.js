@@ -14,7 +14,6 @@
     });
     abptt_parent.on('abp_trigger', '.abp_search_form [name="post_id"]', function () {
         let parent = $(this).closest(".abp_search_form");
-        let target_return = parent.find('.return_date');
         let target_journey = parent.find('.start_date');
         //load_bp(parent);
         let post_id = parent.find('[name="post_id"]').val();
@@ -25,13 +24,11 @@
         $.ajax({
             type: 'POST', url: abptt_infos.ajax_url, contentType: false, processData: false, data: formData,
             beforeSend: function () {
-                abptt_spinner(target_return);
                 abptt_spinner(target_journey);
                 abptt_toast_msg(abptt_infos.msg.date_loading);
             },
             success: function (response) {
                 abptt_spinner_remove(target_journey);
-                abptt_spinner_remove(target_return);
                 if (response.data && response.data.hasOwnProperty('html_journey')) {
                     target_journey.html(response.data.html_journey).promise().done(function () {
                         if (response.data.hasOwnProperty('picker_config') && response.data.picker_config) {
@@ -58,7 +55,7 @@
             if ($.trim(form_area.find('[name="start_date"]').val()).length === 0) {
                 setTimeout(function () {
                     abptt_toast_msg(abptt_infos.msg.select_start_date);
-                    form_area.find('#start_date').focus();
+                    form_area.find('#start_date, #abptt_start_date_select').focus();
                 }, 100);
                 return;
             }
@@ -92,9 +89,11 @@
     });
     // Refresh ticket/seat availability for the selected tour date and session.
     abptt_parent.on('change', '#abptt_search_area [name="start_date"], .post_top_filter [name="start_date"]', function () {
-        let date = $(this).val();
+        let values = String($(this).val() || '').split('|');
+        let date = values[0] || '';
+        let time = values.length > 1 ? values[1] : '';
         abptt_booking.find('form [name="tour_date"]').val(date);
-        abptt_booking.find('form [name="session_time"]').val('');
+        abptt_booking.find('form [name="session_time"]').val(time);
         abptt_booking.find('form [name="session_time"]').first().trigger('change');
     });
     abptt_booking.on('change', "[name='session_time'] , [name='sp_id'] ", function (e) {
@@ -140,6 +139,15 @@
                             field.val(response.data.selected_time || '');
                         }
                     });
+                }
+                if (response.data && typeof response.data.time_html === 'string') {
+                    let topFilter = booking_area.find('.post_top_filter').first();
+                    let topTime = topFilter.find('.abptt_top_time').first();
+                    if (topTime.length) {
+                        topTime.replaceWith(response.data.time_html);
+                    } else if (response.data.time_html) {
+                        topFilter.append(response.data.time_html);
+                    }
                 }
                 if (response.data && response.data.hasOwnProperty('html') && target_html.length > 0) {
                     target_html.html(response.data.html).promise().done(function () {

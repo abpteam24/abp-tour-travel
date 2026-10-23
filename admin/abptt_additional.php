@@ -25,9 +25,9 @@
                     $additional_services = ABPTT_Function::get_option( 'abptt_additional', ABPTT_Static::additional() );
                     ?>
                     <div class="abp_form">
-                        <h4 class="abp_color_theme"><span class="_mar_r_xxs">💰</span><?php esc_html_e( 'Global Additional services Configuration', 'abp-tour-travel' ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs">💰<?php esc_html_e( 'Global Additional services Configuration', 'abp-tour-travel' ); ?></h4>
                         <?php ABPTT_Layout::info_text( 'abptt_additional' ); ?>
-                        <div class="_mar_t_xs"></div>
+                        <div class="_divider_xxs"></div>
                         <?php $this->additional_service( $additional_services, true ); ?>
                     </div>
                     <?php
@@ -104,7 +104,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="_divider_xs"></div>
+                    <div class="_divider_xxs"></div>
                     <div class="_fj_between">
                         <?php ABPTT_Layout::button_add( __( 'Add New Additional services', 'abp-tour-travel' ) );
                             if ( $global ) {
@@ -189,7 +189,10 @@
             }
 
             public function get_additional_array( array $additional_services = [] ): array {
-                $has_post_nonce = isset( $_POST['abptt_post_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['abptt_post_nonce'] ) ), 'abptt_post_nonce' );
+                $has_post_nonce = false;
+                if ( isset( $_POST['abptt_post_nonce'] ) ) {
+                    $has_post_nonce = wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['abptt_post_nonce'] ) ), 'abptt_post_nonce' );
+                }
                 $has_ajax_nonce = check_ajax_referer( 'abptt_admin_ajax_nonce', 'nonce', false );
                 if ( ( $has_post_nonce || $has_ajax_nonce ) && current_user_can( 'manage_options' ) ) {
                     $post_array          = fn( $key ) => ( isset( $_POST[ $key ] ) && is_array( $_POST[ $key ] ) ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST[ $key ] ) ) : [];

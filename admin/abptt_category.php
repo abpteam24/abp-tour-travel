@@ -15,12 +15,13 @@
 				//echo '<pre>';print_r(ABPTT_Function::get_taxonomy( 'abptt_category' ));echo '</pre>';
 				if ( ABPTT_Function::on_off( 'category' ) ) {
 					$label = ABPTT_Function::category_label(); ?>
-                    <div class="_fj_between_mar_b_xs">
-                        <h5 class="abp_gap_xxs"><?php ABPTT_Static::icon_svg( 'category_1' ); ?><?php echo esc_html( $label ); ?></h5>
+                    <div class="_fj_between">
+                        <h4 class="abp_color_theme_gap_xs"><?php ABPTT_Static::svg( 'category_1' ); ?><?php echo esc_html( __( 'Global', 'abp-tour-travel' ) . ' ' . $label . ' ' . __( 'Configuration', 'abp-tour-travel' ) ); ?></h4>
 						<?php ABPTT_Layout::button_global_popup( 'tax_category', __( 'Add New', 'abp-tour-travel' ) . ' ' . $label ); ?>
                     </div>
 					<?php ABPTT_Layout::info_text( 'abptt_category' ); ?>
-                    <div class="tax_category _ov_auto_mar_t_xs">
+                    <div class="_divider_xxs"></div>
+                    <div class="tax_category _ov_auto">
 						<?php $this->category_list(); ?>
                     </div>
 					<?php
@@ -48,7 +49,7 @@
 				}
 				?>
                 <div class="abp_form">
-                    <h5 class="abp_gap_xxs"><?php ABPTT_Static::icon_svg( 'category' ); ?><?php echo esc_html( $title ); ?></h5>
+                    <h5 class="abp_gap_xxs"><?php ABPTT_Static::svg( 'category' ); ?><?php echo esc_html( $title ); ?></h5>
                     <div class="_divider_xs"></div>
                     <input type="hidden" name="id" value="<?php echo esc_attr( $term_id ); ?>"/>
                     <div class="group_setting">
@@ -191,8 +192,8 @@
                                 <th>
                                     <div class="_fj_center">
                                         <div class="_group_content">
-                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('tax_category','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::icon_svg( 'edit' ); ?></button>
-                                            <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('tax_category','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::icon_svg( 'close_1' ); ?></button>
+                                            <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('tax_category','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::svg( 'edit' ); ?></button>
+                                            <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('tax_category','<?php echo esc_attr( $term_id ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $name ); ?>"><?php ABPTT_Static::svg( 'close_1' ); ?></button>
                                         </div>
                                     </div>
                                 </th>

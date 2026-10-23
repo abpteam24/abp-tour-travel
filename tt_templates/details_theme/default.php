@@ -9,8 +9,8 @@
 			$form_data['post_id'] = $post_id;
 			$content              = get_post_field( 'post_content', $post_id );
 			$all_dates            = ABPTT_Function::date( $post_id );
-			$time_infos           = $post_infos['time_infos'] ?? [];
-			[ $all_dates, $start_date, $all_times, $start_time ] = ABPTT_Function::event_schedule_selection( $all_dates, $time_infos );
+			$time_infos           = ABPTT_Function::schedule_time_infos( $post_infos );
+			[ $all_dates, $start_date, $all_times, $start_time ] = ABPTT_Function::event_schedule_selection( $all_dates, $time_infos, $post_id );
 			$show_date_list = ABPTT_Function::on_off( 'tour_date_list' ) && count( ABPTT_Function::event_schedule_items( $post_id, $all_dates, $time_infos ) ) > 1;
 			$upcoming_date  = '';
 			if ( ! empty( $start_date ) ) {
@@ -27,19 +27,19 @@
 			?>
             <div id="abptt_area" class="abptt_area default_details_page">
                 <div class="abp_container">
-                    <section class="abptt_default_hero">
-                        <div class="abptt_default_hero_media">
+                    <section class="default_hero">
+                        <div class="default_hero_media">
 							<?php if ( ! empty( $post_infos['abptt_slider'] ) ) {
 								do_action( 'abptt_slider', $post_infos['abptt_slider'], [ 'slider_style' => 'slider' ] );
 							} else {
 								ABPTT_Layout::image( $post_id );
 							} ?>
                         </div>
-                        <div class="abptt_default_hero_body">
-                            <div class="abptt_default_hero_kicker">
+                        <div class="default_hero_body">
+                            <div class="default_hero_kicker">
 								<?php if ( ! empty( $upcoming_date ) ) { ?>
                                     <span class="abptt_default_date_chip">
-										<?php ABPTT_Static::icon_svg( 'date_1' ); ?>
+										<?php ABPTT_Static::svg( 'date_1' ); ?>
 										<?php echo esc_html( ABPTT_Function::date_format( $upcoming_date ) ); ?>
                                     </span>
 								<?php } ?>
@@ -56,9 +56,9 @@
 								<?php } ?>
 								<?php ABPTT_Layout::top_pick( $post_infos, 'top_pick default_top_pick' ); ?>
                             </div>
-                            <h1 class="abptt_details_title"><?php ABPTT_Layout::title( $post_infos ); ?></h1>
+                            <h1 class="abp_color_theme_gap_xs"><?php ABPTT_Layout::title( $post_infos ); ?></h1>
 							<?php ABPTT_Layout::sub_title( $post_infos, 'sub_title abptt_default_subtitle' ); ?>
-                            <div class="abptt_default_hero_meta _gap_xs_mar_t_xs">
+                            <div class="default_hero_meta _gap_xs">
 								<?php ABPTT_Layout::capacity( $post_infos );
 									ABPTT_Layout::category( $post_infos );
 									ABPTT_Layout::organizer( $post_infos, 'publish' );
@@ -71,7 +71,7 @@
 									ABPTT_Layout::rating( $post_infos );
 								?>
                             </div>
-                            <div class="abptt_default_hero_content">
+                            <div class="default_hero_content">
 								<?php if ( ABPTT_Function::on_off( 'feature' ) ) {
 									ABPTT_Layout::item_feature( $post_infos['post_feature'] ?? '' );
 								}
@@ -98,13 +98,15 @@
                                 <strong><?php echo ! empty( $start_date ) ? esc_html( ABPTT_Function::date_format( $start_date ) ) : esc_html__( 'TBA', 'abp-tour-travel' ); ?></strong>
                             </div>
                         </div>
+						<?php if ( ! empty( $start_time ) ) { ?>
                         <div class="abptt_default_info_card">
                             <span class="abptt_default_info_icon"><i class="far fa-clock" aria-hidden="true"></i></span>
                             <div class="abptt_default_info_text">
                                 <span class="abptt_default_info_label"><?php esc_html_e( 'Time', 'abp-tour-travel' ); ?></span>
-                                <strong><?php echo ! empty( $start_time ) ? esc_html( ABPTT_Function::date_format( $start_date . ' ' . $start_time ) ) : esc_html__( 'TBA', 'abp-tour-travel' ); ?></strong>
+                                <strong><?php echo esc_html( ABPTT_Function::date_format( $start_date . ' ' . $start_time, 'time' ) ); ?></strong>
                             </div>
                         </div>
+						<?php } ?>
 						<?php
 							$location_enabled = ABPTT_Function::on_off( 'location' );
 							$display_location = ( $post_infos['display_location'] ?? ABPTT_Function::get_post_info( $post_id, 'display_location', 'on' ) ) === 'on';
@@ -166,7 +168,7 @@
                                                 <span><?php esc_html_e( 'Get Tickets', 'abp-tour-travel' ); ?></span>
                                             </div>
                                             <div class="post_top_filter">
-												<?php ABPTT_Layout::start_date( $all_dates, $start_date );
+												<?php ABPTT_Layout::start_date( $all_dates, $start_date, $all_times, $time_infos, $post_id, $start_time );
 													ABPTT_Layout::start_time( $form_data ); ?>
                                             </div>
 											<?php

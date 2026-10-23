@@ -5,6 +5,7 @@
 	if ( ! class_exists( 'ABPTT_Dependencies' ) ) {
 		class ABPTT_Dependencies {
 			private const ORDER_SCHEMA_VERSION = 4;
+
 			public function __construct() {
 				add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue' ), 90 );
 				add_action( 'wp_enqueue_scripts', array( $this, 'frontend_enqueue' ), 90 );
@@ -19,10 +20,11 @@
 					ABPTT_Query::flush_cache();
 				}, 20 );
 			}
+
 			public function admin_enqueue( $hook ): void {
 				$screen    = get_current_screen();
 				$post_type = $screen ? $screen->post_type : '';
-				if ( ! str_contains( $hook, ABPTT_Function::slug() ) && $post_type !== ABPTT_Function::get_cpt() ) {
+				if ( false === strpos( $hook, ABPTT_Function::slug() ) && $post_type !== ABPTT_Function::get_cpt() ) {
 					return;
 				}
 				$label   = ABPTT_Function::label();
@@ -46,7 +48,7 @@
 					'abptt_feature'   => wp_json_encode( ABPTT_Function::option_js( $post_id, 'abptt_feature' ) ),
 					'abptt_category'  => wp_json_encode( ABPTT_Function::option_js( $post_id, 'abptt_category' ) ),
 					'abptt_organizer' => wp_json_encode( ABPTT_Function::option_js( $post_id, 'abptt_organizer' ) ),
-					'abptt_guide'   => wp_json_encode( ABPTT_Function::option_js( $post_id, 'abptt_guide' ) ),
+					'abptt_guide'     => wp_json_encode( ABPTT_Function::option_js( $post_id, 'abptt_guide' ) ),
 					'sp_data'         => wp_json_encode( ABPTT_Seat_Plan::get_sp_js( $post_id ) ),
 					'abptt_location'  => wp_json_encode( ABPTT_Function::option_js( $post_id, 'abptt_location' ) ),
 					'msg'             => [
@@ -84,11 +86,11 @@
 					],
 				] );
 				wp_enqueue_style( 'abptt_admin', ABPTT_URL . 'assets/css/abptt_admin.css', array(), time() );
-			$google_map_key = ABPTT_Function::get_options( 'abptt_configuration', 'google_map_key', '' );
-			if ( ABPTT_Function::on_off( 'google_map' ) && ! empty( $google_map_key ) ) {
-				// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External Google Maps API script; version is managed by Google.
-			wp_enqueue_script( 'abptt_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&libraries=places&callback=abptt_gmap_init', array(), null, true );
-			}
+				$google_map_key = ABPTT_Function::get_options( 'abptt_configuration', 'google_map_key', '' );
+				if ( ABPTT_Function::on_off( 'google_map' ) && ! empty( $google_map_key ) ) {
+					// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External Google Maps API script; version is managed by Google.
+					wp_enqueue_script( 'abptt_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&libraries=places&callback=abptt_gmap_init', array(), null, true );
+				}
 				wp_enqueue_script( 'abptt_sp', ABPTT_URL . 'assets/js/abptt_sp.js', array( 'jquery' ), time(), true );
 				wp_localize_script( 'abptt_sp', 'abptt_sp_config', [
 					'seat_type'  => wp_json_encode( ABPTT_Seat_Plan::get_ticket_type_js() ),
@@ -107,6 +109,7 @@
 				//=============================//
 				do_action( 'abptt_admin_enqueue' );
 			}
+
 			public function frontend_enqueue(): void {
 				// Always enqueued on the frontend so the plugin's shortcodes work on any page
 				// and its styles apply wherever its UI is embedded (cart, checkout, account, etc.).
@@ -115,21 +118,22 @@
 					wp_enqueue_style( 'select2' );
 					wp_enqueue_script( 'select2' );
 				}
-			wp_enqueue_style( 'abptt_slick', ABPTT_URL . 'assets/css/slick.min.css', array(), ABPTT_VERSION );
-			wp_enqueue_script( 'abptt_frontend', ABPTT_URL . 'assets/js/abptt_frontend.js', array( 'jquery' ), time(), true );
-			$google_map_key = ABPTT_Function::get_options( 'abptt_configuration', 'google_map_key', '' );
-			$use_google_map = ABPTT_Function::on_off( 'google_map' ) && '' !== trim( (string) $google_map_key );
-			wp_localize_script( 'abptt_frontend', 'abptt_map_config', array(
-				'use_gmap' => $use_google_map ? '1' : '',
-			) );
-			if ( $use_google_map ) {
-				// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External Google Maps API script; version is managed by Google.
-				wp_enqueue_script( 'abptt_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&libraries=places&callback=abptt_route_map_init', array( 'abptt_frontend' ), null, true );
-			}
-			wp_enqueue_script( 'abptt_slick', ABPTT_URL . 'assets/js/slick.min.js', array( 'jquery' ), ABPTT_VERSION, true );
-			$this->global_enqueue();
+				wp_enqueue_style( 'abptt_slick', ABPTT_URL . 'assets/css/slick.min.css', array(), ABPTT_VERSION );
+				wp_enqueue_script( 'abptt_frontend', ABPTT_URL . 'assets/js/abptt_frontend.js', array( 'jquery' ), time(), true );
+				$google_map_key = ABPTT_Function::get_options( 'abptt_configuration', 'google_map_key', '' );
+				$use_google_map = ABPTT_Function::on_off( 'google_map' ) && '' !== trim( (string) $google_map_key );
+				wp_localize_script( 'abptt_frontend', 'abptt_map_config', array(
+					'use_gmap' => $use_google_map ? '1' : '',
+				) );
+				if ( $use_google_map ) {
+					// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External Google Maps API script; version is managed by Google.
+					wp_enqueue_script( 'abptt_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&libraries=places&callback=abptt_route_map_init', array( 'abptt_frontend' ), null, true );
+				}
+				wp_enqueue_script( 'abptt_slick', ABPTT_URL . 'assets/js/slick.min.js', array( 'jquery' ), ABPTT_VERSION, true );
+				$this->global_enqueue();
 				do_action( 'abptt_frontend_enqueue' );
 			}
+
 			public function global_enqueue(): void {
 				wp_enqueue_script( 'jquery' );
 				wp_enqueue_script( 'jquery-ui-core' );
@@ -246,6 +250,7 @@
 				wp_localize_script( 'abptt_infos', 'abptt_infos', $rental_data );
 				do_action( 'abptt_global_script' );
 			}
+
 			private function load_file(): void {
 				require_once ABPTT_DIR . 'includes/abptt_static.php';
 				require_once ABPTT_DIR . 'includes/abptt_function.php';
@@ -285,6 +290,7 @@
 					require_once ABPTT_DIR . 'admin/abptt_hidden_post.php';
 				}
 			}
+
 			public function register_cpt(): void {
 				$cpt   = ABPTT_Function::get_cpt();
 				$label = ABPTT_Function::label();
@@ -404,27 +410,24 @@
 				}
 				flush_rewrite_rules();
 			}
+
 			public static function activation(): void {
 				self::create_table();
 				flush_rewrite_rules();
 			}
+
 			public static function deactivate(): void {
 				flush_rewrite_rules();
 			}
-/**
-		 * Columns that used to hold hotel booking data. Hotel moved to its own plugin,
-		 * so these are dropped on upgrade instead of being left behind as dead weight.
-		 */
-		private const HOTEL_COLUMNS = array( 'hotel_id', 'hotel_info', 'hotel_price', 'checkin_date', 'checkout_date' );
-		public static function create_table(): void {
-			global $wpdb;
-			$order_table    = $wpdb->prefix . 'abptt_orders';
-			$sp_table       = $wpdb->prefix . 'abptt_sp';
-			$collate        = $wpdb->get_charset_collate();
-			// Non-destructive schema upgrade: dbDelta only ever ADDS missing columns/indexes, so
-			// existing booking rows are preserved. Never drop the table on a version bump.
-			self::migrate_orders_table( $order_table );
-			$abptt_orders = "CREATE TABLE $order_table (
+
+			public static function create_table(): void {
+				global $wpdb;
+				$order_table = $wpdb->prefix . 'abptt_orders';
+				$sp_table    = $wpdb->prefix . 'abptt_sp';
+				$collate     = $wpdb->get_charset_collate();
+				// Non-destructive schema upgrade: dbDelta only ever ADDS missing columns/indexes, so
+				// existing booking rows are preserved. Never drop the table on a version bump.
+				$abptt_orders = "CREATE TABLE $order_table (
 					        id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 					        order_id bigint(20) unsigned NOT NULL,
 					        item_id bigint(20) unsigned NOT NULL,
@@ -473,8 +476,8 @@
 					        KEY session_time  (session_time),
 					        KEY avail  (post_id, tour_date, session_time)
 					    ) $collate;";
-			// Seat Plan Table
-			$sp = "CREATE TABLE $sp_table (
+				// Seat Plan Table
+				$sp = "CREATE TABLE $sp_table (
 					        id mediumint unsigned NOT NULL AUTO_INCREMENT,
 					        name varchar(100) DEFAULT NULL,
 					        total_seats mediumint NOT NULL DEFAULT 0,
@@ -485,68 +488,14 @@
 					        updated_at datetime DEFAULT NULL,
 					        PRIMARY KEY  (id)
 					    ) $collate;";
-			if ( ! function_exists( 'dbDelta' ) ) {
-				require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			}
-			dbDelta( $abptt_orders );
-			dbDelta( $sp );
-			update_option( 'abptt_orders_schema_version', self::ORDER_SCHEMA_VERSION );
-		}
-		/**
-		 * Carries the legacy `event_date` column over to `tour_date` without losing any rows.
-		 *
-		 * Must run BEFORE dbDelta: dbDelta only ever adds columns, so it would otherwise create
-		 * an empty `tour_date` next to the populated `event_date` and the old dates would be orphaned.
-		 */
-		private static function migrate_orders_table( string $table ): void {
-			global $wpdb;
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Table probe during a schema migration.
-			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) !== $table ) {
-				return; // Fresh install: dbDelta builds the correct shape from scratch.
-			}
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Column probe during a schema migration.
-			$columns = $wpdb->get_col( $wpdb->prepare( 'SHOW COLUMNS FROM %i', $table ) );
-			$columns = is_array( $columns ) ? $columns : array();
-			$has_legacy = in_array( 'event_date', $columns, true );
-			$has_current = in_array( 'tour_date', $columns, true );
-			if ( $has_legacy && ! $has_current ) {
-				// Rename in place. MySQL carries the values across and rewrites dependent indexes,
-				// so the `avail` index keeps pointing at the same data under the new column name.
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Schema migration on a fixed table name.
-				$wpdb->query( "ALTER TABLE `{$table}` CHANGE COLUMN `event_date` `tour_date` date DEFAULT NULL" );
-			} elseif ( $has_legacy && $has_current ) {
-				// Partially upgraded by an earlier attempt: rescue the stranded values, then drop the legacy column.
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Schema migration on a fixed table name.
-				$wpdb->query( "UPDATE `{$table}` SET `tour_date` = `event_date` WHERE `tour_date` IS NULL AND `event_date` IS NOT NULL" );
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Schema migration on a fixed table name.
-				$wpdb->query( "ALTER TABLE `{$table}` DROP COLUMN `event_date`" );
-			}
-			// Drop the index left behind under the legacy column name; dbDelta recreates it as `tour_date`.
-// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Index probe during a schema migration.
-			$indexes = $wpdb->get_col(
-				$wpdb->prepare(
-					'SELECT DISTINCT Index_name FROM information_schema.STATISTICS WHERE table_schema = DATABASE() AND table_name = %s',
-					$table
-				)
-			);
-			if ( is_array( $indexes ) && in_array( 'event_date', $indexes, true ) ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Schema migration on a fixed table name.
-				$wpdb->query( "ALTER TABLE `{$table}` DROP INDEX `event_date`" );
-			}
-			// Hotel support was removed in favour of a dedicated plugin. dbDelta never drops columns,
-			// so retire the leftovers explicitly for anyone who already installed a version that had them.
-			// The index goes first: dropping a column that a composite index depends on mutates it.
-			if ( is_array( $indexes ) && in_array( 'hotel_avail', $indexes, true ) ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Schema migration on a fixed table name.
-				$wpdb->query( "ALTER TABLE `{$table}` DROP INDEX `hotel_avail`" );
-			}
-			foreach ( self::HOTEL_COLUMNS as $column ) {
-				if ( in_array( $column, $columns, true ) ) {
-					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Schema migration on a fixed table name.
-					$wpdb->query( "ALTER TABLE `{$table}` DROP COLUMN `{$column}`" );
+				if ( ! function_exists( 'dbDelta' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 				}
+				dbDelta( $abptt_orders );
+				dbDelta( $sp );
+				update_option( 'abptt_orders_schema_version', self::ORDER_SCHEMA_VERSION );
 			}
-		}
+
 			public function maybe_upgrade_order_schema(): void {
 				global $wpdb;
 				$order_table = $wpdb->prefix . 'abptt_orders';
@@ -556,21 +505,27 @@
 					self::create_table();
 				}
 			}
+
 			public function plugin_settings_link( $links_array, $plugin_file_name ) {
 				if ( strpos( $plugin_file_name, ABPTT_BASE ) ) {
 					array_unshift( $links_array, '<a class="abp" href="' . esc_url( ABPTT_Function::build_url( 'configuration' ) ) . '">' . __( 'Configuration', 'abp-tour-travel' ) . '</a>' );
 				}
+
 				return $links_array;
 			}
+
 			public function flush_rewrite(): void {
 				flush_rewrite_rules();
 			}
+
 			public function disable_gutenberg( $current_status, $post_type ) {
 				if ( $post_type === ABPTT_Function::get_cpt() ) {
 					return false;
 				}
+
 				return $current_status;
 			}
+
 			public function activation_redirect(): void {
 				$active_tab = '';
 				$page       = '';

@@ -9,7 +9,6 @@
                 add_action( 'abptt_post_content', array( $this, 'post_content_dates' ) );
                 add_action( 'wp_ajax_abptt_save_global_dates', array( $this, 'save_global_dates' ) );
             }
-
             public function global_dates(): void {
                 ?>
                 <div class="global_dates">
@@ -17,7 +16,6 @@
                 </div>
                 <?php
             }
-
             public function dates_config(): void {
                 $date_infos   = ABPTT_Function::get_option( 'abptt_date_config' );
                 $format_array = ABPTT_Layout::array_date_format();
@@ -25,12 +23,16 @@
                 $time_format  = $date_infos['time_format'] ?? ABPTT_Time_Format;
                 ?>
                 <div class="abp_form">
-                    <h4 class="abp_gap_xs"><?php ABPTT_Static::icon_svg( 'date_2' ); ?><?php esc_html_e( 'Global Dates Configuration', 'abp-tour-travel' ); ?></h4>
+                    <div class="_fj_between">
+                        <h4 class="abp_color_theme_gap_xs"><?php ABPTT_Static::svg( 'date_2' ); ?><?php esc_html_e( 'Global Dates Configuration', 'abp-tour-travel' ); ?></h4>
+                        <?php ABPTT_Layout::button_global_save( 'global_dates', __( 'Save Global Date Configuration', 'abp-tour-travel' ) ); ?>
+                    </div>
                     <?php ABPTT_Layout::info_text( 'abptt_dates' ); ?>
-                    <div class="group_setting _mar_t_xs">
+                    <div class="_divider_xxs"></div>
+                    <div class="group_setting ">
                         <div class="setting_item">
                             <label class="_f_wrap_fj_between_fa_center">
-                                <span class="abp_label"><?php esc_html_e( 'Date Format', 'abp-tour-travel' ); ?></span>
+                                <span><?php esc_html_e( 'Date Format', 'abp-tour-travel' ); ?></span>
                                 <?php if ( sizeof( $format_array ) > 0 ) { ?>
                                     <select class="_form_control " name="date_format" required>
                                         <?php foreach ( $format_array as $key => $format ) { ?>
@@ -44,7 +46,7 @@
                         </div>
                         <div class="setting_item">
                             <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php esc_html_e( 'Time Format', 'abp-tour-travel' ); ?></span>
+                                <span><?php esc_html_e( 'Time Format', 'abp-tour-travel' ); ?></span>
                                 <input type="text" class="_form_control" name="time_format" placeholder="<?php echo esc_attr( ABPTT_Time_Format ); ?>" value="<?php echo esc_attr( $time_format ); ?>" required/>
                             </label>
                             <div class="_divider_xs"></div>
@@ -52,7 +54,7 @@
                         </div>
                         <div class="setting_item">
                             <label class="_f_equal_f_wrap">
-                                <span class="_mar_r_xs"><?php esc_html_e( 'Buffer time in MIN (Optional)', 'abp-tour-travel' ); ?></span>
+                                <span><?php esc_html_e( 'Buffer time in MIN (Optional)', 'abp-tour-travel' ); ?></span>
                                 <input type="number" pattern="[0-9]*" step="1" class="_form_control validation_number" name="sale_close_before" placeholder="Ex: 15" value="<?php echo esc_attr( $date_infos['sale_close_before'] ?? 0 ); ?>"/>
                             </label>
                             <div class="_divider_xs"></div>
@@ -60,15 +62,13 @@
                         </div>
                         <div class="setting_item">
                             <label class="_f_equal_f_wrap">
-                                <span class="abp_label"><?php esc_html_e( 'Number of advance booking date', 'abp-tour-travel' ); ?></span>
+                                <span><?php esc_html_e( 'Number of advance booking date', 'abp-tour-travel' ); ?></span>
                                 <input type="number" pattern="[0-9]*" step="1" class="_form_control validation_number" name="advance_date_number" placeholder="Ex: 28" value="<?php echo esc_attr( $date_infos['advance_date_number'] ?? 28 ); ?>"/>
                             </label>
                             <div class="_divider_xs"></div>
                             <?php ABPTT_Layout::info_text( 'advance_date_number' ); ?>
                         </div>
                     </div>
-                    <div class="_divider_xs"></div>
-                    <?php ABPTT_Layout::button_global_save( 'global_dates', __( 'Save Global Date Configuration', 'abp-tour-travel' ) ); ?>
                 </div>
                 <?php
             }
@@ -135,8 +135,8 @@
                     <div class="group_setting">
                         <div class="setting_item full_width configuration_content">
                             <div class="_f_wrap_fj_between_fa_center">
-                                <span class="abp_label_gap_xs"><?php ABPTT_Static::icon_svg( 'date_2' ); ?><?php esc_html_e( 'Particular Dates', 'abp-tour-travel' ); ?></span>
-								<?php /* translators: %d: number of configured particular dates. */ ?>
+                                <span class="abp_label_gap_xs"><?php ABPTT_Static::svg( 'date_2' ); ?><?php esc_html_e( 'Particular Dates', 'abp-tour-travel' ); ?></span>
+                                <?php /* translators: %d: number of configured particular dates. */ ?>
                                 <span class="abptt_count_badge" data-entry-count data-singular="<?php echo esc_attr__( '%d Entry Configured', 'abp-tour-travel' ); ?>" data-plural="<?php echo esc_attr__( '%d Entries Configured', 'abp-tour-travel' ); ?>"><?php
                                         // translators: %d: number of configured particular dates.
                                         echo esc_html( sprintf( _n( '%d Entry Configured', '%d Entries Configured', $configured_count, 'abp-tour-travel' ), $configured_count ) );
@@ -301,13 +301,13 @@
                                     <div class="_group_content custom_checkbox">
                                         <input type="hidden" name="operation_time_optional" value="<?php echo esc_attr( $opt_time ); ?>"/>
                                         <div class="checkbox_item">
-                                            <button type="button" class="_btn_light_info_xs <?php echo esc_attr( str_contains( $opt_time, 'day_wise_time' ) ? 'abp_active' : '' ); ?>" data-collapse-target="#day_wise_time" data-checked="day_wise_time" data-open-icon="fa-check-square" data-close-icon="fa-square">
-                                                <span data-icon class="_mar_r_xs far <?php echo esc_attr( str_contains( $opt_time, 'day_wise_time' ) ? 'fa-check-square' : 'fa-square' ); ?>"></span><?php esc_html_e( 'Day Wise Time', 'abp-tour-travel' ); ?>
+                                            <button type="button" class="_btn_light_info_xs <?php echo esc_attr( false !== strpos( $opt_time, 'day_wise_time' ) ? 'abp_active' : '' ); ?>" data-collapse-target="#day_wise_time" data-checked="day_wise_time" data-open-icon="fa-check-square" data-close-icon="fa-square">
+                                                <span data-icon class="_mar_r_xs far <?php echo esc_attr( false !== strpos( $opt_time, 'day_wise_time' ) ? 'fa-check-square' : 'fa-square' ); ?>"></span><?php esc_html_e( 'Day Wise Time', 'abp-tour-travel' ); ?>
                                             </button>
                                         </div>
                                         <div class="checkbox_item">
-                                            <button type="button" class="_btn_light_info_xs <?php echo esc_attr( str_contains( $opt_time, 'date_wise_time' ) ? 'abp_active' : '' ); ?>" data-collapse-target="#date_wise_time" data-checked="date_wise_time" data-open-icon="fa-check-square" data-close-icon="fa-square">
-                                                <span data-icon class="_mar_r_xs far <?php echo esc_attr( str_contains( $opt_time, 'date_wise_time' ) ? 'fa-check-square' : 'fa-square' ); ?>"></span><?php esc_html_e( 'Date Wise Time', 'abp-tour-travel' ); ?>
+                                            <button type="button" class="_btn_light_info_xs <?php echo esc_attr( false !== strpos( $opt_time, 'date_wise_time' ) ? 'abp_active' : '' ); ?>" data-collapse-target="#date_wise_time" data-checked="date_wise_time" data-open-icon="fa-check-square" data-close-icon="fa-square">
+                                                <span data-icon class="_mar_r_xs far <?php echo esc_attr( false !== strpos( $opt_time, 'date_wise_time' ) ? 'fa-check-square' : 'fa-square' ); ?>"></span><?php esc_html_e( 'Date Wise Time', 'abp-tour-travel' ); ?>
                                             </button>
                                         </div>
                                         <?php ABPTT_Layout::button_add( __( 'Add Time Slot', 'abp-tour-travel' ) ); ?>
@@ -427,7 +427,7 @@
 
             public function date_wise_slots( array $date_times = [] ): void {
                 ?>
-                <div class="setting_item full_width configuration_content <?php echo esc_attr( ! empty( $date_times ) ? 'abp_active' : '' ); ?>" data-collapse="#date_wise_time">
+                <div class="setting_item full_width configuration_content _mar_t_xs <?php echo esc_attr( ! empty( $date_times ) ? 'abp_active' : '' ); ?>" data-collapse="#date_wise_time">
                     <div class="_f_wrap_fj_between_fa_center">
                         <span class="abp_label"><?php esc_html_e( 'Date Wise Time (Optional)', 'abp-tour-travel' ); ?></span>
                         <?php ABPTT_Layout::button_add( __( 'Add New Date Wise Operation Time', 'abp-tour-travel' ) ); ?>
@@ -487,7 +487,7 @@
                         <div class="_group_content">
                             <?php
                                 ABPTT_Layout::button_sort();
-                                ABPTT_Layout::input_date( 'date_wise_date[' . $key . '][]', ( $date_time['date'] ?? '' ), __( 'Date', 'abp-tour-travel' ), 'required' );
+                                ABPTT_Layout::input_date( 'date_wise_date[' . $key . '][]', ( $date_time['date'] ?? '' ) );
                                 ABPTT_Layout::button_delete();
                             ?>
                         </div>

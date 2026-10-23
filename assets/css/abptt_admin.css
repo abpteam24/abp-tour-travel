@@ -1,7 +1,6 @@
 @charset "utf-8";
 /******************************************************************** configuration ************************************************/
 @media only screen and (min-width: 10px) {
-	div.abptt_admin table {border: 2px solid var(--tt_color_muted_2);}
 	div.abptt_admin table thead,
 	div.abptt_admin table tfoot {background: var(--tt_color_muted_2);}
 	div.abptt_admin table tbody tr:nth-child(even) {background: var(--tt_color_6);}
@@ -15,7 +14,7 @@
 	/*=============================*/
 	div.abptt_admin .group_setting {display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap;gap: var(--tt_gap_xs);}
 	div.abptt_admin .group_setting > * {-webkit-flex-grow: 1;flex-grow: 1; -webkit-flex-shrink: 1; flex-shrink: 1; -webkit-flex-basis: 45%; flex-basis: 45%;}
-	div.abptt_admin .setting_item {padding: var(--tt_gap_xs); background: var(--tt_color_4); width: 100%;border: 2px solid var(--tt_color_3); border-radius: var(--tt_br);min-width: 400px;}
+	div.abptt_admin .setting_item {padding: var(--tt_gap_xs); background: var(--tt_color_4); width: 100%; border-radius: var(--tt_br);min-width: 400px;}
 	div.abptt_admin .setting_item .setting_item {border-color: var(--tt_color_alert);background: var(--tt_color_alert);}
 	div.abptt_admin .setting_item .setting_item .setting_item {border-color: var(--tt_color_green_pale);background: var(--tt_color_green_pale)}
 	div.abptt_admin .group_setting > .full_width,
@@ -40,6 +39,7 @@
 	div.abptt_admin .abptt_routing [class*="_form_control"] {min-height: 30px;}
 	/*=============================*/
 	div.abptt_admin .multi_stock table {width: inherit;}
+	div.abptt_admin .related_item .selected_area .selected_list {display: -webkit-flex; display: flex;-webkit-flex-direction: column; flex-direction: column;}
 	/*=============================*/
 	div.abptt_admin .selection_area { position: relative;width: max-content;max-width: 250px;}
 	div.selection_area .selection_list {border: 1px solid var(--tt_color_theme);border-top: none; max-height: 200px;background: #FFF; overflow-y: auto; position: absolute;top: 100%;right: 0;z-index: 2222;opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;min-width: 100%;width: max-content;}
@@ -65,7 +65,9 @@
 	div.abptt_admin button.wp-color-result {width: 40px;height: 32px;margin: 0 !important; border-right: none; border-radius: var(--tt_br) 0 0 var(--tt_br);border-color: var(--tt_color_border);}
 	div.abptt_admin .wp-picker-default {margin: 0 !important; border-left: none; border-radius: 0 var(--tt_br) var(--tt_br) 0;border-color: var(--tt_color_border);}
 	/*=============================*/
-	#abptt_configuration.global_config {max-width: 1200px;margin: 0 auto;}
+
+	/*=============================*/
+	#abptt_configuration.global_config {max-width: 1400px;margin: 0 auto;}
 	#abptt_configuration {border: none;}
 	#abptt_configuration div.abptt_admin {max-width: 100%;width: 100%;border-radius: var(--tt_br_xl); margin: 0}
 	/*=============================*/
@@ -74,8 +76,8 @@
 	#abptt_configuration .postbox-header { display: none;}
 	#abptt_configuration .postbox-header h2 {color: var(--tt_color_light);font-size: var(--tt_fs_h4);-webkit-justify-content: flex-start;justify-content: flex-start;padding: var(--tt_gap_xs) var(--tt_gap);}
 	#abptt_configuration .postbox-header h2 span {margin: 0 var(--tt_gap_xs) 0 0;}
-	#abptt_configuration .wp-editor-wrap {width: 100%;margin: var(--tt_gap_xs) 0 0 0;}
-	#abptt_configuration .wp-editor-wrap iframe {min-height: 300px;}
+	div.abptt_admin .wp-editor-wrap {width: 100%;}
+	/*div.abptt_admin .wp-editor-wrap iframe {min-height: 300px;}*/
 }
 /******************************************************************** add Icon image/Image upload ************************************************/
 @media only screen and (min-width: 10px) {
@@ -458,21 +460,21 @@
 	div.abptt_admin .abptt_gmap_wrap .abptt_gmap_show_name {display: inline-block;color: var(--tt_color_navy_blue);font-size: var(--tt_fs);padding: var(--tt_gap_xxs) var(--tt_gap_xs);background: var(--tt_color_white);border-radius: var(--tt_br);}
 	div.abptt_admin .abptt_gmap_wrap ._group_content {gap: var(--tt_gap_xxs);}
 }
-/******************************************************************** Places You Will See ************************************************/
+/******************************************************************** Places You Will See ,time time,why book us************************************************/
 @media only screen and (min-width: 10px) {
-	div.abptt_admin .places_you_see_empty {display: flex;align-items: center;gap: var(--tt_gap_xxs);padding: var(--tt_gap_xs);border: 1px dashed var(--tt_color_border);border-radius: var(--tt_br);background: var(--tt_color_off_white);color: var(--tt_color_muted);font-size: var(--tt_fs_small);line-height: 1.7;}
-	div.abptt_admin .places_you_see_empty_icon {font-size: 22px;line-height: 1;}
-	div.abptt_admin .place_you_see_item {border: 1px solid var(--tt_color_border);border-left: 3px solid var(--tt_color_theme);border-radius: var(--tt_br);background: var(--tt_color_white);overflow: hidden;box-shadow: var(--tt_shadow_2);}
+	div.abptt_admin .why_book_item,
+	div.abptt_admin .timeline_item,
+	div.abptt_admin .place_you_see_item {border: 1px solid var(--tt_color_border);border-left: 3px solid var(--tt_color_theme);border-radius: var(--tt_br);background: var(--tt_color_white);overflow: hidden;margin: var(--tt_gap_xs) 0 0 0;}
+	div.abptt_admin .why_book_item.active,
+	div.abptt_admin .timeline_item.active,
 	div.abptt_admin .place_you_see_item.active {border-color: var(--tt_color_theme);box-shadow: var(--tt_shadow_5);}
+	div.abptt_admin .why_book_item_head,
+	div.abptt_admin .timeline_head,
 	div.abptt_admin .place_you_see_head {display: flex;align-items: center;justify-content: space-between;gap: var(--tt_gap_xs);padding: var(--tt_gap_xxs) var(--tt_gap_xs);background: var(--tt_color_off_white);border-bottom: 1px solid var(--tt_color_border);}
+	div.abptt_admin .why_book_item_head h6,
+	div.abptt_admin .timeline_head h6,
 	div.abptt_admin .place_you_see_head h6 {margin: 0;word-break: break-word;}
+	div.abptt_admin .why_book_item_body,
+	div.abptt_admin .timeline_body,
 	div.abptt_admin .place_you_see_body {padding: var(--tt_gap_xs);}
-	div.abptt_admin .place_you_see_body ._divider_xs {margin: var(--tt_gap_xs) 0;}
-	div.abptt_admin .place_you_see_body textarea._form_control {resize: vertical;min-height: 76px;}
-  div.abptt_admin .place_you_see_list_wrap {margin-bottom: var(--tt_gap_xxs);}
-  div.abptt_admin .place_you_see_item input._form_control[readonly] {background: var(--tt_color_off_white);color: var(--tt_color_navy_blue);font-weight: 600;cursor: default;}
-  div.abptt_admin .place_you_see_body .wp-editor-wrap {border: 1px solid var(--tt_color_border);border-radius: var(--tt_br);background: var(--tt_color_white);overflow: hidden;}
-  div.abptt_admin .place_you_see_body .wp-editor-container {border: 0;border-radius: 0;}
-  div.abptt_admin .place_you_see_body .wp-editor-area {border: 0;box-shadow: none;background: var(--tt_color_white);}
-  div.abptt_admin .place_you_see_body .mce-toolbar-grp {border: 0;border-bottom: 1px solid var(--tt_color_border);background: var(--tt_color_off_white);}
 }

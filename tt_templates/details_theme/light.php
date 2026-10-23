@@ -8,8 +8,8 @@
 			$form_data['form'] = 'inline';
 			$content           = get_post_field( 'post_content', $post_id );
 			$all_dates         = ABPTT_Function::date( $post_id );
-			$time_infos        = $post_infos['time_infos'] ?? [];
-			[ $all_dates, $start_date, $all_times, $start_time ] = ABPTT_Function::event_schedule_selection( $all_dates, $time_infos );
+			$time_infos        = ABPTT_Function::schedule_time_infos( $post_infos );
+			[ $all_dates, $start_date, $all_times, $start_time ] = ABPTT_Function::event_schedule_selection( $all_dates, $time_infos, $post_id );
 			$show_date_list            = ABPTT_Function::on_off( 'tour_date_list' ) && count( ABPTT_Function::event_schedule_items( $post_id, $all_dates, $time_infos ) ) > 1;
 			$upcoming_date             = ! empty( $start_date ) && ! empty( $start_time ) ? gmdate( 'Y-m-d H:i', strtotime( $start_date . ' ' . $start_time ) ) : $start_date;
 			$form_data['post_id']      = $post_id;
@@ -26,10 +26,10 @@
                         <div class="_f_equal_f_wrap_gap_section_15 abptt_light_lead">
                             <div class="abptt_details_column abptt_light_lead_body">
                                 <div class="abptt_light_lead_kicker">
-									<?php ABPTT_Static::icon_svg( 'location_1' ); ?>
+									<?php ABPTT_Static::svg( 'location_1' ); ?>
                                     <span><?php esc_html_e( 'Tour Highlights', 'abp-tour-travel' ); ?></span>
                                 </div>
-                                <h1 class="abptt_details_title"><?php ABPTT_Layout::title( $post_infos ); ?></h1>
+                                <h1 class="abp_color_theme_gap_xs"><?php ABPTT_Layout::title( $post_infos ); ?></h1>
 								<?php ABPTT_Layout::sub_title( $post_infos ); ?>
                                 <div class="abptt_light_lead_meta _gap_xs_mar_t_xs">
 									<?php ABPTT_Layout::capacity( $post_infos );
@@ -46,7 +46,7 @@
                                 </div>
 								<?php if ( ! empty( $upcoming_date ) ) { ?>
                                     <div class="abptt_light_lead_date">
-										<?php ABPTT_Static::icon_svg( 'date_1' ); ?>
+										<?php ABPTT_Static::svg( 'date_1' ); ?>
                                         <span><?php echo esc_html( ABPTT_Function::date_format( $upcoming_date ) ); ?></span>
                                     </div>
 								<?php } ?>
@@ -106,7 +106,7 @@
                                 <div class="abptt_booking">
 									<?php if ( ( $post_infos['sale_continue'] ?? 'on' ) === 'on' ) { ?>
                                         <div class="post_top_filter">
-											<?php ABPTT_Layout::start_date( $all_dates, $start_date );
+											<?php ABPTT_Layout::start_date( $all_dates, $start_date, $all_times, $time_infos, $post_id, $start_time );
 												ABPTT_Layout::start_time( $form_data ); ?>
                                         </div>
 										<?php do_action( 'abptt_registration', $post_infos, $form_data ); ?>

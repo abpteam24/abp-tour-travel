@@ -16,11 +16,12 @@
                 if ( ABPTT_Function::on_off( 'feature' ) ) {
                     $label = ABPTT_Function::feature_label(); ?>
                     <div class="_fj_between">
-                        <h5 class="abp_gap_xs">🔗<?php echo esc_html( $label ); ?></h5>
+                        <h4 class="abp_color_theme_gap_xs">🔗<?php echo esc_html( __( 'Global', 'abp-tour-travel' ) . ' ' . $label . ' ' . __( 'Configuration', 'abp-tour-travel' ) ); ?></h4>
                         <?php ABPTT_Layout::button_global_popup( 'option_feature', __( 'Add New', 'abp-tour-travel' ) . ' ' . $label ); ?>
                     </div>
                     <?php ABPTT_Layout::info_text( 'abptt_feature' ); ?>
-                    <div class="option_feature _ov_auto_mar_t_xs">
+                    <div class="_divider_xxs"></div>
+                    <div class="option_feature _ov_auto">
                         <?php $this->feature_list(); ?>
                     </div>
                     <?php
@@ -219,8 +220,8 @@
                                             echo esc_html( $label . ' ' . ( ! empty( $value ) ? '-' . $value : '' ) ); ?>
                                     </h6>
                                     <div class="_group_content">
-                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('option_feature','<?php echo esc_attr( $key ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $label ); ?>"><?php ABPTT_Static::icon_svg( 'edit' ); ?></button>
-                                        <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('option_feature','<?php echo esc_attr( $key ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $label ); ?>"><?php ABPTT_Static::icon_svg( 'close_1' ); ?></button>
+                                        <button type="button" class="_btn_light_yellow_xxs" onclick="abptt_popup_open_global('option_feature','<?php echo esc_attr( $key ); ?>')" title="<?php echo esc_attr__( 'Edit : ', 'abp-tour-travel' ) . ' ' . esc_attr( $label ); ?>"><?php ABPTT_Static::svg( 'edit' ); ?></button>
+                                        <button type="button" class="_btn_light_danger_xxs" onclick="abptt_delete_global('option_feature','<?php echo esc_attr( $key ); ?>')" title="<?php echo esc_attr__( 'Trash : ', 'abp-tour-travel' ) . ' ' . esc_attr( $label ); ?>"><?php ABPTT_Static::svg( 'close_1' ); ?></button>
                                     </div>
                                 </div>
                                 <?php

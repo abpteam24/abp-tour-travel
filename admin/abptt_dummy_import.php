@@ -24,9 +24,9 @@
 			 * ========================================================= */
 			private function page_map(): array {
 				return array(
-					'tf_booking' => array( 'name' => __( 'Booking', 'abp-tour-travel' ), 'slug' => 'tf_booking', 'code' => '[abptt-booking]' ),
-					'tf_post'    => array( 'name' => sprintf( '%s List', ABPTT_Function::label() ), 'slug' => 'tf_post', 'code' => '[abptt-post]' ),
-					'tf_gallery' => array( 'name' => __( 'Gallery', 'abp-tour-travel' ), 'slug' => 'tf_gallery', 'code' => '[abptt-gallery]' ),
+					'tt_booking' => array( 'name' => __( 'Booking', 'abp-tour-travel' ), 'slug' => 'tt_booking', 'code' => '[abptt-booking]' ),
+					'tt_post'    => array( 'name' => sprintf( '%s List', ABPTT_Function::label() ), 'slug' => 'tt_post', 'code' => '[abptt-post]' ),
+					'tt_gallery' => array( 'name' => __( 'Gallery', 'abp-tour-travel' ), 'slug' => 'tt_gallery', 'code' => '[abptt-gallery]' ),
 				);
 			}
 
@@ -178,8 +178,8 @@
 				$table = $wpdb->prefix . 'abptt_sp';
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Existence check for a plugin-owned table.
 				if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) === $table ) {
-					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is a trusted prefix.
-					$wpdb->query( "DELETE FROM {$table}" );
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Table name is a plugin-owned table passed through the %i identifier placeholder.
+					$wpdb->query( $wpdb->prepare( 'DELETE FROM %i', $table ) );
 				}
 			}
 
