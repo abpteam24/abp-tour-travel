@@ -358,10 +358,7 @@ Yes. The plugin uses the WordPress localization system and is translation-ready.
 7. Orders - booking and order management with status and check-in
 8. Frontend tour listing - tour grid with search and filters
 9.  Frontend tour detail - ticket/seat selection and booking form
-10. Location map picker in the admin and the frontend location map
-11. Tour Timeline tab in tour settings and frontend timeline display
-12. Tour Guide management in Global Data and guide assignment in tour settings
-13. Why Book With Us reasons in Global Data and the frontend block
+
 
 
 == Need help or have suggestions? ==
