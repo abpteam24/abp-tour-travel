@@ -9,6 +9,10 @@
 		if ( ! empty( $post_ids ) && sizeof( $post_ids ) > 0 ) {
 			$column            = $params['column'] ?? 3;
 			$show_post         = absint( ( $params['show'] ?? 0 ) ?: ( $column * 3 ) );
+			// Pagination disabled means all cards must be visible.
+			if ( ( $params['pagination'] ?? 'yes' ) === 'no' ) {
+				$show_post = sizeof( $post_ids );
+			}
 			$post_count        = 0;
 			$args['total']     = sizeof( $post_ids );
 			$args['page_item'] = $show_post;
@@ -19,9 +23,11 @@
 					$post_infos['post_id'] = $post_id;
 					$cat_id                = ABPTT_Function::get_post_info( $post_id, 'abptt_category' );
 					$loc_id                = ABPTT_Function::get_post_info( $post_id, 'abptt_location' );
+					$org_id                = ABPTT_Function::get_post_info( $post_id, 'abptt_organizer' );
+					$guide_id              = ABPTT_Function::get_post_info( $post_id, 'guide' );
 					$post_count ++;
 					$url = get_the_permalink( $post_id ); ?>
-                    <div class="pagination_item item_box_1  <?php echo esc_attr( $show_post >= $post_count ? '' : 'abp_close' ); ?>" data-cat_id="<?php echo esc_attr( $cat_id ); ?>" data-loc_id="<?php echo esc_attr( $loc_id ); ?>">
+                    <div class="pagination_item item_box_1  <?php echo esc_attr( $show_post >= $post_count ? '' : 'abp_close' ); ?>" data-cat_id="<?php echo esc_attr( $cat_id ); ?>" data-loc_id="<?php echo esc_attr( $loc_id ); ?>" data-organizer_id="<?php echo esc_attr( $org_id ); ?>" data-guide_id="<?php echo esc_attr( $guide_id ); ?>">
                         <div class="item_head">
 							<?php ABPTT_Layout::category( $post_infos, 'ribbon' ); ?>
 							<?php ABPTT_Layout::image( $post_id ); ?>

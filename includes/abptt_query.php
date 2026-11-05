@@ -107,7 +107,7 @@
 				$status = !empty($filters['status']) ? sanitize_text_field($filters['status']) : null;
 				$booked_status = $status ?: ABPTT_Function::booking_status();
 				$booked_status = $booked_status ? explode(',', $booked_status) : array();
-				$is_all_status = (!empty($booked_status) && current($booked_status) === 'all');
+				$is_all_status = in_array('all', $booked_status, true);
 				if (!empty($booked_status) && !$is_all_status) {
 					$placeholders = implode(',', array_fill(0, count($booked_status), '%s'));
 					$conditions[] = "order_status IN ($placeholders)";
@@ -233,6 +233,8 @@
 			}
 			public static function get_sold_qty_ex($filters = []) {
 				$sold_qty = 0;
+				// Availability follows the admin "Booked Status" selection in Configuration.
+				$filters['status'] = !empty($filters['status']) ? $filters['status'] : ABPTT_Function::booking_status_sold();
 				$booking_lists = self::get_booking_query($filters);
 				if (empty($booking_lists)) {
 					return $sold_qty;
@@ -292,6 +294,8 @@
 			}
 			public static function get_sold_ticket($filters = []): array {
 				$sold_qty = [];
+				// Availability follows the admin "Booked Status" selection in Configuration.
+				$filters['status'] = !empty($filters['status']) ? $filters['status'] : ABPTT_Function::booking_status_sold();
 				$booking_lists = self::get_booking_query($filters);
 				if (empty($booking_lists)) {
 					return $sold_qty;
@@ -313,6 +317,8 @@
 			}
 			public static function get_sold_seat($filters = []): array {
 				$sold_seats = [];
+				// Availability follows the admin "Booked Status" selection in Configuration.
+				$filters['status'] = !empty($filters['status']) ? $filters['status'] : ABPTT_Function::booking_status_sold();
 				$booking_lists = self::get_booking_query($filters);
 				if (empty($booking_lists)) {
 					return $sold_seats;

@@ -141,7 +141,87 @@
 					"pagination"       => "yes",
 					"pagination-style" => "live",
 					'form'             => 'inline',
+					'filter'           => '',
 				);
+			}
+			/**
+			 * Map the shortcode `filter` tokens to the canonical taxonomy keys.
+			 *
+			 * @return array<string,string>
+			 */
+			public static function filter_aliases(): array {
+				return array(
+					'category'     => 'category',
+					'categories'   => 'category',
+					'cat'          => 'category',
+					'cat_id'       => 'category',
+					'location'     => 'location',
+					'locations'    => 'location',
+					'loc'          => 'location',
+					'loc_id'       => 'location',
+					'organizer'    => 'organizer',
+					'organizers'   => 'organizer',
+					'org'          => 'organizer',
+					'organizer_id' => 'organizer',
+					'guide'        => 'guide',
+					'guides'       => 'guide',
+					'guide_id'     => 'guide',
+				);
+			}
+			/**
+			 * Resolve the `filter` shortcode attribute into a list of taxonomy keys.
+			 *
+			 * Supported values:
+			 *   "" / "all"                        -> every globally enabled taxonomy
+			 *   "none"                            -> no taxonomy filter dropdowns
+			 *   "category,location"               -> only the listed taxonomies
+			 *   "-guide" / "all,-guide"           -> every taxonomy except the listed ones
+			 *
+			 * @param mixed $value Raw shortcode attribute.
+			 * @return array<int,string>
+			 */
+			public static function normalize_filter_taxonomies( $value ): array {
+				$all   = array( 'category', 'location', 'organizer', 'guide' );
+				$value = is_array( $value ) ? implode( ',', $value ) : (string) $value;
+				$value = strtolower( trim( $value ) );
+				if ( '' === $value || 'all' === $value || '*' === $value ) {
+					return $all;
+				}
+				if ( in_array( $value, array( 'none', 'no', 'off', 'false', '0' ), true ) ) {
+					return array();
+				}
+				$aliases  = self::filter_aliases();
+				$included = array();
+				$excluded = array();
+				foreach ( array_map( 'trim', explode( ',', $value ) ) as $token ) {
+					if ( '' === $token ) {
+						continue;
+					}
+					$exclude = false;
+					if ( 0 === strpos( $token, '-' ) ) {
+						$exclude = true;
+						$token   = ltrim( $token, '-' );
+					}
+					$token = $aliases[ $token ] ?? '';
+					if ( '' === $token ) {
+						continue;
+					}
+					if ( $exclude ) {
+						$excluded[] = $token;
+					} else {
+						$included[] = $token;
+					}
+				}
+				$included = array_values( array_unique( $included ) );
+				$excluded = array_values( array_unique( $excluded ) );
+				if ( empty( $included ) && empty( $excluded ) ) {
+					return $all;
+				}
+				if ( empty( $included ) ) {
+					return array_values( array_diff( $all, $excluded ) );
+				}
+				$included = array_values( array_diff( $included, $excluded ) );
+				return array_values( array_intersect( $all, $included ) );
 			}
 			private static function normalize_attributes( $attribute ): array {
 				$params                     = shortcode_atts( self::default_attribute(), is_array( $attribute ) ? $attribute : array() );
@@ -158,6 +238,8 @@
 				$params['sort']             = strtoupper( (string) $params['sort'] ) === 'DESC' ? 'DESC' : 'ASC';
 				$params['pagination']       = in_array( strtolower( (string) $params['pagination'] ), array( 'no', 'false', 'off', '0' ), true ) ? 'no' : 'yes';
 				$params['pagination_style'] = in_array( $params['pagination-style'], array( 'live', 'number' ), true ) ? $params['pagination-style'] : 'live';
+				$params['filter']           = is_string( $params['filter'] ) ? sanitize_text_field( $params['filter'] ) : '';
+				$params['filter_taxonomies'] = self::normalize_filter_taxonomies( $params['filter'] );
 				return $params;
 			}
 		}

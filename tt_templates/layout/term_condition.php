@@ -20,8 +20,7 @@
                     <h4 class="abp"><span class="_mar_r_xxs">🤝</span> <?php esc_html_e('Term & Conditions', 'abp-tour-travel'); ?></h4>
                     <div class="_divider_xs"></div>
                     <?php
-                        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-                        echo wp_kses_post(apply_filters('the_content', $infos));
+                        echo wp_kses_post( ABPTT_Function::format_content( $infos ) );
                     ?>
                 </div>
                 <?php

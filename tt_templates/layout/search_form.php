@@ -24,9 +24,9 @@
         //echo '<pre>';        print_r($all_dates);        echo '</pre>';
         ?>
         <div id="abptt_search_area">
-            <h5 class="abp_gap_xs">
-                <span class="fas fa-ticket"></span><?php esc_html_e('BUY TICKET', 'abp-tour-travel'); ?>
-            </h5>
+            <div class="_fs_h5 abp_gap_xs">
+                <span class="fas fa-ticket" aria-hidden="true"></span><?php esc_html_e('BUY TICKET', 'abp-tour-travel'); ?>
+            </div>
             <form class="abp_search_form <?php echo esc_attr($form_type === 'column' ? '_form_column' : '_form_inline'); ?>" method="post" action="">
                 <?php if ($post_id > 0 && empty($global_order)) { ?>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>"/>

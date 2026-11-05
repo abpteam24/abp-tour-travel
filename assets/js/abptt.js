@@ -88,7 +88,7 @@
         });
     });
     // Refresh ticket/seat availability for the selected tour date and session.
-    abptt_parent.on('change', '#abptt_search_area [name="start_date"], .post_top_filter [name="start_date"]', function () {
+    $(document).on('change', '#abptt_search_area [name="start_date"], div.abptt_booking  [name="start_date"]', function () {
         let values = String($(this).val() || '').split('|');
         let date = values[0] || '';
         let time = values.length > 1 ? values[1] : '';
@@ -142,7 +142,7 @@
                 }
                 if (response.data && typeof response.data.time_html === 'string') {
                     let topFilter = booking_area.find('.post_top_filter').first();
-                    let topTime = topFilter.find('.abptt_top_time').first();
+                    let topTime = booking_area.find('.abptt_top_time').first();
                     if (topTime.length) {
                         topTime.replaceWith(response.data.time_html);
                     } else if (response.data.time_html) {

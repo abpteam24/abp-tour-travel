@@ -30,10 +30,7 @@
                             <h5 class="abptt_tl_title"><?php echo esc_html( $title ); ?></h5>
                             <?php if ( ! empty( $des ) ) { ?>
                                 <div class="abptt_tl_des">
-                                    <?php
-                                        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-                                        echo wp_kses_post( apply_filters( 'the_content', $des ) );
-                                    ?>
+                                    <?php echo wp_kses_post( ABPTT_Function::format_content( $des ) ); ?>
                                 </div>
                             <?php } ?>
                         </div>

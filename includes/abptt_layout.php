@@ -830,7 +830,7 @@
 					if ( $date_count > 1 && ! self::use_date_select( $date_count ) ) {
 						?>
                         <label>
-                            <span class="_gap_xxs"><?php ABPTT_Static::svg( 'date_1' ); ?><?php esc_html_e( 'Select Tour Date', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
+                            <span><?php ABPTT_Static::svg( 'date_1' ); ?><?php esc_html_e( 'Select Tour Date', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
                             <input type="hidden" name="start_date" value="<?php echo esc_attr( $hidden_date ); ?>" required/>
                             <input id="start_date" type="text" value="<?php echo esc_attr( $visible_date ); ?>" class="_form_control" placeholder="<?php echo esc_attr( $now ); ?>" data-alert="<?php esc_attr_e( 'Please Select Tour Date', 'abp-tour-travel' ); ?>" readonly required/>
                             <span class="fas fa-times date_close_icon" title="<?php esc_attr_e( 'Clear Date', 'abp-tour-travel' ); ?>"></span>
@@ -840,7 +840,7 @@
 					} elseif ( $date_count > 1 ) {
 						?>
                         <label>
-                            <span class="_gap_xxs"><?php ABPTT_Static::svg( 'date_1' ); ?><?php esc_html_e( 'Select Tour Date', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
+                            <span><?php ABPTT_Static::svg( 'date_1' ); ?><?php esc_html_e( 'Select Tour Date', 'abp-tour-travel' ); ?><sup class="_color_required">*</sup></span>
                             <select id="abptt_start_date_select" name="start_date" class="_form_control" data-alert="<?php esc_attr_e( 'Please Select Tour Date', 'abp-tour-travel' ); ?>" required>
 								<?php foreach ( $all_dates as $available_date ) {
 									$date_value = gmdate( 'Y-m-d', strtotime( $available_date ) );

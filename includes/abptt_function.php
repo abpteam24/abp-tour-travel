@@ -133,15 +133,15 @@
 
 			public static function booking_status() { return ( ABPTT_Configuration['booked_status'] ?? null ) ?: 'wc-processing,wc-completed'; }
 
+			/**
+			 * Order statuses that count as booked and reserve stock/seats.
+			 *
+			 * The admin controls this from Configuration → Booked Status. Availability,
+			 * sold counts and stock checks use exactly the selected statuses; no status
+			 * is added implicitly, so the setting is the single source of truth.
+			 */
 			public static function booking_status_sold() {
-				$booked   = self::booking_status();
-				$statuses = array_map( 'trim', explode( ',', $booked ) );
-				if ( in_array( 'all', $statuses, true ) ) {
-					return $booked;
-				}
-				$statuses = array_values( array_unique( array_merge( $statuses, [ 'wc-pending', 'wc-on-hold' ] ) ) );
-
-				return implode( ',', $statuses );
+				return self::booking_status();
 			}
 
 			public static function label() { return ( ABPTT_Configuration['label'] ?? null ) ?: __( 'Tours', 'abp-tour-travel' ); }
@@ -205,6 +205,40 @@
 			public static function guide_value( $id ) { return ( ABPTT_Guide[ $id ]['label'] ?? null ) ?: $id; }
 
 			public static function label_place_you_see(): ?string { return __( "Places You'll See", 'abp-tour-travel' ); }
+
+			/**
+			 * Format a short rich-text field (term description, timeline note,
+			 * FAQ answer, terms text) for output.
+			 *
+			 * These values are not post content, so they must not run the full
+			 * `the_content` filter chain. Themes and plugins routinely hook
+			 * `the_content` to inject page-level markup around the main post;
+			 * running that chain on a nested field leaks the injected markup
+			 * into the field. Paragraph formatting and shortcodes are still
+			 * applied, and the result can be extended with the
+			 * `abptt_format_content` filter.
+			 *
+			 * @param string $content Raw field value.
+			 *
+			 * @return string Formatted HTML.
+			 */
+			public static function format_content( $content ): string {
+				$content = (string) $content;
+				if ( '' === trim( $content ) ) {
+					return '';
+				}
+				$content = wptexturize( $content );
+				$content = wpautop( $content );
+				$content = shortcode_unautop( $content );
+				$content = do_shortcode( $content );
+
+				/**
+				 * Filter the formatted value of a nested rich-text field.
+				 *
+				 * @param string $content Formatted HTML.
+				 */
+				return (string) apply_filters( 'abptt_format_content', $content );
+			}
 
 			/**
 			 * Icon/label map for the social networks a guide can link to.
@@ -918,14 +952,20 @@
 			public static function date_session_times( $post_id, array $date_infos = [], string $current_date = '' ): array {
 				$date_type = $date_infos['date_type'] ?? 'particular';
 				if ( 'particular' === $date_type && ! empty( $current_date ) ) {
+					// A date can have more than one particular session configured. Collect
+					// all of them instead of returning the first one and ignoring the rest.
+					$particular_times = [];
 					foreach ( ( $date_infos['particular_dates'] ?? [] ) as $particular_date ) {
 						if ( ! is_array( $particular_date ) || empty( $particular_date['checkin_date'] ) ) {
 							continue;
 						}
 						$checkin = gmdate( 'Y-m-d', strtotime( $particular_date['checkin_date'] ) );
 						if ( $checkin === $current_date && self::is_valid_time( $particular_date['checkin_time'] ?? '' ) ) {
-							return array( (string) $particular_date['checkin_time'] );
+							$particular_times[] = (string) $particular_date['checkin_time'];
 						}
+					}
+					if ( ! empty( $particular_times ) ) {
+						return array_values( array_unique( $particular_times ) );
 					}
 				}
 				$time_infos = self::get_post_info( $post_id, 'time_infos', [] );
@@ -967,11 +1007,16 @@
 					if ( ! is_array( $particular_date ) || empty( $particular_date['checkin_date'] ) || ! self::is_valid_time( $particular_date['checkin_time'] ?? '' ) ) {
 						continue;
 					}
-					$checkin_date                                           = gmdate( 'Y-m-d', strtotime( $particular_date['checkin_date'] ) );
-					$time_infos['date_times'][ 'abptt_p_' . $checkin_date ] = [
-						'date' => $checkin_date,
-						'time' => array( (string) $particular_date['checkin_time'] ),
-					];
+					$checkin_date = gmdate( 'Y-m-d', strtotime( $particular_date['checkin_date'] ) );
+					$time_key     = 'abptt_p_' . $checkin_date;
+					if ( ! isset( $time_infos['date_times'][ $time_key ] ) || ! is_array( $time_infos['date_times'][ $time_key ] ) ) {
+						$time_infos['date_times'][ $time_key ] = [
+							'date' => $checkin_date,
+							'time' => array(),
+						];
+					}
+					$time_infos['date_times'][ $time_key ]['time'][] = (string) $particular_date['checkin_time'];
+					$time_infos['date_times'][ $time_key ]['time']   = array_values( array_unique( $time_infos['date_times'][ $time_key ]['time'] ) );
 				}
 
 				return $time_infos;
@@ -1445,7 +1490,9 @@
 							$all_price[] = $price_info['price'] ?? 0;
 						};
 					}
-					$price = min( $all_price );
+					// min() throws a ValueError on an empty array in PHP 8, which used to
+					// crash tour lists for tours with no ticket configured yet.
+					$price = ! empty( $all_price ) ? min( $all_price ) : 0;
 				}
 
 				return $price > 0 ? self::tax_with_price( $post_id, $price ) : 0;

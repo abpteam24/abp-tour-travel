@@ -338,7 +338,7 @@
 				$post_infos   = ABPTT_Function::get_all_meta( $post_id );
 				$ticket_infos = $post_infos['ticket_infos'] ?? array();
 				$filters      = array( 'post_id' => $post_id, 'start_time' => $start_time, 'cache' => false );
-				$sold         = ABPTT_Query::get_sold_ticket( $filters, true );
+				$sold         = ABPTT_Query::get_sold_ticket( $filters );
 				if ( empty( $ticket_infos ) || ! is_array( $ticket_infos ) ) {
 					echo '<div class="dash_empty"><i class="fas fa-tag"></i><p>' . esc_html__( 'No ticket configuration found.', 'abp-tour-travel' ) . '</p></div>';
 					return;

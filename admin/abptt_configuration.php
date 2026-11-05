@@ -234,7 +234,7 @@
                         array(
                             'name'    => 'booked_status',
                             'label'   => __( 'Booked Status', 'abp-tour-travel' ),
-                            'desc'    => __( 'Select the specific order statuses that will automatically trigger inventory deduction or reserve a seat.', 'abp-tour-travel' ),
+                            'desc'    => __( 'Select the order statuses that count as booked and reserve inventory/seats. Availability, sold counts and stock checks use exactly these statuses. Include Pending payment or On hold if unpaid orders should hold seats.', 'abp-tour-travel' ),
                             'class'   => 'full_width',
                             'type'    => 'multi_check',
                             'default' => 'wc-processing,wc-completed',

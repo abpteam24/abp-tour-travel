@@ -364,7 +364,7 @@
 						'post_id' => $post_id,
 						'user_id' => $order instanceof WC_Order ? $order->get_customer_id() : get_current_user_id(),
 						'booking_infos' => $booking_info,
-						'item_total' => $cart_item['total_price'] ?? '',
+						'item_total' => $booking_infos['total_price'] ?? '',
 					];
 					$item_info = apply_filters('abptt_checkout_create_order_line_item', $item_info, $booking_infos);
 					$item->add_meta_data('_abptt_items', $item_info, true);
@@ -397,13 +397,21 @@
 							return;
 						}
 						try {
-							$total_order = ABPTT_Query::get_booking_query(['order_id' => $order_id], 0, 0, true);
-							if ($total_order == 0) {
-								$table_name = $wpdb->prefix . 'abptt_orders';
-								$rows = array();
-								foreach ($order->get_items() as $item_id => $item) {
+							$table_name = $wpdb->prefix . 'abptt_orders';
+							$rows = array();
+							$order_items = $order->get_items();
+							if (!empty($order_items)) {
+								foreach ($order_items as $item_id => $item) {
 									$item_infos = wc_get_order_item_meta($item_id, '_abptt_items');
 									if (!empty($item_infos) && is_array($item_infos) && sizeof($item_infos) > 0) {
+										// Skip only the items that already have a booking row, whatever
+										// the order status is. A retried request cannot insert the same
+										// booking twice, while any remaining item of a partially
+										// written order can still be completed.
+										$existing_rows = ABPTT_Query::get_booking_query(['order_id' => $order_id, 'item_id' => $item_id, 'status' => 'all'], 0, 0, true);
+										if (!empty($existing_rows)) {
+											continue;
+										}
 										$post_id = $item_infos['post_id'] ?? '';
 										$booking_info = $item_infos['booking_infos'] ?? [];
 										if (!empty($post_id) && get_post_type($post_id) == ABPTT_Function::get_cpt() && !empty($booking_info) && sizeof($booking_info) > 0) {
@@ -501,29 +509,40 @@ $money = static function ($value): ?string {
 					global $wpdb;
 					$table_name = $wpdb->prefix . 'abptt_orders';
 					$order = wc_get_order($order_id);
+					if (!$order) {
+						return;
+					}
 					$order_status = $order->get_status();
+					$updated = false;
 					foreach ($order->get_items() as $item_id => $item_values) {
 						if ($item_id) {
-							$order_infos = ABPTT_Query::get_booking_query(['item_id' => $item_id]);
+							// Status-independent lookup: rows created while the order was pending,
+							// on-hold or failed must still be found when the status changes later.
+							$order_infos = ABPTT_Query::get_booking_query(['order_id' => $order_id, 'item_id' => $item_id, 'status' => 'all']);
 							if (!empty($order_infos) && sizeof($order_infos) > 0) {
 								$order_info = current($order_infos);
 								$others = $order_info['others'] ?? '';
-								if (!empty($others)) {
-									$others = json_decode($others, true);
-									$user_id = get_current_user_id();
-									$others['updated_by'] = $user_id;
-									$data = [
-										'others' => wp_json_encode($others),
-										'order_status' => 'wc-' . $order_status,
-										'updated_at' => current_time('Y-m-d H:i')
-									];
-									$where = ['item_id' => $item_id];
-									// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-									$wpdb->update($table_name, $data, $where, ['%s', '%s', '%s'], ['%d']);
-									$mail_send = apply_filters('abptt_send_mail', false, $item_id);
-								}
+								$others = !empty($others) ? json_decode($others, true) : [];
+								$others = is_array($others) ? $others : [];
+								$others['updated_by'] = get_current_user_id();
+								$data = [
+									'others' => wp_json_encode($others),
+									'order_status' => 'wc-' . $order_status,
+									'updated_at' => current_time('Y-m-d H:i')
+								];
+								$where = ['item_id' => $item_id, 'order_id' => $order_id];
+								// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+								$wpdb->update($table_name, $data, $where, ['%s', '%s', '%s'], ['%d', '%d']);
+								$updated = true;
+								$mail_send = apply_filters('abptt_send_mail', false, $item_id);
 							}
 						}
+					}
+					// Backfill bookings for orders whose rows were never written, e.g. an order
+					// created through a gateway that changed status before checkout completed.
+					if (!$updated && in_array($order_status, ['pending', 'on-hold', 'processing', 'completed'], true)) {
+						self::save_custom_data($order_id);
+						return;
 					}
 					ABPTT_Query::flush_cache();
 				}

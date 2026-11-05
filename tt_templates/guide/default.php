@@ -65,8 +65,7 @@
                             <?php if ( '' !== trim( wp_strip_all_tags( $bio ) ) ) { ?>
                                 <div class="abptt_sp_bio">
                                     <?php
-                                        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-                                        echo wp_kses_post( apply_filters( 'the_content', $bio ) );
+                                        echo wp_kses_post( ABPTT_Function::format_content( $bio ) );
                                     ?>
                                 </div>
                             <?php } ?>

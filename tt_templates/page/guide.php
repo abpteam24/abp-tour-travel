@@ -89,8 +89,7 @@
                             </h2>
                             <div class="abptt_guide_bio">
 								<?php
-									// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-									echo wp_kses_post( apply_filters( 'the_content', $abptt_guide['bio'] ) );
+									echo wp_kses_post( ABPTT_Function::format_content( $abptt_guide['bio'] ) );
 								?>
                             </div>
                         </div>

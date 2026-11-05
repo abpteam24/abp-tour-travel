@@ -207,7 +207,7 @@
 			}
 			public function event_schedule_list( int $post_id, array $dates, array $time_infos, string $selected_date = '', string $selected_time = '', string $layout = 'dropdown' ): void {
 				$items = ABPTT_Function::event_schedule_items( $post_id, $dates, $time_infos );
-				if ( ! ABPTT_Function::on_off( 'tour_date_list' ) || count( $items ) < 2 ) {
+				if (count( $items ) < 2 ) {
 					return;
 				}
 				$is_scroll_layout = 'scroll' === $layout;

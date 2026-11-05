@@ -10,6 +10,11 @@
 			$column            = $params['column'] ?? 3;
 			$related           = $params['related'] ?? '';
 			$show_post         = absint( ( $params['show'] ?? 0 ) ?: ( $column * 3 ) );
+			// With pagination disabled every card must stay visible; otherwise the
+			// remaining cards keep the hidden class and can never be reached.
+			if ( ( $params['pagination'] ?? 'yes' ) === 'no' ) {
+				$show_post = sizeof( $post_ids );
+			}
 			$class             = $style == 'grid' && $column > 1 ? 'abptt_grid item_' . $column : 'abptt_lists item_' . $column;
 			$class             = ! empty( $related ) ? 'abptt_grid ' : $class;
 			$post_count        = 0;
@@ -22,11 +27,13 @@
 					$post_infos = ABPTT_Function::get_all_meta( $post_id );
 					$cat_id     = $post_infos['abptt_category'] ?? '';
 					$loc_id     = $post_infos['abptt_location'] ?? '';
+					$org_id     = $post_infos['abptt_organizer'] ?? '';
+					$guide_id   = $post_infos['guide'] ?? '';
 					$url        = get_the_permalink( $post_id );
 					$show_class = $show_post >= $post_count ? '' : 'abp_close';
 					//echo '<pre>';print_r($filter_args);echo '</pre>';
 					?>
-                    <div class="pagination_item item_box_1 <?php echo esc_attr( $show_class ); ?>" data-cat_id="<?php echo esc_attr( $cat_id ); ?>" data-loc_id="<?php echo esc_attr( $loc_id ); ?>">
+                    <div class="pagination_item item_box_1 <?php echo esc_attr( $show_class ); ?>" data-cat_id="<?php echo esc_attr( $cat_id ); ?>" data-loc_id="<?php echo esc_attr( $loc_id ); ?>" data-organizer_id="<?php echo esc_attr( $org_id ); ?>" data-guide_id="<?php echo esc_attr( $guide_id ); ?>">
                         <div class="item_head">
 							<?php
 								ABPTT_Layout::image( $post_id );

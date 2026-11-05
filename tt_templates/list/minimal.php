@@ -7,6 +7,10 @@
 		$global_order = $params['global_order'] ?? '';
 		$column       = $params['column'] ?? 3;
 		$show_post    = absint( ( $params['show'] ?? 0 ) ?: ( $column * 3 ) );
+		// Pagination disabled means all cards must be visible.
+		if ( ( $params['pagination'] ?? 'yes' ) === 'no' ) {
+			$show_post = count( $post_ids );
+		}
 		$post_count   = 0;
 		$args         = [
 			'total'     => count( $post_ids ),
@@ -25,9 +29,11 @@
 				$post_infos = ABPTT_Function::get_all_meta( $post_id );
 				$category   = $post_infos['abptt_category'] ?? '';
 				$location   = $post_infos['abptt_location'] ?? '';
+				$organizer  = $post_infos['abptt_organizer'] ?? '';
+				$guide      = $post_infos['guide'] ?? '';
 				$url        = get_permalink( $post_id );
 				?>
-                <div class="pagination_item minimal_item <?php echo esc_attr( $show_post >= $post_count ? '' : 'abp_close' ); ?>" data-cat_id="<?php echo esc_attr( $category ); ?>" data-loc_id="<?php echo esc_attr( $location ); ?>">
+                <div class="pagination_item minimal_item <?php echo esc_attr( $show_post >= $post_count ? '' : 'abp_close' ); ?>" data-cat_id="<?php echo esc_attr( $category ); ?>" data-loc_id="<?php echo esc_attr( $location ); ?>" data-organizer_id="<?php echo esc_attr( $organizer ); ?>" data-guide_id="<?php echo esc_attr( $guide ); ?>">
 					<?php ABPTT_Layout::image( $post_id, '', '', 'minimal_image' ); ?>
                     <div class="minimal_content">
 						<?php ABPTT_Layout::rating( $post_infos, 'minimal_rating' ); ?>

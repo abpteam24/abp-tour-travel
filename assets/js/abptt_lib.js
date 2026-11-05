@@ -719,18 +719,25 @@ function abptt_popup_close(target_id = '') {
 //================================================================================Filter and pagination=================//
 function abptt_filter(parent) {
     abptt_spinner(parent);
-    let cat_id = parent.find('[name="cat_id"]').val();
-    let loc_id = parent.find('[name="loc_id"]').val();
-    cat_id = cat_id ? cat_id.trim() : '';
-    loc_id = loc_id ? loc_id.trim() : '';
+    let filter_names = ['cat_id', 'loc_id', 'organizer_id', 'guide_id'];
+    let filters = {};
+    filter_names.forEach(function (name) {
+        let field = parent.find('[name="' + name + '"]').first();
+        let value = field.length ? field.val() : '';
+        filters[name] = value ? String(value).trim() : '';
+    });
     parent.find('.pagination_item').each(function () {
         let item = jQuery(this);
-        let itemCat = item.data('cat_id') ? String(item.data('cat_id')).trim() : '';
-        let itemLocRaw = item.data('loc_id') ? String(item.data('loc_id')).trim() : '';
-        let itemLocArray = itemLocRaw.split(',').map(id => id.trim());
-        let isCatMatch = cat_id === '' || itemCat === cat_id;
-        let isLocMatch = loc_id === '' || itemLocArray.includes(loc_id);
-        if (isCatMatch && isLocMatch) {
+        let isMatch = true;
+        filter_names.forEach(function (name) {
+            if (!filters[name]) return;
+            let raw = item.data(name);
+            let values = (raw !== undefined && raw !== null) ? String(raw).split(',').map(id => id.trim()) : [];
+            if (!values.includes(filters[name])) {
+                isMatch = false;
+            }
+        });
+        if (isMatch) {
             item.removeClass('abp_off').addClass('abp_on abp_close');
         } else {
             item.addClass('abp_off').removeClass('abp_on abp_close');
@@ -847,19 +854,12 @@ function abptt_number_slice(parent, page, per_page) {
 }
 (function ($) {
     "use strict";
-    abptt_parent.on('change', '.abp_pagination [name="cat_id"]', function () {
+    let filter_selector = '.abp_pagination [name="cat_id"], .abp_pagination [name="loc_id"], .abp_pagination [name="organizer_id"], .abp_pagination [name="guide_id"]';
+    abptt_parent.on('change', filter_selector, function () {
         let parent = $(this).closest('.abp_pagination');
         abptt_filter(parent);
     });
-    abptt_parent.on('abp_trigger', '.abp_pagination [name="cat_id"]', function () {
-        let parent = $(this).closest('.abp_pagination');
-        abptt_filter(parent);
-    });
-    abptt_parent.on('change', '.abp_pagination [name="loc_id"]', function () {
-        let parent = $(this).closest('.abp_pagination');
-        abptt_filter(parent);
-    });
-    abptt_parent.on('abp_trigger', '.abp_pagination [name="loc_id"]', function () {
+    abptt_parent.on('abp_trigger', filter_selector, function () {
         let parent = $(this).closest('.abp_pagination');
         abptt_filter(parent);
     });
@@ -875,6 +875,8 @@ function abptt_number_slice(parent, page, per_page) {
         }
         parent.find('.list_view').removeClass('abp_active');
         $(this).addClass('abp_active');
+        parent.find('.grid_view').attr('aria-pressed', 'true');
+        parent.find('.list_view').attr('aria-pressed', 'false');
         abptt_load_more(parent);
     });
     $(document).on('click', 'div.abptt_area .list_view', function () {
@@ -890,6 +892,8 @@ function abptt_number_slice(parent, page, per_page) {
         }
         parent.find('.grid_view').removeClass('abp_active');
         $(this).addClass('abp_active');
+        parent.find('.list_view').attr('aria-pressed', 'true');
+        parent.find('.grid_view').attr('aria-pressed', 'false');
         abptt_load_more(parent);
     });
     $(document).on('click', 'div.abptt_area .abp_pagination .live_pagination', function () {

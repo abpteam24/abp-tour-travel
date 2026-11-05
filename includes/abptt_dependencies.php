@@ -39,7 +39,7 @@
 				wp_enqueue_style( 'wp-codemirror' );
 				wp_enqueue_script( 'wp-codemirror' );
 				//=============================//
-				wp_enqueue_script( 'abptt_admin', ABPTT_URL . 'assets/js/abptt_admin.js', array( 'jquery' ), time(), true );
+				wp_enqueue_script( 'abptt_admin', ABPTT_URL . 'assets/js/abptt_admin.js', array( 'jquery' ), ABPTT_VERSION, true );
 				wp_localize_script( 'abptt_admin', 'abptt_admin_data', [
 					'ajax_url'        => admin_url( 'admin-ajax.php' ),
 					'nonce'           => wp_create_nonce( 'abptt_admin_ajax_nonce' ),
@@ -85,13 +85,13 @@
 						'no_item_selected'    => __( 'No Item selected !', 'abp-tour-travel' ),
 					],
 				] );
-				wp_enqueue_style( 'abptt_admin', ABPTT_URL . 'assets/css/abptt_admin.css', array(), time() );
+				wp_enqueue_style( 'abptt_admin', ABPTT_URL . 'assets/css/abptt_admin.css', array(), ABPTT_VERSION );
 				$google_map_key = ABPTT_Function::get_options( 'abptt_configuration', 'google_map_key', '' );
 				if ( ABPTT_Function::on_off( 'google_map' ) && ! empty( $google_map_key ) ) {
 					// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External Google Maps API script; version is managed by Google.
 					wp_enqueue_script( 'abptt_gmaps', 'https://maps.googleapis.com/maps/api/js?key=' . rawurlencode( $google_map_key ) . '&libraries=places&callback=abptt_gmap_init', array(), null, true );
 				}
-				wp_enqueue_script( 'abptt_sp', ABPTT_URL . 'assets/js/abptt_sp.js', array( 'jquery' ), time(), true );
+				wp_enqueue_script( 'abptt_sp', ABPTT_URL . 'assets/js/abptt_sp.js', array( 'jquery' ), ABPTT_VERSION, true );
 				wp_localize_script( 'abptt_sp', 'abptt_sp_config', [
 					'seat_type'  => wp_json_encode( ABPTT_Seat_Plan::get_ticket_type_js() ),
 					'ajax_url'   => admin_url( 'admin-ajax.php' ),
@@ -119,7 +119,7 @@
 					wp_enqueue_script( 'select2' );
 				}
 				wp_enqueue_style( 'abptt_slick', ABPTT_URL . 'assets/css/slick.min.css', array(), ABPTT_VERSION );
-				wp_enqueue_script( 'abptt_frontend', ABPTT_URL . 'assets/js/abptt_frontend.js', array( 'jquery' ), time(), true );
+				wp_enqueue_script( 'abptt_frontend', ABPTT_URL . 'assets/js/abptt_frontend.js', array( 'jquery' ), ABPTT_VERSION, true );
 				$google_map_key = ABPTT_Function::get_options( 'abptt_configuration', 'google_map_key', '' );
 				$use_google_map = ABPTT_Function::on_off( 'google_map' ) && '' !== trim( (string) $google_map_key );
 				wp_localize_script( 'abptt_frontend', 'abptt_map_config', array(
@@ -142,8 +142,8 @@
 				wp_enqueue_style( 'abptt_font_awesome', ABPTT_URL . 'assets/css/font_awesome.min.css', array(), '5.15.4' );
 				wp_enqueue_style( 'abptt_leaflet', ABPTT_URL . 'assets/css/leaflet.min.css', array(), '1.9.4' );
 				wp_enqueue_script( 'abptt_leaflet', ABPTT_URL . 'assets/js/leaflet.min.js', array(), '1.9.4', true );
-				wp_enqueue_style( 'abptt_lib', ABPTT_URL . 'assets/css/abptt_lib.css', array(), time() );
-				wp_enqueue_script( 'abptt_lib', ABPTT_URL . 'assets/js/abptt_lib.js', array( 'jquery' ), time(), true );
+				wp_enqueue_style( 'abptt_lib', ABPTT_URL . 'assets/css/abptt_lib.css', array(), ABPTT_VERSION );
+				wp_enqueue_script( 'abptt_lib', ABPTT_URL . 'assets/js/abptt_lib.js', array( 'jquery' ), ABPTT_VERSION, true );
 				if ( in_array( 'woocommerce/woocommerce.php', get_option( 'active_plugins' ) ) ) {
 					wp_localize_script( 'abptt_lib', 'abptt_var', [
 						'currency_symbol'     => get_woocommerce_currency_symbol(),
@@ -231,8 +231,8 @@
 						--tt_color_seclected:{$selected};						
 					}";
 				wp_add_inline_style( 'abptt_lib', wp_kses_post( $abptt_var ) );
-				wp_enqueue_style( 'abptt', ABPTT_URL . 'assets/css/abptt.css', array(), time() );
-				wp_enqueue_script( 'abptt_infos', ABPTT_URL . 'assets/js/abptt.js', array( 'jquery' ), time(), true );
+				wp_enqueue_style( 'abptt', ABPTT_URL . 'assets/css/abptt.css', array(), ABPTT_VERSION );
+				wp_enqueue_script( 'abptt_infos', ABPTT_URL . 'assets/js/abptt.js', array( 'jquery' ), ABPTT_VERSION, true );
 				$rental_data = array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
 					'nonce'    => wp_create_nonce( 'abptt_ajax_nonce' ),
@@ -408,7 +408,20 @@
 						'meta_box_cb'       => false,
 					] );
 				}
-				flush_rewrite_rules();
+				// Flush once when a rewrite-relevant setting changes, not on every
+				// request. The old unconditional flush wrote rewrite rules on each
+				// page load and was a measurable performance cost.
+				$rewrite_signature = md5( wp_json_encode( [
+					'cpt'       => ABPTT_Function::slug(),
+					'category'  => ABPTT_Function::on_off( 'category' ) ? ABPTT_Function::category_slug() : '',
+					'location'  => ABPTT_Function::location_slug(),
+					'organizer' => ABPTT_Function::on_off( 'organizer' ) ? ABPTT_Function::organizer_slug() : '',
+					'guide'     => ABPTT_Function::on_off( 'guide' ) ? ABPTT_Function::guide_slug() : '',
+				] ) );
+				if ( get_option( 'abptt_rewrite_signature' ) !== $rewrite_signature ) {
+					flush_rewrite_rules( false );
+					update_option( 'abptt_rewrite_signature', $rewrite_signature, false );
+				}
 			}
 
 			public static function activation(): void {

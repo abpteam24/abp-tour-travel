@@ -180,7 +180,7 @@
                         </thead>
                         <tbody>
 						<?php foreach ( $all_organizer as $term_id => $organizer ) {
-							$name        = $organizer['name'] ?? '';
+							$name        = $organizer['label'] ?? '';
 							$description = $organizer['description'] ?? '';
 							?>
                             <tr>
@@ -188,7 +188,7 @@
                                 <th class="_text_left"><a href="<?php echo esc_url( get_term_link( $term_id ) ); ?>" target="_blank" class="abp_fs_h5_color_theme"><?php echo esc_html( $name ); ?></a></th>
                                 <th><?php echo esc_html( $term_id ); ?></th>
                                 <td><?php echo esc_html( $description ); ?></td>
-                                <th><code> [abptt-post cat_id="<?php echo esc_attr( $term_id ); ?>"]</code></th>
+                                <th><code> [abptt-post organizer_id="<?php echo esc_attr( $term_id ); ?>"]</code></th>
                                 <th>
                                     <div class="_fj_center">
                                         <div class="_group_content">

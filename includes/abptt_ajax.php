@@ -61,6 +61,7 @@
                     $post_ids = ABPTT_Query::get_post_id($form_data_down);
                     $form_data_down['all_post'] = $post_ids;
                     $form_data_down = array_merge($defaults, $form_data_down);
+                    $form_data_down['filter_taxonomies'] = ABPTT_Shortcodes::normalize_filter_taxonomies($form_data_down['filter'] ?? '');
                     $style = ($form_data_down['style'] ?? 'grid') ?: 'grid';
                     $templates = ['grid' => 'list/grid.php', 'missionary' => 'list/missionary.php',];
                     $file = ABPTT_Function::template_path($templates[$style] ?? $templates['grid']);
@@ -83,6 +84,7 @@
                         $post_ids = ABPTT_Query::get_post_id($form_data_up);
                         $form_data_up['all_post'] = $post_ids;
                         $form_data_up = array_merge($defaults, $form_data_up);
+                        $form_data_up['filter_taxonomies'] = ABPTT_Shortcodes::normalize_filter_taxonomies($form_data_up['filter'] ?? '');
                         ?>
                         <div class="abp_pagination _gap_fd_column">
                             <?php do_action('abptt_post_filter', $form_data_up);

@@ -18,7 +18,7 @@
                 return;
             }
             ?>
-            <div class="_section faq_area abptt_faq_panel">
+            <div class="_section faq_area faq_panel">
                 <h4 class="abp_gap_xs"> ❓ <?php esc_html_e( 'Frequently Asked Questions', 'abp-tour-travel' ); ?>                </h4>
                 <div class="_divider_xs"></div>
                 <div class="faq_list">
@@ -41,8 +41,7 @@
                                 <div class="faq_answer">
                                     <div class="faq_answer_content">
                                         <?php
-                                            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-                                            echo wp_kses_post( apply_filters( 'the_content', $description ) );
+                                            echo wp_kses_post( ABPTT_Function::format_content( $description ) );
                                         ?>
                                     </div>
                                 </div>
