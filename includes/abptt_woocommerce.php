@@ -110,7 +110,9 @@
 					$tour_date = $tour_date ?: $post_val('start_date');
 					$session_time = $post_val('session_time');
 					$session_time = $session_time ?: $post_val('start_time');
-					$session_time=$session_time?:$tour_date;
+					if (empty($session_time)) {
+						$session_time = ABPTT_Function::check_time_exit_date($tour_date) ? gmdate('H:i', strtotime($tour_date)) : '00:00';
+					}
 					$ticket_price = 0;
 					if (!empty($tour_date) && !empty($session_time) && !empty($post_id)) {
 						if ($seat_type == 'ticket') {
@@ -120,7 +122,7 @@
 								foreach ($ticket_types as $key => $ticket_type) {
 									$qty = absint($item_qty[$key] ?? '');
 									if (!empty($ticket_type) && $qty > 0) {
-										$price = ABPTT_Function::get_price($post_infos, $ticket_type, $session_time);
+										$price = ABPTT_Function::get_price($post_infos, $ticket_type, $tour_date);
 										$booking_info['info'][$ticket_type]['id'] = $ticket_type;
 										$booking_info['info'][$ticket_type]['name'] = ABPTT_Function::ticket_name($ticket_type);
 										$booking_info['info'][$ticket_type]['price'] = $price;
@@ -235,7 +237,7 @@
 								$seat_type = $cart_item['seat_type'] ?? '';
 								$html .= esc_html__('Booking Information', 'abp-tour-travel') . '<br />';
 								$html .= esc_html__('Tour Date', 'abp-tour-travel') . ' : ' . esc_html(ABPTT_Function::date_format($tour_date)) . '<br />';
-								$html .= esc_html__('Session Time', 'abp-tour-travel') . ' : ' . esc_html(ABPTT_Function::date_format($tour_date . ' ' . $session_time)) . '<br />';
+								$html .= esc_html__('Session Time', 'abp-tour-travel') . ' : ' . esc_html(ABPTT_Function::date_format($tour_date . ' ' . $session_time, 'time')) . '<br />';
 								$html .= esc_html__('Ticket Information', 'abp-tour-travel') . '<br />';
 								foreach ($ticket_infos as $ticket_info) {
 									$price = $ticket_info['price'] ?? 0;
@@ -316,7 +318,7 @@
 								$attendee_infos = $cart_item['pass_info'] ?? [];
 								$item->add_meta_data(__('Booking Information', 'abp-tour-travel') . ' ' . $return, '');
 								$item->add_meta_data(__('Tour Date', 'abp-tour-travel'), ABPTT_Function::date_format($tour_date));
-								$item->add_meta_data(__('Session Time: ', 'abp-tour-travel'), ABPTT_Function::date_format($tour_date . ' ' . $session_time));
+								$item->add_meta_data(__('Session Time', 'abp-tour-travel'), ABPTT_Function::date_format($tour_date . ' ' . $session_time, 'time'));
 								$item->add_meta_data(__('Ticket Information', 'abp-tour-travel'), '');
 								foreach ($ticket_infos as $ticket_info) {
 									$price = $ticket_info['price'] ?? 0;

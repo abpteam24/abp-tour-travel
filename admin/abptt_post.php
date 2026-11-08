@@ -678,15 +678,6 @@
                         }
                         $date_infos['special_on_dates'] = $specific_on;
                     }
-                    $off_schedules = [];
-                    $from_dates    = $post_array( 'abptt_off_from' );
-                    $to_dates      = $post_array( 'abptt_off_to' );
-                    foreach ( $from_dates as $key => $from_date ) {
-                        if ( $from_date && ! empty( $to_dates[ $key ] ) ) {
-                            $off_schedules[] = [ 'from' => $from_date, 'to' => $to_dates[ $key ] ];
-                        }
-                    }
-                    $date_infos['off_date_range'] = $off_schedules;
                     /****************/
                     $read_slots                  = function ( $names, $times, $stocks ) {
                         $slots = [];

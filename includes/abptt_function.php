@@ -564,7 +564,8 @@
 			}
 
 			public static function on_off( $key ): bool {
-				$value = ( ABPTT_On_Off[ $key ] ?? 'on' ) ?: 'on';
+				$default = ( 'remove_uninstall' === $key ) ? 'off' : 'on';
+				$value   = ( ABPTT_On_Off[ $key ] ?? $default ) ?: $default;
 
 				return $value !== 'off';
 			}
@@ -1450,10 +1451,14 @@
 					if ( ! empty( $post_id ) && $post_id > 0 ) {
 						$display_ticket_type = $post_infos['display_ticket_type'] ?? ABPTT_Function::get_post_info( $post_id, 'display_ticket_type', 'on' );
 						$display_ticket_type = ABPTT_Function::on_off( 'ticket_type' ) ? $display_ticket_type : 'off';
-						$type                = $display_ticket_type == 'on' ? $type : 'price';
 						$price_infos         = $post_infos['ticket_infos'] ?? ABPTT_Function::get_post_info( $post_id, 'ticket_infos', [] );
-						if ( ! empty( $price_infos ) && array_key_exists( $type, $price_infos ) ) {
-							$price = $price_infos[ $type ]['price'] ?? ( current( $price_infos['price'] ) ?? 0 );
+						if ( ! empty( $price_infos ) && is_array( $price_infos ) ) {
+							if ( $display_ticket_type == 'on' && array_key_exists( $type, $price_infos ) ) {
+								$price = $price_infos[ $type ]['price'] ?? 0;
+							} else {
+								$target = array_key_exists( $type, $price_infos ) ? $price_infos[ $type ] : reset( $price_infos );
+								$price  = $target['price'] ?? 0;
+							}
 							$price = $price > 0 ? apply_filters( 'abptt_filter_price', $price, $date ) : $price;
 						}
 					}

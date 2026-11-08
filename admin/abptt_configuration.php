@@ -252,7 +252,7 @@
                             'label'   => __( 'Slug', 'abp-tour-travel' ),
                             'desc'    => sprintf(
                             /* translators: %s: Permalinks settings page link layout */
-                                __( 'Define the primary URL slug for rentals. Important: After changing this, you must flush your permalinks by visiting %s and clicking Save Changes.', 'abp-tour-travel' ),
+                                __( 'Define the primary URL slug for tours. Important: After changing this, you must flush your permalinks by visiting %s and clicking Save Changes.', 'abp-tour-travel' ),
                                 '<strong class="abp_color_theme">' . __( 'Settings → Permalinks', 'abp-tour-travel' ) . '</strong>'
                             ),
                             'type'    => 'text',
@@ -463,7 +463,7 @@
                         array(
                             'name'    => 'min_max',
                             'label'   => __( 'Min & Max qty', 'abp-tour-travel' ),
-                            'desc'    => __( 'If you do not want to use the Min & Max feature, simply turn this switch OFF. This will completely disable the Tour Min & Max feature for all Tours across your website.  You can re-enable the Tour return feature at any time by turning this switch back ON.', 'abp-tour-travel' ),
+                            'desc'    => __( 'If you do not want to use the Min & Max feature, simply turn this switch OFF. This will completely disable the Tour Min & Max feature for all Tours across your website.  You can re-enable the Tour Min & Max feature at any time by turning this switch back ON.', 'abp-tour-travel' ),
                             'type'    => 'button_switch',
                             'default' => 'on',
                         ),
