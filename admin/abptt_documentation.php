@@ -44,6 +44,7 @@
 											'2',
 											__( 'Global Configuration', 'abp-tour-travel' ),
 											__( 'Set the plugin-wide options.', 'abp-tour-travel' ),
+											/* translators: %s: tour label (for example "Tour"). */
 											sprintf( __( 'Open Global Configuration → %1$s and set the tour label, slug, icons, taxonomy labels and the Booked Status that reserves inventory. Then open Feature ON/OFF and switch off any feature areas you do not need.', 'abp-tour-travel' ), $label ),
 											'configuration',
 											__( 'Open Configuration', 'abp-tour-travel' )
@@ -186,7 +187,10 @@
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text"><?php esc_html_e( 'The plugin does not keep a separate stock counter. Availability is calculated live from the stored orders, so the only thing you configure is which order statuses count as booked.', 'abp-tour-travel' ); ?></p>
-                                <p class="dash_body_text">• <?php echo esc_html( sprintf( __( 'Open Global Configuration → %1$s → Booked Status and tick the WooCommerce statuses that should reserve inventory (for example Processing and Completed).', 'abp-tour-travel' ), $label ) ); ?></p>
+                                <p class="dash_body_text">• <?php
+                                    /* translators: %s: tour label (for example "Tour"). */
+                                    echo esc_html( sprintf( __( 'Open Global Configuration → %1$s → Booked Status and tick the WooCommerce statuses that should reserve inventory (for example Processing and Completed).', 'abp-tour-travel' ), $label ) );
+                                ?></p>
                                 <p class="dash_body_text">• <?php esc_html_e( 'An order that moves into one of those statuses reduces the available quantity or seats; moving it back out releases them again.', 'abp-tour-travel' ); ?></p>
                                 <p class="dash_body_text">• <?php esc_html_e( 'This one setting powers the tour page availability, the seat map colours, the Dashboard session counts and the admin order list.', 'abp-tour-travel' ); ?></p>
                             </div>

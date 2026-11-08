@@ -66,7 +66,6 @@
                         <?php ABPTT_Layout::button_delete_sort_edit(); ?>
                     </div>
                     <div class="edit_area timeline_body">
-
                         <label class="_f_equal_f_wrap">
                             <span class="abp_label"><?php esc_html_e( 'Time', 'abp-tour-travel' ); ?></span>
                             <input type="text" class="_form_control" name="timeline_time[]" placeholder="<?php esc_attr_e( 'EX: 10:00 AM', 'abp-tour-travel' ); ?>" value="<?php echo esc_attr( $time ); ?>"/>
