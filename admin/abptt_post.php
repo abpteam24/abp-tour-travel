@@ -38,6 +38,7 @@
                             <button type="button" class="_btn_light_active_xs <?php echo esc_attr( $status == 'draft' ? 'abp_active' : '' ); ?>" data-href="<?php echo esc_url( ABPTT_Function::build_url( 'posts', [ 'status' => 'draft' ] ) ); ?>"><?php esc_html_e( 'Draft', 'abp-tour-travel' ); ?> ( <?php echo esc_html( $total_draft ); ?> )</button>
                             <button type="button" class="_btn_light_active_xs <?php echo esc_attr( $status == 'trash' ? 'abp_active' : '' ); ?>" data-href="<?php echo esc_url( ABPTT_Function::build_url( 'posts', [ 'status' => 'trash' ] ) ); ?>"><?php esc_html_e( 'Trash', 'abp-tour-travel' ); ?> ( <?php echo esc_html( $total_trash ); ?> )</button>
                         </div>
+                        <?php ABPTT_Layout::filter_post_list('',true); ?>
                         <a class="_btn_navy_blue_xs" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . ABPTT_Function::get_cpt() ) ); ?>">
                             <?php ABPTT_Static::svg( 'plus' );
                                 esc_html_e( 'Add New Tour', 'abp-tour-travel' ); ?>
@@ -72,10 +73,19 @@
                 $filters['status']         = $status;
                 $filters['posts_per_page'] = $limit;
                 $filters['paged']          = $page_number;
+                $post_title = $filter_args['post_title'] ?? '';
+                $post_title = is_string($post_title) ? trim($post_title) : '';
+                if ($post_title !== '') {
+                    $filters['post_title'] = $post_title;
+                }
                 //echo '<pre>';print_r($filters);echo '</pre>';
                 $post_ids = ABPTT_Query::get_post_id( $filters );
                 if ( ! empty( $post_ids ) && sizeof( $post_ids ) > 0 ) {
-                    $total_post   = sizeof( ABPTT_Query::get_post_id( [ 'status' => $status ] ) );
+                    $count_filters = ['status' => $status];
+                    if ($post_title !== '') {
+                        $count_filters['post_title'] = $post_title;
+                    }
+                    $total_post   = sizeof( ABPTT_Query::get_post_id( $count_filters ) );
                     $new_post_url = admin_url( 'post-new.php?post_type=' . $cpt );
                     ?>
                     <table class="abp">
@@ -142,6 +152,7 @@
                         ?>
                         </tbody>
                     </table>
+
                     <?php
                     do_action( 'abptt_pagination', [ 'page_item' => $limit, 'page_number' => $page_number, 'total' => $total_post, 'style' => 'ajax' ] );
                 } else {

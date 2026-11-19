@@ -17,7 +17,7 @@
                     <div class="dash_card dash_wc_setup">
                         <div class="dash_wc_setup_icon"><i class="fas fa-shopping-cart"></i></div>
                         <div class="dash_wc_setup_body">
-                            <h4><?php esc_html_e( 'WooCommerce is required', 'abp-tour-travel' ); ?></h4>
+                            <h6 class="abp_color_theme_gap_xs"><?php esc_html_e( 'WooCommerce is required', 'abp-tour-travel' ); ?></h6>
                             <p><?php echo esc_html( ABPTT_Static::array_info( 'must_wc' ) ); ?></p>
                         </div>
                         <?php

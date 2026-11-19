@@ -11,15 +11,6 @@
 			}
 
 			/* =========================================================
-			 * Security
-			 * ========================================================= */
-			private function verify_request(): void {
-				if ( ! check_ajax_referer( 'abptt_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
-					wp_send_json_error( array( 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-tour-travel' ), 'type' => 'warn' ), 403 );
-				}
-			}
-
-			/* =========================================================
 			 * Pages
 			 * ========================================================= */
 			private function page_map(): array {
@@ -31,7 +22,9 @@
 			}
 
 			public function create_page(): void {
-				$this->verify_request();
+				if ( ! check_ajax_referer( 'abptt_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( array( 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-tour-travel' ), 'type' => 'warn' ), 403 );
+				}
 				$page_type = '';
 				if ( isset( $_POST['type'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in verify_request().
 					$page_type = sanitize_text_field( wp_unslash( $_POST['type'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in verify_request().
@@ -72,9 +65,9 @@
 			 * Import
 			 * ========================================================= */
 			public function import_dummy(): void {
-				$this->verify_request();
-				// Start from a clean slate so repeated imports never duplicate data.
-				$this->reset_data();
+				if ( ! check_ajax_referer( 'abptt_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( array( 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-tour-travel' ), 'type' => 'warn' ), 403 );
+				}
 				$term_map = $this->create_terms();
 				$this->seed_options();
 				$post_ids = $this->create_posts( $term_map );
@@ -93,7 +86,9 @@
 			 * Remove (full reset of this plugin's data only)
 			 * ========================================================= */
 			public function remove_dummy(): void {
-				$this->verify_request();
+				if ( ! check_ajax_referer( 'abptt_admin_ajax_nonce', 'nonce', false ) || ! current_user_can( 'manage_options' ) ) {
+					wp_send_json_error( array( 'msg' => __( 'Invalid security token or Insufficient permissions.', 'abp-tour-travel' ), 'type' => 'warn' ), 403 );
+				}
 				$this->reset_data();
 				ABPTT_Query::flush_cache();
 				flush_rewrite_rules();
@@ -142,13 +137,7 @@
 
 			private function reset_data(): void {
 				// 1. Tour posts (and their linked hidden WooCommerce products).
-				$post_ids = get_posts( array(
-					'post_type'      => ABPTT_Function::get_cpt(),
-					'post_status'    => array( 'publish', 'draft', 'pending', 'private', 'future', 'trash' ),
-					'posts_per_page' => - 1,
-					'fields'         => 'ids',
-					'no_found_rows'  => true,
-				) );
+				$post_ids = ABPTT_Query::get_post_id( [ 'status' => array( 'publish', 'draft', 'pending', 'private', 'future', 'trash' ) ] );
 				foreach ( $post_ids as $post_id ) {
 					$link_wc_id = absint( ABPTT_Function::get_post_info( $post_id, 'link_wc_id' ) );
 					if ( $link_wc_id > 0 ) {
@@ -324,7 +313,7 @@
 						array( 'icon' => '⭐', 'title' => 'Certified Guides', 'description' => 'Hand-picked licensed guides who know every story.' ),
 						array( 'icon' => '🗺️', 'title' => 'Flexible Itinerary', 'description' => 'Personalize your trip before you go.' ),
 					);
-					$why_book_data = array( 'title' => 'Why Book With Us', 'items' => array() );
+					$why_book_data  = array( 'title' => 'Why Book With Us', 'items' => array() );
 					foreach ( $why_book_items as $why_book_item ) {
 						$why_book_data['items'][ uniqid() ] = $why_book_item;
 					}
@@ -401,18 +390,7 @@
 			}
 
 			private function post_icons(): array {
-				return array(
-					'🏙️',
-					'🏛️',
-					'🏔️',
-					'🚢',
-					'🐾',
-					'🕰️',
-					'☀️',
-					'🥾',
-					'🏖️',
-					'🖼️',
-				);
+				return array( '🏙️', '🏛️', '🏔️', '🚢', '🐾', '🕰️', '☀️', '🥾', '🏖️', '🖼️', );
 			}
 
 			private function ticket_row( int $index, $type ): array {
@@ -509,7 +487,7 @@
 			}
 
 			private function time_config( int $index ): array {
-				$all = array(
+				$all   = array(
 					array( 'name' => __( 'Morning', 'abp-tour-travel' ), 'time' => '09:00' ),
 					array( 'name' => __( 'Late Morning', 'abp-tour-travel' ), 'time' => '10:30' ),
 					array( 'name' => __( 'Noon', 'abp-tour-travel' ), 'time' => '12:00' ),
@@ -539,24 +517,20 @@
 				$icons        = $this->post_icons();
 				$ages         = array( '5 - 50 Years', '10 - 60 Years', '18+ Years', 'All Ages' );
 				$start_places = array( 'Downtown Meeting Point', 'Central Station', 'City Main Square', 'Harbor Front', 'Old Town Gate' );
-
 				$feature_keys = array_keys( (array) get_option( 'abptt_feature' ) );
 				$ticket_keys  = array_keys( (array) get_option( 'abptt_ticket' ) );
 				$sp_option    = (array) get_option( 'abptt_ticket_sp' );
 				$sp_ids       = array_keys( $sp_option );
-
 				$locations  = array_values( $term_map['abptt_location'] );
 				$categories = array_values( $term_map['abptt_category'] );
 				$organizers = array_values( $term_map['abptt_organizer'] );
 				$guides     = array_values( $term_map['abptt_guide'] );
-
 				$created = array();
 				foreach ( $specs as $index => $spec ) {
 					$guide_on = ! empty( $guides );
 					$ticket   = $this->ticket_config( $spec, $index, $ticket_keys, $sp_ids, $sp_option );
 					$dates    = $this->date_config( $spec['date'], $index );
 					$time     = $this->time_config( $index );
-
 					// Features.
 					$feature_total = count( $feature_keys );
 					$included      = array();
@@ -576,7 +550,6 @@
 						}
 						$excluded = array_values( array_unique( $excluded ) );
 					}
-
 					// Places you'll see (location terms).
 					$places    = array();
 					$loc_total = count( $locations );
@@ -595,11 +568,9 @@
 							);
 						}
 					}
-
-					$cat_id = ! empty( $categories ) ? $categories[ $index % count( $categories ) ] : '';
-					$org_id = ! empty( $organizers ) ? $organizers[ $index % count( $organizers ) ] : '';
+					$cat_id    = ! empty( $categories ) ? $categories[ $index % count( $categories ) ] : '';
+					$org_id    = ! empty( $organizers ) ? $organizers[ $index % count( $organizers ) ] : '';
 					$guide_ids = $guide_on ? array( $guides[ $index % count( $guides ) ] ) : array();
-
 					// Guest form.
 					$form_display = 'on' === $spec['form'] ? 'on' : 'off';
 					$form_global  = 'off';
@@ -610,19 +581,15 @@
 							$form_custom = ABPTT_Static::form();
 						}
 					}
-
 					// Additional services.
 					$add_global          = ( 3 === $index ) ? 'off' : 'on';
 					$additional_services = ( 'off' === $add_global ) ? ABPTT_Static::additional() : array();
-
 					// FAQ.
 					$faq_global = ( 5 === $index ) ? 'off' : 'on';
 					$faq_custom = ( 'off' === $faq_global ) ? ABPTT_Static::faq() : array();
-
 					// Terms & conditions.
 					$tc_global = ( 7 === $index ) ? 'off' : 'on';
 					$tc_custom = ( 'off' === $tc_global ) ? (string) ABPTT_Static::tc() : '';
-
 					$meta = array(
 						'sale_continue'                => 'on',
 						'abptt_template'               => ( [ 'default', 'light', 'modern' ] )[ $index % 3 ],
@@ -685,7 +652,6 @@
 						'abptt_timeline'               => $this->timeline_items( $index ),
 						'dummy'                        => 'on',
 					);
-
 					$post_id = wp_insert_post( array(
 						'post_title'   => $titles[ $index ],
 						'post_status'  => 'publish',
@@ -710,11 +676,13 @@
 			}
 
 			private function sync_taxonomies( int $post_id, array $meta ): void {
-				foreach ( array(
-					'abptt_category'  => 'abptt_category',
-					'abptt_organizer' => 'abptt_organizer',
-					'guide'           => 'abptt_guide',
-				) as $meta_key => $taxonomy ) {
+				foreach (
+					array(
+						'abptt_category'  => 'abptt_category',
+						'abptt_organizer' => 'abptt_organizer',
+						'guide'           => 'abptt_guide',
+					) as $meta_key => $taxonomy
+				) {
 					if ( ! taxonomy_exists( $taxonomy ) ) {
 						continue;
 					}
@@ -754,7 +722,7 @@
 					'Nashville'     => array( 'lat' => '36.1627', 'lng' => '-86.7816', 'place' => 'Nashville, USA', 'address' => 'Nashville, TN, USA' ),
 					'Austin'        => array( 'lat' => '30.2672', 'lng' => '-97.7431', 'place' => 'Austin, USA', 'address' => 'Austin, TX, USA' ),
 				);
-				$key = trim( $name );
+				$key    = trim( $name );
 
 				return isset( $coords[ $key ] ) ? $coords[ $key ] : array();
 			}
@@ -809,7 +777,7 @@
 					'priya.sharma@example.com',
 					'marcus.lee@example.com',
 				);
-				$review_texts = array(
+				$review_texts  = array(
 					'Amazing tour - our guide brought every stop to life and the pace worked perfectly for the whole family.',
 					'Well organised from start to finish. The itinerary gave us plenty of time at each place.',
 					'Booking was simple and the day ran exactly as described. Would happily book again.',
@@ -822,8 +790,8 @@
 					}
 					$review_count = 3 + ( $index % 2 );
 					for ( $i = 0; $i < $review_count; $i ++ ) {
-						$key         = ( $index + $i ) % count( $review_names );
-						$comment_id  = wp_insert_comment( array(
+						$key        = ( $index + $i ) % count( $review_names );
+						$comment_id = wp_insert_comment( array(
 							'comment_post_ID'      => $product_id,
 							'comment_content'      => $review_texts[ ( $index + $i ) % count( $review_texts ) ],
 							'comment_author'       => $review_names[ $key ],

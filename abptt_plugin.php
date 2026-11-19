@@ -2,7 +2,7 @@
 	/**
 	 * Plugin Name: ABP Tour & Travel
 	 * Description: WooCommerce tour and travel booking system. Create tours with fixed, recurring or specific schedules, sell admission tickets and reserved seats, add extra services, itinerary and timelines, and manage bookings, seats and revenue.
-	 * Version: 1.0.1
+	 * Version: 1.0.2
 	 * Author: abpteam
 	 * Author URI: https://abp-team.com
 	 * Text Domain: abp-tour-travel
@@ -46,7 +46,7 @@
 					define( 'ABPTT_Plugin_FILE', __FILE__ );
 				}
 				if ( ! defined( 'ABPTT_VERSION' ) ) {
-					define( 'ABPTT_VERSION', '1.0.1' );
+					define( 'ABPTT_VERSION', '1.0.2' );
 				}
 				if ( ! defined( 'ABPTT_DIR' ) ) {
 					define( 'ABPTT_DIR', plugin_dir_path( __FILE__ ) );
@@ -170,7 +170,6 @@
 			'abptt_faq',
 			'abptt_tc',
 			'abptt_place',
-			'abptt_color',
 			'abptt_css_var',
 			'abptt_slider',
 			'abptt_contact',

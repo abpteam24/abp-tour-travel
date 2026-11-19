@@ -24,8 +24,8 @@
                 if ( empty( $wp_filter[ $hook ] ) || empty( $wp_filter[ $hook ]->callbacks ) ) {
                     return;
                 }
-                $plugin_dir  = str_replace( '\\', '/', ABPTT_DIR );
-                $to_remove   = [];
+                $plugin_dir = str_replace( '\\', '/', ABPTT_DIR );
+                $to_remove  = [];
                 foreach ( $wp_filter[ $hook ]->callbacks as $priority => $callbacks ) {
                     foreach ( $callbacks as $callback ) {
                         $function = $callback['function'];
@@ -49,7 +49,7 @@
                         }
                     }
                 }
-                foreach ( $to_remove as [ $function, $priority ] ) {
+                foreach ( $to_remove as [$function, $priority] ) {
                     remove_action( $hook, $function, $priority );
                 }
             }
@@ -82,21 +82,21 @@
                         <div class="head_brand">
                             <div class="brand_icon _all_center"><?php ABPTT_Layout::image_icon( $icon ); ?></div>
                             <div class="_fd_column">
-                                <h4 class="abp"><?php echo esc_html( $label ); ?></h4>
+                                <h4 class="abp_color_white"><?php echo esc_html( $label ); ?></h4>
                                 <span class="brand_version"><?php echo esc_html( ABPTT_VERSION ); ?></span>
                             </div>
                         </div>
-                        <div class="_group_content">
-                            <a href="<?php echo esc_url( add_query_arg( 'tab', 'dashboard' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'dashboard' ? 'abp_active' : '' ); ?>"><span>📊</span><?php esc_html_e( 'Dashboard', 'abp-tour-travel' ); ?></a>
+                        <div class="menu_list">
+                            <a href="<?php echo esc_url( ABPTT_Function::build_url( 'dashboard' )); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'dashboard' ? 'abp_active' : '' ); ?>"><span>📊</span><?php esc_html_e( 'Dashboard', 'abp-tour-travel' ); ?></a>
                             <a href="<?php echo esc_url( ABPTT_Function::build_url( 'posts' ) ); ?>" class="_btn_xs post_tab <?php echo esc_attr( $active_tab == 'posts' ? 'abp_active' : '' ); ?>">
                                 <?php ABPTT_Layout::image_icon( $icon );
                                     echo esc_html( $label ) . ' ' . esc_html__( 'Lists', 'abp-tour-travel' ); ?>
-                                <sup class="_color_theme">( <?php echo esc_html( $total_post ); ?> )</sup>
+                                <sup>( <?php echo esc_html( $total_post ); ?> )</sup>
                             </a>
                             <a href="<?php echo esc_url( ABPTT_Function::build_url( 'orders' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'orders' ? 'abp_active' : '' ); ?>">
                                 <?php ABPTT_Static::svg( 'order' );
                                     esc_html_e( 'Orders', 'abp-tour-travel' ); ?>
-                                <sup class="_color_theme">( <?php echo esc_html( $total_order ); ?> )</sup>
+                                <sup>( <?php echo esc_html( $total_order ); ?> )</sup>
                             </a>
                             <a href="<?php echo esc_url( ABPTT_Function::build_url( 'sp' ) ); ?>" class="_btn_xs  <?php echo esc_attr( $active_tab == 'sp' ? 'abp_active' : '' ); ?>">
                                 <?php ABPTT_Static::svg( 'seat' );
@@ -110,20 +110,14 @@
                             <a href="<?php echo esc_url( ABPTT_Function::build_url( 'documentation' ) ); ?>" class="_btn_xs <?php echo esc_attr( $active_tab == 'documentation' ? 'abp_active' : '' ); ?>">
                                 <span>📘</span><?php esc_html_e( 'Documentation', 'abp-tour-travel' ); ?>
                             </a>
-                            <?php do_action( 'abptt_add_admin_menu_tab', $active_tab ); ?>
-                        </div>
-                        <?php if ( ABPTT_WC == 2 ) { ?>
-                            <div class="_group_content">
-                                <button type="button" class="_btn_xs" data-href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . ABPTT_Function::get_cpt() ) ); ?>" data-blank="_blank">
+                            <?php if ( ABPTT_WC == 2 ) { ?>
+                                <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . ABPTT_Function::get_cpt() ) ); ?>" class="_btn_xs" data-blank="_blank">
                                     <?php ABPTT_Static::svg( 'plus' );
                                         echo esc_html( $label ); ?>
-                                </button>
-                                <?php ABPTT_Layout::button_global_popup( 'tax_location', ABPTT_Function::location_label(), '_btn_xs' );
-                                    if ( ABPTT_Function::on_off( 'category' ) ) {
-                                        ABPTT_Layout::button_global_popup( 'tax_category', ABPTT_Function::category_label(), '_btn_xs' );
-                                    } ?>
-                            </div>
-                        <?php } ?>
+                                </a>
+                            <?php } ?>
+                            <?php do_action( 'abptt_add_admin_menu_tab', $active_tab ); ?>
+                        </div>
                     </div>
                     <div class="dashboard_content">
                         <?php do_action( 'abptt_notice' );

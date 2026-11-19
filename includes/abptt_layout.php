@@ -1284,16 +1284,17 @@
 				}
 			}
 			//=============================//
-			public static function filter_post_list(): void {
+			public static function filter_post_list($post_id = '', $allow = false): void {
 				$label      = ABPTT_Function::label();
 				$brand_icon = ABPTT_Function::icon();
+                $allow_class = $allow ? 'abptt_allow' : '';
 				// echo '<pre>';print_r($configuration);echo '</pre>';
 				?>
                 <div class="_input_item abp_dropdown post_selection">
                     <label>
                         <span class="_gap_xxs"><?php ABPTT_Layout::image_icon( $brand_icon ); ?><?php echo esc_html( $label ); ?></span>
-                        <input type="hidden" name="post_id" value=""/>
-                        <input type="text" class="_form_control_w_full" name="" placeholder="<?php echo esc_attr( $label ); ?>" value=""/>
+                        <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>"/>
+                        <input type="text" class="_form_control_w_full <?php echo esc_attr($allow_class); ?>" name="post_title" placeholder="<?php echo esc_attr( $label ); ?>" value="<?php echo esc_attr($post_id > 0 ? get_the_title($post_id) : ''); ?>"/>
                     </label>
 					<?php if ( sizeof( ABPTT_ids ) > 0 ) { ?>
                         <div class="dropdown_list">

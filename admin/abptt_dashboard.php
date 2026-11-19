@@ -94,7 +94,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4 class="abp"><i class="fas fa-calendar-day _color_theme"></i> <?php esc_html_e( "Today's Sessions", 'abp-tour-travel' ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs"><i class="fas fa-calendar-day "></i> <?php esc_html_e( "Today's Sessions", 'abp-tour-travel' ); ?></h4>
                         <a class="_btn_light_theme_xs" href="<?php echo esc_url( ABPTT_Function::build_url( 'orders' ) ); ?>"><?php esc_html_e( 'View All', 'abp-tour-travel' ); ?> <i class="fas fa-angle-right"></i></a>
                     </div>
                     <div class="dash_card_body dash_card_body_plain">
@@ -168,7 +168,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4><i class="fas fa-bolt"></i> <?php esc_html_e( 'Quick Actions', 'abp-tour-travel' ); ?></h4>
+                        <h6 class="abp_color_theme_gap_xs"><i class="fas fa-bolt"></i> <?php esc_html_e( 'Quick Actions', 'abp-tour-travel' ); ?></h6>
                     </div>
                     <div class="dash_card_body">
                         <div class="dash_action_grid">
@@ -193,7 +193,7 @@
 				?>
                 <div class="dash_card dash_orders_card">
                     <div class="dash_card_head ">
-                        <h4 class="abp_gap_xs"><i class="fas fa-receipt"></i> <?php esc_html_e( 'Recent Orders', 'abp-tour-travel' ); ?></h4>
+                        <h4 class="abp_color_theme_gap_xs"><i class="fas fa-receipt"></i> <?php esc_html_e( 'Recent Orders', 'abp-tour-travel' ); ?></h4>
                         <div class="_group_content">
                             <button type="button" class="_btn_light_theme_xs abp_active dash_order_tab" data-dtab="recent"><i class="fas fa-list-ul"></i> <?php esc_html_e( 'Last 10 Orders', 'abp-tour-travel' ); ?></button>
                             <button type="button" class="_btn_light_theme_xs dash_order_tab" data-dtab="today"><i class="fas fa-calendar-day"></i> <?php esc_html_e( "Today's Orders", 'abp-tour-travel' ); ?></button>
@@ -524,7 +524,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4 class="abp_gap_xs"><i class="fas fa-server"></i> <?php esc_html_e( 'System Status', 'abp-tour-travel' ); ?></h4>
+                        <h6 class="abp_color_theme_gap_xs"><i class="fas fa-server"></i> <?php esc_html_e( 'System Status', 'abp-tour-travel' ); ?></h6>
                     </div>
                     <div class="dash_card_body dash_card_body_plain">
                         <div class="dash_kv_list">
@@ -639,7 +639,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4><i class="fas fa-layer-group"></i> <?php esc_html_e( 'Content Breakdown', 'abp-tour-travel' ); ?></h4>
+                        <h6 class="abp_color_theme_gap_xs"><i class="fas fa-layer-group"></i> <?php esc_html_e( 'Content Breakdown', 'abp-tour-travel' ); ?></h6>
                     </div>
                     <div class="dash_card_body">
                         <div class="dash_bar">

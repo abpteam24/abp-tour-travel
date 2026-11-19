@@ -66,6 +66,7 @@
 				$loc_id = $filters['loc_id'] ?? null;
 				$organizer_id = $filters['organizer_id'] ?? null;
 				$guide_id = $filters['guide_id'] ?? null;
+				$title = $filters['post_title'] ?? null;
 				$meta_query = ['relation' => 'AND'];
 				// Category query
 				if (!empty($cat_id)) {
@@ -85,7 +86,7 @@
 					$meta_query[] = ['key' => 'abptt_top_pick', 'value' => 'on', 'compare' => '='];
 				}
 				$order = strtoupper((string) ($filters['sort'] ?? 'ASC')) === 'DESC' ? 'DESC' : 'ASC';
-				$all_data = get_posts(array(
+				$args = array(
 					'fields' => 'ids',
 					'post_type' => $post_type,
 					'posts_per_page' => $show,
@@ -95,7 +96,21 @@
 					'order' => $order,
 					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Meta query keys are fixed plugin strings.
 					'meta_query' => $meta_query
-				) + ABPTT_Function::polylang_query_args());
+				 );
+				$title_filter = null;
+				if (!empty($title)) {
+					$args['s'] = $title;
+					$args['suppress_filters'] = false;
+					$title_filter = function ($search) use ($title) {
+						global $wpdb;
+						return $wpdb->prepare(" AND {$wpdb->posts}.post_title LIKE %s ", '%' . $wpdb->esc_like($title) . '%');
+					};
+					add_filter('posts_search', $title_filter, 10, 1);
+				}
+				$all_data = get_posts($args+ ABPTT_Function::polylang_query_args());
+				if ($title_filter !== null) {
+					remove_filter('posts_search', $title_filter, 10);
+				}
 				return array_unique($all_data);
 			}
 			public static function get_booking_query($filters = array(), $limit = 0, $offset = 0, $count = false) {

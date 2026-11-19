@@ -27,7 +27,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🚀</span> <?php esc_html_e( 'Quick Start — Follow these steps in order', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">🚀</span> <?php esc_html_e( 'Quick Start — Follow these steps in order', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <div class="_grid_400">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🗂️</span> <?php esc_html_e( 'Every menu explained', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">🗂️</span> <?php esc_html_e( 'Every menu explained', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <b>📊 <?php esc_html_e( 'Dashboard', 'abp-tour-travel' ); ?></b> — <?php esc_html_e( 'business overview: KPI cards, today\'s sessions, recent orders, quick actions, system status and content breakdown. Demo import and page creation live in System Status.', 'abp-tour-travel' ); ?></p>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🌍</span> <?php esc_html_e( 'Inside Global Configuration', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">🌍</span> <?php esc_html_e( 'Inside Global Configuration', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <b><?php echo esc_html( $label ); ?></b> — <?php esc_html_e( 'main settings: Booked Status, label, slug, icons, taxonomy labels and slugs, Google Maps API key.', 'abp-tour-travel' ); ?></p>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">📝</span> <?php esc_html_e( 'Tour editor tabs', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">📝</span> <?php esc_html_e( 'Tour editor tabs', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'General', 'abp-tour-travel' ); ?></b> — <?php esc_html_e( 'title, short description, detail template, SKU, icon, taxonomies, Top Pick and the other basics.', 'abp-tour-travel' ); ?></p>
@@ -153,7 +153,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🎟️</span> <?php esc_html_e( 'Ticket Type vs Seat Plan — made clear', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">🎟️</span> <?php esc_html_e( 'Ticket Type vs Seat Plan — made clear', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text"><?php esc_html_e( 'Every tour sells in one of two ways. You choose this on the tour edit page in the Ticket & Price tab:', 'abp-tour-travel' ); ?></p>
@@ -183,7 +183,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">📦</span> <?php esc_html_e( 'Booked Status and stock', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">📦</span> <?php esc_html_e( 'Booked Status and stock', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text"><?php esc_html_e( 'The plugin does not keep a separate stock counter. Availability is calculated live from the stored orders, so the only thing you configure is which order statuses count as booked.', 'abp-tour-travel' ); ?></p>
@@ -197,7 +197,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🧭</span> <?php esc_html_e( 'Optional tour page sections', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">🧭</span> <?php esc_html_e( 'Optional tour page sections', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <b><?php esc_html_e( 'Tour Timeline', 'abp-tour-travel' ); ?></b> — <?php esc_html_e( 'switch Tour Timeline ON in Global Configuration → Feature ON/OFF and Active Timeline ? ON in the tour\'s Timeline tab, then add entries. The design follows the tour\'s detail template (Default, Light or Modern).', 'abp-tour-travel' ); ?></p>
@@ -209,7 +209,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">🔑</span> <?php esc_html_e( 'Shortcodes you can place anywhere', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">🔑</span> <?php esc_html_e( 'Shortcodes you can place anywhere', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <code>[abptt-booking]</code> — <?php esc_html_e( 'search form + tour listing + booking flow. Ideal for your Booking page. Supports style, cat_id, loc_id, organizer_id, guide_id, top_pick, show, column, sort, pagination, pagination-style, form and filter.', 'abp-tour-travel' ); ?></p>
@@ -220,7 +220,7 @@
                         </div>
                         <div class="dash_card">
                             <div class="dash_card_head">
-                                <h4><span class="dash_step">✅</span> <?php esc_html_e( 'Good to know', 'abp-tour-travel' ); ?></h4>
+                                <h6 class="abp_color_theme_gap_xs"><span class="dash_step">✅</span> <?php esc_html_e( 'Good to know', 'abp-tour-travel' ); ?></h6>
                             </div>
                             <div class="dash_card_body">
                                 <p class="dash_body_text">• <?php esc_html_e( 'Customers pick a date and time from the schedule shown on the tour page before choosing tickets or seats.', 'abp-tour-travel' ); ?></p>
@@ -239,7 +239,7 @@
 				?>
                 <div class="dash_card">
                     <div class="dash_card_head">
-                        <h4><span class="dash_step"><?php echo esc_html( $step ); ?></span><?php echo esc_html( $title ); ?></h4>
+                        <h6 class="abp_color_theme_gap_xs"><span class="dash_step"><?php echo esc_html( $step ); ?></span><?php echo esc_html( $title ); ?></h6>
 						<?php if ( $url && $btn_label ) { ?>
                             <a class="_btn_light_active_xs" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $btn_label ); ?></a>
 						<?php } ?>

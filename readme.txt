@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 11.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -416,6 +416,12 @@ If you need any further assistance or support, please contact us through the [ðŸ
 
 == Changelog ==
 
+= 1.0.2=
+* Minor design improvements and UI refinements.
+* Minor bug fixes for better stability and compatibility.
+
+Released: November 19, 2026
+
 = 1.0.1 =
 
 * Fixed duplicate booking rows when order processing runs more than once for the same order.
@@ -433,6 +439,10 @@ Released: November 5, 2026
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.2=
+Minor design improvements and UI refinements, minor bug fixes. Recommended update.
+Released: November 19, 2026
 
 = 1.0.1 =
 

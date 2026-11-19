@@ -206,38 +206,16 @@
 
 			public static function label_place_you_see(): ?string { return __( "Places You'll See", 'abp-tour-travel' ); }
 
-			/**
-			 * Format a short rich-text field (term description, timeline note,
-			 * FAQ answer, terms text) for output.
-			 *
-			 * These values are not post content, so they must not run the full
-			 * `the_content` filter chain. Themes and plugins routinely hook
-			 * `the_content` to inject page-level markup around the main post;
-			 * running that chain on a nested field leaks the injected markup
-			 * into the field. Paragraph formatting and shortcodes are still
-			 * applied, and the result can be extended with the
-			 * `abptt_format_content` filter.
-			 *
-			 * @param string $content Raw field value.
-			 *
-			 * @return string Formatted HTML.
-			 */
 			public static function format_content( $content ): string {
-				$content = (string) $content;
-				if ( '' === trim( $content ) ) {
-					return '';
+				if ( trim( $content ) === '' ) {
+					$content = html_entity_decode( $content );
+					$content     = (string) $content;
+					$content = wptexturize( $content );
+					$content = wpautop( $content );
+					$content = shortcode_unautop( $content );
+					$content = do_shortcode( $content );
 				}
-				$content = wptexturize( $content );
-				$content = wpautop( $content );
-				$content = shortcode_unautop( $content );
-				$content = do_shortcode( $content );
-
-				/**
-				 * Filter the formatted value of a nested rich-text field.
-				 *
-				 * @param string $content Formatted HTML.
-				 */
-				return (string) apply_filters( 'abptt_format_content', $content );
+				return (string)  $content ;
 			}
 
 			/**

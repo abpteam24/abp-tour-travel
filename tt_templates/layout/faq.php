@@ -26,27 +26,21 @@
                         foreach ( $faq_infos as $faq ) {
                             $title       = $faq['title'] ?? '';
                             $description = $faq['des'] ?? '';
-                            if ( $description !== '' ) {
-                                $description = html_entity_decode( $description );
-                            }
-                            if ( empty( $title ) ) {
-                                continue;
-                            }
-                            ?>
-                            <div class="faq_item">
-                                <div class="faq_question faq_target">
-                                    <h6 class="abp"><?php echo esc_html( $title ); ?></h6>
-                                    <span class="faq_icon"></span>
-                                </div>
-                                <div class="faq_answer">
-                                    <div class="faq_answer_content">
-                                        <?php
-                                            echo wp_kses_post( ABPTT_Function::format_content( $description ) );
-                                        ?>
+                            if ( ! empty( $title ) && ! empty( $description ) ) {
+                                ?>
+                                <div class="faq_item">
+                                    <div class="faq_question faq_target">
+                                        <h6 class="abp"><?php echo esc_html( $title ); ?></h6>
+                                        <span class="faq_icon"></span>
+                                    </div>
+                                    <div class="faq_answer">
+                                        <div class="faq_answer_content">
+                                            <?php echo wp_kses_post( ABPTT_Function::format_content( $description ) ); ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php
+                                <?php
+                            }
                         }
                     ?>
                 </div>

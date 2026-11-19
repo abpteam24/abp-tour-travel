@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ABP Tour and Travel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-05 10:04+0000\n"
+"POT-Creation-Date: 2026-11-19 13:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/"
 
 #. %s = Days
-#: includes/abptt_function.php:1242 includes/abptt_function.php:1369
+#: includes/abptt_function.php:1221 includes/abptt_function.php:1348
 #, php-format
 msgid " %s Day"
 msgid_plural " %s Days"
@@ -26,7 +26,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s = Hours
-#: includes/abptt_function.php:1247 includes/abptt_function.php:1374
+#: includes/abptt_function.php:1226 includes/abptt_function.php:1353
 #, php-format
 msgid " %s Hour"
 msgid_plural " %s Hours"
@@ -34,7 +34,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s = Minutes
-#: includes/abptt_function.php:1252 includes/abptt_function.php:1379
+#: includes/abptt_function.php:1231 includes/abptt_function.php:1358
 #, php-format
 msgid " %s Minute"
 msgid_plural " %s Minutes"
@@ -42,7 +42,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s = Months
-#: includes/abptt_function.php:1364
+#: includes/abptt_function.php:1343
 #, php-format
 msgid " %s Month"
 msgid_plural " %s Months"
@@ -50,7 +50,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s = Seconds
-#: includes/abptt_function.php:1384
+#: includes/abptt_function.php:1363
 #, php-format
 msgid " %s Second"
 msgid_plural " %s Seconds"
@@ -58,7 +58,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s =Years
-#: includes/abptt_function.php:1359
+#: includes/abptt_function.php:1338
 #, php-format
 msgid " %s Year"
 msgid_plural " %s Years"
@@ -107,7 +107,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s: page name.
-#: admin/abptt_dummy_import.php:67
+#: admin/abptt_dummy_import.php:60
 #, php-format
 msgid "%s Page Created successfully....."
 msgstr ""
@@ -149,7 +149,7 @@ msgstr ""
 msgid "/Ticket"
 msgstr ""
 
-#: includes/abptt_function.php:1234
+#: includes/abptt_function.php:1213
 msgid "0 Min"
 msgstr ""
 
@@ -161,18 +161,18 @@ msgstr ""
 msgid "2. Cancel : To Cancel ."
 msgstr ""
 
-#: admin/abptt_documentation.php:202
+#: admin/abptt_documentation.php:206
 msgid ""
 "a reasons block shown on tour pages when the switch is ON. Edit the reasons "
 "in Global Configuration → Why Book With Us ?."
 msgstr ""
 
-#: admin/abptt_dummy_import.php:788
+#: admin/abptt_dummy_import.php:756
 msgid ""
 "A relaxed window to explore on your own, pick up souvenirs and grab a coffee."
 msgstr ""
 
-#: admin/abptt_documentation.php:174
+#: admin/abptt_documentation.php:175
 msgid ""
 "A reusable category with a label, a colour, an icon/image and a seat prefix "
 "used for automatic numbering (e.g. VIP-01, B-01). Create them in Ticket/Seat "
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: admin/abptt_post.php:89 admin/abptt_seat_plan.php:94
+#: admin/abptt_post.php:99 admin/abptt_seat_plan.php:94
 msgid "Actions"
 msgstr ""
 
@@ -245,19 +245,19 @@ msgid ""
 "formatting."
 msgstr ""
 
-#: admin/abptt_post.php:862
+#: admin/abptt_post.php:864
 msgid "Add a tour title before publishing."
 msgstr ""
 
-#: admin/abptt_post.php:942
+#: admin/abptt_post.php:944
 msgid "Add at least one ticket type with a valid price and quantity."
 msgstr ""
 
 #: admin/abptt_category.php:20 admin/abptt_feature.php:20
 #: admin/abptt_feature.php:73 admin/abptt_guide.php:21 admin/abptt_guide.php:49
 #: admin/abptt_location.php:21 admin/abptt_location.php:301
-#: admin/abptt_organizer.php:21 admin/abptt_post.php:305
-#: admin/abptt_post.php:322 includes/abptt_layout.php:83
+#: admin/abptt_organizer.php:21 admin/abptt_post.php:316
+#: admin/abptt_post.php:333 includes/abptt_layout.php:83
 #: includes/abptt_layout.php:161
 msgid "Add New"
 msgstr ""
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Add New Timeline Item"
 msgstr ""
 
-#: admin/abptt_post.php:43
+#: admin/abptt_post.php:44
 msgid "Add New Tour"
 msgstr ""
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "Add Post"
 msgstr ""
 
-#: admin/abptt_documentation.php:77
+#: admin/abptt_documentation.php:78
 msgid "Add Shortcodes & Pages"
 msgstr ""
 
@@ -372,7 +372,7 @@ msgstr ""
 msgid "Add to cart successfully!"
 msgstr ""
 
-#: admin/abptt_documentation.php:70
+#: admin/abptt_documentation.php:71
 msgid "Add your first tour and set its tickets or seats."
 msgstr ""
 
@@ -392,7 +392,7 @@ msgstr ""
 msgid "Additional Info"
 msgstr ""
 
-#: includes/abptt_woocommerce.php:253 includes/abptt_woocommerce.php:333
+#: includes/abptt_woocommerce.php:255 includes/abptt_woocommerce.php:335
 msgid "Additional Information"
 msgstr ""
 
@@ -405,8 +405,8 @@ msgid "Additional Services"
 msgstr ""
 
 #: admin/abptt_configuration.php:194 admin/abptt_configuration.php:487
-#: admin/abptt_documentation.php:117 admin/abptt_documentation.php:140
-#: admin/abptt_post.php:175
+#: admin/abptt_documentation.php:118 admin/abptt_documentation.php:141
+#: admin/abptt_post.php:186
 msgid "Additional services"
 msgstr ""
 
@@ -434,7 +434,7 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:516
+#: admin/abptt_dummy_import.php:494
 msgid "Afternoon"
 msgstr ""
 
@@ -444,7 +444,7 @@ msgstr ""
 msgid "Age %s"
 msgstr ""
 
-#: admin/abptt_configuration.php:550 admin/abptt_post.php:396
+#: admin/abptt_configuration.php:550 admin/abptt_post.php:407
 #: includes/abptt_layout.php:662
 msgid "Age Range"
 msgstr ""
@@ -459,7 +459,7 @@ msgstr ""
 msgid "All %s"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:100
+#: admin/abptt_dummy_import.php:95
 msgid "All ABP Tour and Travel data removed successfully."
 msgstr ""
 
@@ -471,7 +471,7 @@ msgstr ""
 msgid "All Orders"
 msgstr ""
 
-#: admin/abptt_documentation.php:101
+#: admin/abptt_documentation.php:102
 msgid ""
 "all your tours: create, edit, clone, restore, trash and permanently delete "
 "tours. Each row also has a shortcode helper for that single tour."
@@ -485,7 +485,7 @@ msgstr ""
 msgid "An error occurred. Please try again."
 msgstr ""
 
-#: admin/abptt_documentation.php:190
+#: admin/abptt_documentation.php:194
 msgid ""
 "An order that moves into one of those statuses reduces the available "
 "quantity or seats; moving it back out releases them again."
@@ -507,15 +507,15 @@ msgstr ""
 msgid "Are you sure you want to delete this Seat Plan?"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:771
+#: admin/abptt_dummy_import.php:739
 msgid "Arrival & Check-in"
 msgstr ""
 
-#: admin/abptt_post.php:945
+#: admin/abptt_post.php:947
 msgid "Assign at least one seat plan to this tour."
 msgstr ""
 
-#: admin/abptt_documentation.php:144
+#: admin/abptt_documentation.php:145
 msgid "assign one or more guides to this tour."
 msgstr ""
 
@@ -566,7 +566,7 @@ msgstr ""
 msgid "Bg Image"
 msgstr ""
 
-#: includes/abptt_layout.php:1441 includes/abptt_layout.php:1442
+#: includes/abptt_layout.php:1442 includes/abptt_layout.php:1443
 msgid "Billing Email"
 msgstr ""
 
@@ -574,11 +574,11 @@ msgstr ""
 msgid "Billing Info"
 msgstr ""
 
-#: includes/abptt_layout.php:1431 includes/abptt_layout.php:1432
+#: includes/abptt_layout.php:1432 includes/abptt_layout.php:1433
 msgid "Billing Name"
 msgstr ""
 
-#: includes/abptt_layout.php:1451 includes/abptt_layout.php:1452
+#: includes/abptt_layout.php:1452 includes/abptt_layout.php:1453
 msgid "Billing phone"
 msgstr ""
 
@@ -616,7 +616,7 @@ msgstr ""
 msgid "Booked Status"
 msgstr ""
 
-#: admin/abptt_documentation.php:185
+#: admin/abptt_documentation.php:186
 msgid "Booked Status and stock"
 msgstr ""
 
@@ -624,7 +624,7 @@ msgstr ""
 msgid "Booked Today"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:27
+#: admin/abptt_dummy_import.php:18
 msgid "Booking"
 msgstr ""
 
@@ -637,11 +637,11 @@ msgstr ""
 msgid "Booking Completed"
 msgstr ""
 
-#: includes/abptt_woocommerce.php:91 includes/abptt_woocommerce.php:283
+#: includes/abptt_woocommerce.php:91 includes/abptt_woocommerce.php:285
 msgid "Booking Details"
 msgstr ""
 
-#: includes/abptt_woocommerce.php:236 includes/abptt_woocommerce.php:317
+#: includes/abptt_woocommerce.php:238 includes/abptt_woocommerce.php:319
 msgid "Booking Information"
 msgstr ""
 
@@ -674,7 +674,7 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: admin/abptt_documentation.php:129
+#: admin/abptt_documentation.php:130
 msgid "brand colours, border radius and font sizes."
 msgstr ""
 
@@ -682,11 +682,11 @@ msgstr ""
 msgid "Buffer time in MIN (Optional)"
 msgstr ""
 
-#: admin/abptt_documentation.php:54
+#: admin/abptt_documentation.php:55
 msgid "Build the reusable lists every tour shares."
 msgstr ""
 
-#: admin/abptt_documentation.php:100
+#: admin/abptt_documentation.php:101
 msgid ""
 "business overview: KPI cards, today's sessions, recent orders, quick actions,"
 " system status and content breakdown. Demo import and page creation live in "
@@ -791,15 +791,15 @@ msgid ""
 "dot interface elements."
 msgstr ""
 
-#: admin/abptt_documentation.php:142
+#: admin/abptt_documentation.php:143
 msgid "choose which included / excluded features apply to this tour."
 msgstr ""
 
 #: admin/abptt_form.php:199 includes/abptt_layout.php:281
-#: includes/abptt_layout.php:836 includes/abptt_layout.php:1334
-#: includes/abptt_layout.php:1348 includes/abptt_layout.php:1353
-#: includes/abptt_layout.php:1367 includes/abptt_layout.php:1381
-#: includes/abptt_layout.php:1386
+#: includes/abptt_layout.php:836 includes/abptt_layout.php:1335
+#: includes/abptt_layout.php:1349 includes/abptt_layout.php:1354
+#: includes/abptt_layout.php:1368 includes/abptt_layout.php:1382
+#: includes/abptt_layout.php:1387
 msgid "Clear Date"
 msgstr ""
 
@@ -823,7 +823,7 @@ msgstr ""
 msgid "Client Info : "
 msgstr ""
 
-#: includes/abptt_woocommerce.php:266 includes/abptt_woocommerce.php:346
+#: includes/abptt_woocommerce.php:268 includes/abptt_woocommerce.php:348
 msgid "Client Information"
 msgstr ""
 
@@ -848,7 +848,7 @@ msgid "Color Combination Saved Successfully..........!!"
 msgstr ""
 
 #: admin/abptt_guide.php:133 admin/abptt_guide.php:318
-#: includes/abptt_function.php:489
+#: includes/abptt_function.php:467
 msgid "Company"
 msgstr ""
 
@@ -856,7 +856,7 @@ msgstr ""
 msgid "Company Name"
 msgstr ""
 
-#: admin/abptt_documentation.php:128
+#: admin/abptt_documentation.php:129
 msgid "company name, address, contact number and e-mail."
 msgstr ""
 
@@ -864,7 +864,7 @@ msgstr ""
 msgid "Company/Organization"
 msgstr ""
 
-#: admin/abptt_post.php:921
+#: admin/abptt_post.php:923
 msgid ""
 "Complete every particular date entry with check-in, check-out and "
 "registration end date and time."
@@ -874,15 +874,15 @@ msgstr ""
 #: admin/abptt_configuration.php:103 admin/abptt_feature.php:19
 #: admin/abptt_guide.php:20 admin/abptt_location.php:20
 #: admin/abptt_location.php:289 admin/abptt_organizer.php:20
-#: admin/abptt_post.php:57 includes/abptt_dependencies.php:524
+#: admin/abptt_post.php:58 includes/abptt_dependencies.php:524
 msgid "Configuration"
 msgstr ""
 
-#: admin/abptt_post.php:906
+#: admin/abptt_post.php:908
 msgid "Configure at least one valid tour date."
 msgstr ""
 
-#: admin/abptt_post.php:935
+#: admin/abptt_post.php:937
 msgid "Configure at least one valid tour session time."
 msgstr ""
 
@@ -908,7 +908,7 @@ msgid ""
 "consistent identification."
 msgstr ""
 
-#: admin/abptt_configuration.php:224 admin/abptt_documentation.php:128
+#: admin/abptt_configuration.php:224 admin/abptt_documentation.php:129
 msgid "Contact Information"
 msgstr ""
 
@@ -948,41 +948,41 @@ msgid ""
 "switch back ON."
 msgstr ""
 
-#: admin/abptt_post.php:127 admin/abptt_seat_plan.php:118
+#: admin/abptt_post.php:137 admin/abptt_seat_plan.php:118
 msgid "Copy/Clone : "
 msgstr ""
 
-#: includes/abptt_woocommerce.php:396
+#: includes/abptt_woocommerce.php:398
 msgid ""
 "Could not finalize the booking due to a temporary database lock. Please "
 "review and try again."
 msgstr ""
 
-#: admin/abptt_documentation.php:69
+#: admin/abptt_documentation.php:70
 msgid "Create a Tour"
 msgstr ""
 
-#: admin/abptt_documentation.php:53
+#: admin/abptt_documentation.php:54
 msgid "Create Global Lists"
 msgstr ""
 
-#: admin/abptt_documentation.php:200
+#: admin/abptt_documentation.php:204
 msgid ""
 "create guide profiles in Global Configuration → Guide, then assign them on "
 "each tour. Every guide also gets a public profile page."
 msgstr ""
 
-#: admin/abptt_documentation.php:103
+#: admin/abptt_documentation.php:104
 msgid ""
 "create reusable ticket types, decor (non-seat) items and seat plans for "
 "assigned seating."
 msgstr ""
 
-#: admin/abptt_documentation.php:62
+#: admin/abptt_documentation.php:63
 msgid "Create the ticket categories and seat layouts."
 msgstr ""
 
-#: admin/abptt_configuration.php:225 admin/abptt_documentation.php:129
+#: admin/abptt_configuration.php:225 admin/abptt_documentation.php:130
 msgid "CSS Property"
 msgstr ""
 
@@ -998,20 +998,20 @@ msgstr ""
 msgid "Custom Text"
 msgstr ""
 
-#: admin/abptt_documentation.php:163
+#: admin/abptt_documentation.php:164
 msgid ""
 "Customers buy a quantity of a ticket type (Adult, Child, VIP) without a "
 "fixed seat. Best for festivals, conferences, workshops and guided tours."
 msgstr ""
 
-#: admin/abptt_documentation.php:169
+#: admin/abptt_documentation.php:170
 msgid ""
 "Customers buy a specific seat. You build a visual layout (theatre, bus, hall)"
 " once, assign a ticket type to each seat area, and the customer picks their "
 "seat on the tour page."
 msgstr ""
 
-#: admin/abptt_documentation.php:222
+#: admin/abptt_documentation.php:226
 msgid ""
 "Customers pick a date and time from the schedule shown on the tour page "
 "before choosing tickets or seats."
@@ -1027,7 +1027,7 @@ msgstr ""
 msgid "Daily"
 msgstr ""
 
-#: admin/abptt_admin.php:90 admin/abptt_documentation.php:100
+#: admin/abptt_admin.php:90 admin/abptt_documentation.php:101
 msgid "Dashboard"
 msgstr ""
 
@@ -1047,7 +1047,7 @@ msgstr ""
 msgid "Date  Loading............."
 msgstr ""
 
-#: admin/abptt_documentation.php:139 admin/abptt_post.php:173
+#: admin/abptt_documentation.php:140 admin/abptt_post.php:184
 msgid "Date and Times"
 msgstr ""
 
@@ -1075,7 +1075,7 @@ msgstr ""
 msgid "Date Wise Time (Optional)"
 msgstr ""
 
-#: admin/abptt_configuration.php:191 admin/abptt_documentation.php:116
+#: admin/abptt_configuration.php:191 admin/abptt_documentation.php:117
 msgid "Dates"
 msgstr ""
 
@@ -1086,7 +1086,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %d: day number.
-#: admin/abptt_dummy_import.php:777
+#: admin/abptt_dummy_import.php:745
 msgid "Day %d - Signature Stops"
 msgstr ""
 
@@ -1098,7 +1098,7 @@ msgstr ""
 msgid "Day Wise Time Slots (Optional)"
 msgstr ""
 
-#: admin/abptt_dates.php:261 admin/abptt_post.php:341
+#: admin/abptt_dates.php:261 admin/abptt_post.php:352
 msgid "Days"
 msgstr ""
 
@@ -1142,7 +1142,7 @@ msgstr ""
 msgid "Default Font Size"
 msgstr ""
 
-#: admin/abptt_post.php:241
+#: admin/abptt_post.php:252
 msgid "Default Template"
 msgstr ""
 
@@ -1184,7 +1184,7 @@ msgstr ""
 #: admin/abptt_configuration.php:255
 #, php-format
 msgid ""
-"Define the primary URL slug for rentals. Important: After changing this, you "
+"Define the primary URL slug for tours. Important: After changing this, you "
 "must flush your permalinks by visiting %s and clicking Save Changes."
 msgstr ""
 
@@ -1213,14 +1213,14 @@ msgid "Deleting............."
 msgstr ""
 
 #. %d: number of demo posts created.
-#: admin/abptt_dummy_import.php:88
+#: admin/abptt_dummy_import.php:81
 msgid "Demo data imported successfully! (%d items)"
 msgstr ""
 
 #: admin/abptt_additional.php:92 admin/abptt_category.php:75
 #: admin/abptt_category.php:178 admin/abptt_faq.php:86
 #: admin/abptt_organizer.php:76 admin/abptt_organizer.php:176
-#: admin/abptt_ticket.php:209 admin/abptt_timeline.php:80
+#: admin/abptt_ticket.php:209 admin/abptt_timeline.php:79
 #: admin/abptt_why_book.php:85
 msgid "Description"
 msgstr ""
@@ -1230,7 +1230,7 @@ msgid "Description(Optional)"
 msgstr ""
 
 #: admin/abptt_guide.php:125 admin/abptt_guide.php:317
-#: includes/abptt_function.php:488
+#: includes/abptt_function.php:466
 msgid "Designation"
 msgstr ""
 
@@ -1260,17 +1260,17 @@ msgstr ""
 msgid "Directions"
 msgstr ""
 
-#: admin/abptt_post.php:370
+#: admin/abptt_post.php:381
 msgid "Display Capacity"
 msgstr ""
 
-#: admin/abptt_documentation.php:213
+#: admin/abptt_documentation.php:217
 msgid ""
 "displays tour gallery images as a gallery grid or a carousel slider "
 "(slider_style=\"gallery\" or \"slider\")."
 msgstr ""
 
-#: admin/abptt_admin.php:111 admin/abptt_documentation.php:105
+#: admin/abptt_admin.php:111 admin/abptt_documentation.php:106
 msgid "Documentation"
 msgstr ""
 
@@ -1290,7 +1290,7 @@ msgstr ""
 msgid "Drag Cells"
 msgstr ""
 
-#: admin/abptt_documentation.php:145
+#: admin/abptt_documentation.php:146
 msgid "drag-and-drop gallery images for this tour."
 msgstr ""
 
@@ -1331,7 +1331,7 @@ msgstr ""
 msgid "e.g., Tour Forge Ltd."
 msgstr ""
 
-#: admin/abptt_documentation.php:203
+#: admin/abptt_documentation.php:207
 msgid ""
 "each tour has its own FAQs and Term & Conditions tab, which can inherit the "
 "global content or use tour-specific content."
@@ -1344,7 +1344,7 @@ msgstr ""
 
 #: admin/abptt_category.php:195 admin/abptt_feature.php:223
 #: admin/abptt_guide.php:345 admin/abptt_location.php:258
-#: admin/abptt_organizer.php:195 admin/abptt_post.php:132
+#: admin/abptt_organizer.php:195 admin/abptt_post.php:142
 #: admin/abptt_seat_plan.php:119 admin/abptt_seat_plan.php:610
 #: admin/abptt_seat_plan.php:798
 msgid "Edit : "
@@ -1400,13 +1400,13 @@ msgstr ""
 msgid "End Date"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:793
+#: admin/abptt_dummy_import.php:761
 msgid ""
 "End the day at the best viewpoint in town before the transfer back to your "
 "hotel."
 msgstr ""
 
-#: admin/abptt_dummy_import.php:783
+#: admin/abptt_dummy_import.php:751
 msgid ""
 "Enjoy an included local lunch at a hand picked restaurant close to the route."
 msgstr ""
@@ -1494,21 +1494,21 @@ msgid ""
 "Establish the primary body text typography canvas hexadecimal hex color code."
 msgstr ""
 
-#: admin/abptt_dummy_import.php:517
+#: admin/abptt_dummy_import.php:495
 msgid "Evening"
 msgstr ""
 
-#: admin/abptt_documentation.php:102
+#: admin/abptt_documentation.php:103
 msgid ""
 "every customer booking with status tabs, filters, booking/seat/traveler "
 "details and totals."
 msgstr ""
 
-#: admin/abptt_documentation.php:97
+#: admin/abptt_documentation.php:98
 msgid "Every menu explained"
 msgstr ""
 
-#: admin/abptt_documentation.php:158
+#: admin/abptt_documentation.php:159
 msgid ""
 "Every tour sells in one of two ways. You choose this on the tour edit page "
 "in the Ticket & Price tab:"
@@ -1522,7 +1522,7 @@ msgstr ""
 msgid "Ex: 1"
 msgstr ""
 
-#: admin/abptt_timeline.php:72
+#: admin/abptt_timeline.php:71
 msgid "EX: 10:00 AM"
 msgstr ""
 
@@ -1549,7 +1549,7 @@ msgstr ""
 msgid "EX: Decor item Name"
 msgstr ""
 
-#: admin/abptt_additional.php:167 admin/abptt_post.php:290
+#: admin/abptt_additional.php:167 admin/abptt_post.php:301
 #: admin/abptt_ticket.php:286
 msgid "EX: Description"
 msgstr ""
@@ -1570,7 +1570,7 @@ msgstr ""
 msgid "EX: No hidden charges and the lowest fares every single time."
 msgstr ""
 
-#: admin/abptt_timeline.php:77
+#: admin/abptt_timeline.php:76
 msgid "EX: Registration Opens"
 msgstr ""
 
@@ -1594,7 +1594,7 @@ msgstr ""
 msgid "Excluded Feature"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:63
+#: admin/abptt_dummy_import.php:56
 msgid "Failed to create page."
 msgstr ""
 
@@ -1607,7 +1607,7 @@ msgid "Failed to resolve location context."
 msgstr ""
 
 #: admin/abptt_configuration.php:214 admin/abptt_configuration.php:501
-#: admin/abptt_documentation.php:124
+#: admin/abptt_documentation.php:125
 msgid "FAQ"
 msgstr ""
 
@@ -1619,11 +1619,11 @@ msgstr ""
 msgid "FAQ Title"
 msgstr ""
 
-#: admin/abptt_documentation.php:149 admin/abptt_post.php:199
+#: admin/abptt_documentation.php:150 admin/abptt_post.php:210
 msgid "FAQs"
 msgstr ""
 
-#: admin/abptt_documentation.php:203
+#: admin/abptt_documentation.php:207
 msgid "FAQs & Terms"
 msgstr ""
 
@@ -1635,11 +1635,11 @@ msgstr ""
 msgid "FAQs Configuration Saved Successfully..... !! "
 msgstr ""
 
-#: admin/abptt_documentation.php:142 includes/abptt_function.php:155
+#: admin/abptt_documentation.php:143 includes/abptt_function.php:155
 msgid "Feature"
 msgstr ""
 
-#: admin/abptt_configuration.php:190 admin/abptt_documentation.php:115
+#: admin/abptt_configuration.php:190 admin/abptt_documentation.php:116
 msgid "Feature ON/OFF"
 msgstr ""
 
@@ -1691,7 +1691,7 @@ msgstr ""
 msgid "Font Size H6"
 msgstr ""
 
-#: admin/abptt_documentation.php:226
+#: admin/abptt_documentation.php:230
 msgid ""
 "For detailed screenshots, shortcode tables and template-override "
 "instructions, use the full online documentation linked at the top of this "
@@ -1717,11 +1717,11 @@ msgstr ""
 #: admin/abptt_orders.php:200 admin/abptt_orders.php:202
 #: admin/abptt_orders.php:204 includes/abptt_dependencies.php:246
 #: includes/abptt_layout.php:1208 includes/abptt_layout.php:1229
-#: includes/abptt_my_account.php:142 includes/abptt_woocommerce.php:243
-#: includes/abptt_woocommerce.php:244 includes/abptt_woocommerce.php:258
-#: includes/abptt_woocommerce.php:259 includes/abptt_woocommerce.php:324
-#: includes/abptt_woocommerce.php:325 includes/abptt_woocommerce.php:338
-#: includes/abptt_woocommerce.php:340
+#: includes/abptt_my_account.php:142 includes/abptt_woocommerce.php:245
+#: includes/abptt_woocommerce.php:246 includes/abptt_woocommerce.php:260
+#: includes/abptt_woocommerce.php:261 includes/abptt_woocommerce.php:326
+#: includes/abptt_woocommerce.php:327 includes/abptt_woocommerce.php:340
+#: includes/abptt_woocommerce.php:342
 #: tt_templates/layout/display_cart_item.php:43
 #: tt_templates/layout/display_cart_item.php:44
 #: tt_templates/layout/display_cart_item.php:70
@@ -1735,7 +1735,7 @@ msgstr ""
 msgid "Free"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:787
+#: admin/abptt_dummy_import.php:755
 msgid "Free Time & Shopping"
 msgstr ""
 
@@ -1759,12 +1759,12 @@ msgstr ""
 msgid "Full Address(optional)"
 msgstr ""
 
-#: admin/abptt_documentation.php:145 admin/abptt_dummy_import.php:29
-#: admin/abptt_post.php:190 admin/abptt_post.php:469
+#: admin/abptt_documentation.php:146 admin/abptt_dummy_import.php:20
+#: admin/abptt_post.php:201 admin/abptt_post.php:480
 msgid "Gallery"
 msgstr ""
 
-#: admin/abptt_documentation.php:127
+#: admin/abptt_documentation.php:128
 msgid "gallery / carousel presentation, indicators and popup."
 msgstr ""
 
@@ -1780,11 +1780,11 @@ msgstr ""
 msgid "Gender"
 msgstr ""
 
-#: admin/abptt_documentation.php:137 admin/abptt_post.php:171
+#: admin/abptt_documentation.php:138 admin/abptt_post.php:182
 msgid "General"
 msgstr ""
 
-#: admin/abptt_post.php:224
+#: admin/abptt_post.php:235
 msgid "General Configuration"
 msgstr ""
 
@@ -1803,11 +1803,11 @@ msgid "Global Additional services Configuration"
 msgstr ""
 
 #: admin/abptt_admin.php:108 admin/abptt_documentation.php:45
-#: admin/abptt_documentation.php:104
+#: admin/abptt_documentation.php:105
 msgid "Global Configuration"
 msgstr ""
 
-#: admin/abptt_documentation.php:55
+#: admin/abptt_documentation.php:56
 msgid ""
 "Global Configuration also holds the reusable data: Locations, Categories, "
 "Organizers, Features, Additional services, Traveler Forms, Guides, FAQ, Why "
@@ -1823,7 +1823,7 @@ msgstr ""
 msgid "Global Date Configuration Saved Successfully ..... !!"
 msgstr ""
 
-#: admin/abptt_documentation.php:116
+#: admin/abptt_documentation.php:117
 msgid ""
 "global date format, time format, sale-close buffer and advance-booking "
 "window."
@@ -1861,7 +1861,7 @@ msgstr ""
 msgid "Global Why Book With Us Configuration"
 msgstr ""
 
-#: admin/abptt_documentation.php:219
+#: admin/abptt_documentation.php:223
 msgid "Good to know"
 msgstr ""
 
@@ -1869,7 +1869,7 @@ msgstr ""
 msgid "Google Cloud Console"
 msgstr ""
 
-#: admin/abptt_configuration.php:423 admin/abptt_documentation.php:201
+#: admin/abptt_configuration.php:423 admin/abptt_documentation.php:205
 msgid "Google Location Map"
 msgstr ""
 
@@ -1893,18 +1893,18 @@ msgstr ""
 msgid "Guests   "
 msgstr ""
 
-#: admin/abptt_documentation.php:144 admin/abptt_post.php:188
+#: admin/abptt_documentation.php:145 admin/abptt_post.php:199
 #: includes/abptt_function.php:201
 msgid "Guide"
 msgstr ""
 
-#: admin/abptt_documentation.php:123
+#: admin/abptt_documentation.php:124
 msgid ""
 "guide profiles (photo, designation, company, bio, website and social links). "
 "Each guide also gets a public profile page."
 msgstr ""
 
-#: admin/abptt_dummy_import.php:778
+#: admin/abptt_dummy_import.php:746
 msgid ""
 "Guided sightseeing of the landmark stops that define this tour, with time "
 "for photos at each one."
@@ -1929,11 +1929,11 @@ msgid ""
 "configuration."
 msgstr ""
 
-#: admin/abptt_post.php:342 includes/abptt_layout.php:602
+#: admin/abptt_post.php:353 includes/abptt_layout.php:602
 msgid "Hours"
 msgstr ""
 
-#: admin/abptt_documentation.php:175
+#: admin/abptt_documentation.php:176
 msgid "How to create a Seat Plan:"
 msgstr ""
 
@@ -1959,7 +1959,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: admin/abptt_post.php:116
+#: admin/abptt_post.php:126
 msgid "ID : "
 msgstr ""
 
@@ -1968,7 +1968,7 @@ msgstr ""
 msgid "id Invalid...!"
 msgstr ""
 
-#: admin/abptt_post.php:254
+#: admin/abptt_post.php:265
 msgid "ID/SKU"
 msgstr ""
 
@@ -2077,8 +2077,8 @@ msgstr ""
 msgid ""
 "If you do not want to use the Min & Max feature, simply turn this switch OFF."
 " This will completely disable the Tour Min & Max feature for all Tours "
-"across your website.  You can re-enable the Tour return feature at any time "
-"by turning this switch back ON."
+"across your website.  You can re-enable the Tour Min & Max feature at any "
+"time by turning this switch back ON."
 msgstr ""
 
 #: admin/abptt_configuration.php:354
@@ -2172,7 +2172,7 @@ msgstr ""
 msgid "If you wish to modify the Operator label, you can do so here. "
 msgstr ""
 
-#: admin/abptt_post.php:85
+#: admin/abptt_post.php:95
 msgid "Image"
 msgstr ""
 
@@ -2204,7 +2204,7 @@ msgstr ""
 msgid "Import Global Traveler Forms"
 msgstr ""
 
-#: admin/abptt_documentation.php:140
+#: admin/abptt_documentation.php:141
 msgid ""
 "import services from the global library and adjust price or quantity for "
 "this tour."
@@ -2238,7 +2238,7 @@ msgstr ""
 msgid "Importing........"
 msgstr ""
 
-#: admin/abptt_documentation.php:122
+#: admin/abptt_documentation.php:123
 msgid "included / excluded feature badges shown on the tour page."
 msgstr ""
 
@@ -2246,7 +2246,7 @@ msgstr ""
 msgid "Included Feature"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:427
+#: admin/abptt_dummy_import.php:405
 msgid "Includes guided access and standard facilities."
 msgstr ""
 
@@ -2264,7 +2264,7 @@ msgstr ""
 msgid "Insert  Post"
 msgstr ""
 
-#: admin/abptt_documentation.php:111
+#: admin/abptt_documentation.php:112
 msgid "Inside Global Configuration"
 msgstr ""
 
@@ -2276,18 +2276,19 @@ msgstr ""
 msgid "Install & Active Now"
 msgstr ""
 
-#: admin/abptt_post.php:998 admin/abptt_post.php:1020
+#: admin/abptt_post.php:1000 admin/abptt_post.php:1022
 msgid "Invalid  ID ..... !! "
 msgstr ""
 
-#: admin/abptt_post.php:973
+#: admin/abptt_post.php:975
 msgid "Invalid ID ..... !! "
 msgstr ""
 
 #: admin/abptt_additional.php:177 admin/abptt_additional.php:232
 #: admin/abptt_category.php:32 admin/abptt_category.php:90
 #: admin/abptt_category.php:135 admin/abptt_dashboard.php:285
-#: admin/abptt_dates.php:662 admin/abptt_dummy_import.php:18
+#: admin/abptt_dates.php:662 admin/abptt_dummy_import.php:26
+#: admin/abptt_dummy_import.php:69 admin/abptt_dummy_import.php:90
 #: admin/abptt_faq.php:109 admin/abptt_faq.php:196 admin/abptt_feature.php:90
 #: admin/abptt_feature.php:142 admin/abptt_feature.php:190
 #: admin/abptt_form.php:248 admin/abptt_form.php:256 admin/abptt_guide.php:67
@@ -2296,8 +2297,8 @@ msgstr ""
 #: admin/abptt_location.php:190 admin/abptt_orders.php:217
 #: admin/abptt_orders.php:233 admin/abptt_organizer.php:33
 #: admin/abptt_organizer.php:91 admin/abptt_organizer.php:135
-#: admin/abptt_post.php:969 admin/abptt_post.php:986 admin/abptt_post.php:1003
-#: admin/abptt_post.php:1025 admin/abptt_seat_plan.php:134
+#: admin/abptt_post.php:971 admin/abptt_post.php:988 admin/abptt_post.php:1005
+#: admin/abptt_post.php:1027 admin/abptt_seat_plan.php:134
 #: admin/abptt_seat_plan.php:255 admin/abptt_seat_plan.php:350
 #: admin/abptt_seat_plan.php:358 admin/abptt_seat_plan.php:416
 #: admin/abptt_seat_plan.php:509 admin/abptt_seat_plan.php:574
@@ -2313,7 +2314,7 @@ msgstr ""
 msgid "Invalid session."
 msgstr ""
 
-#: admin/abptt_dummy_import.php:594
+#: admin/abptt_dummy_import.php:567
 msgid "is one of the must-visit places included in this tour."
 msgstr ""
 
@@ -2341,7 +2342,7 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:514
+#: admin/abptt_dummy_import.php:492
 msgid "Late Morning"
 msgstr ""
 
@@ -2353,7 +2354,7 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#: admin/abptt_post.php:242
+#: admin/abptt_post.php:253
 msgid "Light Template"
 msgstr ""
 
@@ -2369,7 +2370,7 @@ msgstr ""
 msgid "List view"
 msgstr ""
 
-#: admin/abptt_admin.php:93 admin/abptt_documentation.php:101
+#: admin/abptt_admin.php:93 admin/abptt_documentation.php:102
 msgid "Lists"
 msgstr ""
 
@@ -2410,11 +2411,11 @@ msgstr ""
 msgid "Location Slug"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:782
+#: admin/abptt_dummy_import.php:750
 msgid "Lunch Break"
 msgstr ""
 
-#: admin/abptt_documentation.php:114
+#: admin/abptt_documentation.php:115
 msgid ""
 "main settings: Booked Status, label, slug, icons, taxonomy labels and slugs, "
 "Google Maps API key."
@@ -2448,11 +2449,11 @@ msgstr ""
 msgid "Manage Traveler Forms fields"
 msgstr ""
 
-#: admin/abptt_post.php:425
+#: admin/abptt_post.php:436
 msgid "Mark as Top Pick"
 msgstr ""
 
-#: admin/abptt_documentation.php:115
+#: admin/abptt_documentation.php:116
 msgid ""
 "master switches for every feature area. Tabs marked (switch) below appear "
 "only when their feature is ON."
@@ -2464,7 +2465,7 @@ msgstr ""
 msgid "Max %s Guests"
 msgstr ""
 
-#: admin/abptt_configuration.php:543 admin/abptt_post.php:381
+#: admin/abptt_configuration.php:543 admin/abptt_post.php:392
 #: includes/abptt_layout.php:644
 msgid "Max Guests"
 msgstr ""
@@ -2485,7 +2486,7 @@ msgstr ""
 msgid "Meet the"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:772
+#: admin/abptt_dummy_import.php:740
 msgid ""
 "Meet your guide at the hotel lobby, drop your bags and go over the plan for "
 "the day."
@@ -2508,11 +2509,11 @@ msgstr ""
 msgid "Min qty/Order"
 msgstr ""
 
-#: admin/abptt_post.php:343 includes/abptt_layout.php:604
+#: admin/abptt_post.php:354 includes/abptt_layout.php:604
 msgid "Minutes"
 msgstr ""
 
-#: admin/abptt_post.php:243
+#: admin/abptt_post.php:254
 msgid "Modern Template"
 msgstr ""
 
@@ -2533,7 +2534,7 @@ msgstr ""
 msgid "More Options"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:513
+#: admin/abptt_dummy_import.php:491
 msgid "Morning"
 msgstr ""
 
@@ -2545,7 +2546,7 @@ msgstr ""
 msgid "Move This Item"
 msgstr ""
 
-#: admin/abptt_post.php:134
+#: admin/abptt_post.php:144
 msgid "Move to Trash : "
 msgstr ""
 
@@ -2553,7 +2554,7 @@ msgstr ""
 msgid "move to Trashing.........!"
 msgstr ""
 
-#: admin/abptt_post.php:996
+#: admin/abptt_post.php:998
 msgid "Moved to trash successfully...... !! "
 msgstr ""
 
@@ -2598,7 +2599,7 @@ msgstr ""
 msgid "NEW PLACE"
 msgstr ""
 
-#: admin/abptt_documentation.php:87
+#: admin/abptt_documentation.php:88
 msgid ""
 "New to the plugin? Use Dummy Import in the Dashboard's System Status card to "
 "import sample tours, then remove it again when you are done. When live, "
@@ -2610,7 +2611,7 @@ msgstr ""
 msgid "Next Page"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:518
+#: admin/abptt_dummy_import.php:496
 msgid "Night"
 msgstr ""
 
@@ -2707,12 +2708,12 @@ msgid ""
 "No Ticket Type Found ! Please add Ticket Type to use Multiple Ticket Type"
 msgstr ""
 
-#: admin/abptt_post.php:497 admin/abptt_seat_plan.php:300
+#: admin/abptt_post.php:508 admin/abptt_seat_plan.php:300
 #: admin/abptt_seat_plan.php:309
 msgid "None"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:515
+#: admin/abptt_dummy_import.php:493
 msgid "Noon"
 msgstr ""
 
@@ -3333,7 +3334,7 @@ msgstr ""
 msgid "ON"
 msgstr ""
 
-#: admin/abptt_documentation.php:180
+#: admin/abptt_documentation.php:181
 msgid ""
 "On the tour edit page you can enable multiple ticket types to sell several "
 "categories (Adult + Child + VIP) at once — or keep it off to sell a single "
@@ -3344,15 +3345,15 @@ msgstr ""
 msgid "ON/OFF Configuration"
 msgstr ""
 
-#: admin/abptt_documentation.php:179
+#: admin/abptt_documentation.php:180
 msgid "One or many ticket types?"
 msgstr ""
 
-#: includes/abptt_woocommerce.php:420
+#: includes/abptt_woocommerce.php:422
 msgid "One or more seats became unavailable. The order has been cancelled."
 msgstr ""
 
-#: includes/abptt_woocommerce.php:297
+#: includes/abptt_woocommerce.php:299
 msgid ""
 "One or more tour tickets are no longer available. Please review your booking "
 "and try again."
@@ -3374,12 +3375,12 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: admin/abptt_documentation.php:49
+#: admin/abptt_documentation.php:50
 msgid "Open Configuration"
 msgstr ""
 
-#: admin/abptt_documentation.php:41 admin/abptt_documentation.php:81
-#: admin/abptt_documentation.php:89
+#: admin/abptt_documentation.php:41 admin/abptt_documentation.php:82
+#: admin/abptt_documentation.php:90
 msgid "Open Dashboard"
 msgstr ""
 
@@ -3391,11 +3392,12 @@ msgstr ""
 msgid "Open full route in Google Maps"
 msgstr ""
 
-#: admin/abptt_documentation.php:57
+#: admin/abptt_documentation.php:58
 msgid "Open Global Configuration"
 msgstr ""
 
-#: admin/abptt_documentation.php:47
+#. %s: tour label (for example "Tour").
+#: admin/abptt_documentation.php:48
 #, php-format
 msgid ""
 "Open Global Configuration → %1$s and set the tour label, slug, icons, "
@@ -3403,7 +3405,8 @@ msgid ""
 "Feature ON/OFF and switch off any feature areas you do not need."
 msgstr ""
 
-#: admin/abptt_documentation.php:189
+#. %s: tour label (for example "Tour").
+#: admin/abptt_documentation.php:192
 #, php-format
 msgid ""
 "Open Global Configuration → %1$s → Booked Status and tick the WooCommerce "
@@ -3419,11 +3422,11 @@ msgstr ""
 msgid "Open the Dashboard and verify everything is ready."
 msgstr ""
 
-#: admin/abptt_documentation.php:65
+#: admin/abptt_documentation.php:66
 msgid "Open Ticket/Seat Plan"
 msgstr ""
 
-#: admin/abptt_documentation.php:176
+#: admin/abptt_documentation.php:177
 msgid ""
 "Open Ticket/Seat Plan → press Add New Seat Plan. Set the grid size, then "
 "click cells to place seats (with a ticket type) or decor items (entrance, "
@@ -3431,7 +3434,7 @@ msgid ""
 "on any number of tours."
 msgstr ""
 
-#: admin/abptt_documentation.php:73
+#: admin/abptt_documentation.php:74
 msgid "Open Tour List"
 msgstr ""
 
@@ -3447,7 +3450,7 @@ msgstr ""
 msgid "Operator Slug"
 msgstr ""
 
-#: admin/abptt_documentation.php:196
+#: admin/abptt_documentation.php:200
 msgid "Optional tour page sections"
 msgstr ""
 
@@ -3467,11 +3470,11 @@ msgstr[1] ""
 msgid "Order / Tour"
 msgstr ""
 
-#: includes/abptt_layout.php:1364
+#: includes/abptt_layout.php:1365
 msgid "Order Date"
 msgstr ""
 
-#: includes/abptt_layout.php:1376
+#: includes/abptt_layout.php:1377
 msgid "Order Date Between"
 msgstr ""
 
@@ -3479,7 +3482,7 @@ msgstr ""
 msgid "Order Filter"
 msgstr ""
 
-#: includes/abptt_layout.php:1421 includes/abptt_layout.php:1422
+#: includes/abptt_layout.php:1422 includes/abptt_layout.php:1423
 msgid "Order ID"
 msgstr ""
 
@@ -3496,11 +3499,11 @@ msgid "Order Loading........ !"
 msgstr ""
 
 #: admin/abptt_admin.php:98 admin/abptt_dashboard.php:62
-#: admin/abptt_documentation.php:102
+#: admin/abptt_documentation.php:103
 msgid "Orders"
 msgstr ""
 
-#: admin/abptt_documentation.php:121
+#: admin/abptt_documentation.php:122
 msgid "organizers / operators."
 msgstr ""
 
@@ -3512,7 +3515,7 @@ msgstr ""
 msgid "Others/Decor Item List"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:53
+#: admin/abptt_dummy_import.php:46
 msgid "Page already exists."
 msgstr ""
 
@@ -3520,11 +3523,11 @@ msgstr ""
 msgid "Page Creating ........!"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:42
+#: admin/abptt_dummy_import.php:35
 msgid "Page type is missing."
 msgstr ""
 
-#: admin/abptt_dummy_import.php:49
+#: admin/abptt_dummy_import.php:42
 msgid "Page Type not found!"
 msgstr ""
 
@@ -3536,7 +3539,7 @@ msgstr ""
 msgid "Particular Dates"
 msgstr ""
 
-#: admin/abptt_documentation.php:139
+#: admin/abptt_documentation.php:140
 msgid ""
 "Particular or Repeated dates, special on/off dates, and General / Day Wise / "
 "Date Wise time slots."
@@ -3562,11 +3565,11 @@ msgstr ""
 msgid "Permanent Deleting.........!"
 msgstr ""
 
-#: admin/abptt_post.php:130 admin/abptt_seat_plan.php:120
+#: admin/abptt_post.php:140 admin/abptt_seat_plan.php:120
 msgid "Permanent Remove : "
 msgstr ""
 
-#: admin/abptt_post.php:981
+#: admin/abptt_post.php:983
 msgid "Permanently removed. ..... !! "
 msgstr ""
 
@@ -3598,11 +3601,11 @@ msgid ""
 "and buttons."
 msgstr ""
 
-#: admin/abptt_documentation.php:143
+#: admin/abptt_documentation.php:144
 msgid "pick tours to cross-sell on this tour page."
 msgstr ""
 
-#: admin/abptt_documentation.php:146 includes/abptt_function.php:207
+#: admin/abptt_documentation.php:147 includes/abptt_function.php:207
 #: tt_templates/layout/places_you_see.php:28
 msgid "Places You'll See"
 msgstr ""
@@ -3619,8 +3622,8 @@ msgstr ""
 msgid "Please Login your account to Download/View ticket !"
 msgstr ""
 
-#: admin/abptt_configuration.php:1157 admin/abptt_post.php:240
-#: admin/abptt_post.php:494 admin/abptt_post.php:505 admin/abptt_ticket.php:27
+#: admin/abptt_configuration.php:1157 admin/abptt_post.php:251
+#: admin/abptt_post.php:505 admin/abptt_post.php:516 admin/abptt_ticket.php:27
 #: includes/abptt_dependencies.php:243 includes/abptt_layout.php:308
 msgid "Please Select"
 msgstr ""
@@ -3641,7 +3644,7 @@ msgstr ""
 msgid "Plugin"
 msgstr ""
 
-#: admin/abptt_documentation.php:104
+#: admin/abptt_documentation.php:105
 msgid ""
 "plugin-wide settings plus every reusable data list. Full sub-tab list below."
 msgstr ""
@@ -3667,7 +3670,7 @@ msgstr ""
 msgid "Post List"
 msgstr ""
 
-#: admin/abptt_post.php:1035
+#: admin/abptt_post.php:1037
 msgid "Post List Loaded successfully...... !! "
 msgstr ""
 
@@ -3687,7 +3690,7 @@ msgstr ""
 msgid "Prefix"
 msgstr ""
 
-#: admin/abptt_documentation.php:71
+#: admin/abptt_documentation.php:72
 msgid ""
 "Press the + button, add a title, image and description, then choose a detail "
 "template and fill in the date/time schedule, location/category, and ticket "
@@ -3711,7 +3714,7 @@ msgstr ""
 msgid "Price Configuration Loading........"
 msgstr ""
 
-#: admin/abptt_documentation.php:178
+#: admin/abptt_documentation.php:179
 msgid ""
 "Prices, quantities, reserved quantity and min/max per order are set per tour "
 "(Tour edit → Ticket & Price). The global Ticket Type only defines the label "
@@ -3732,7 +3735,7 @@ msgid ""
 "booking logs."
 msgstr ""
 
-#: admin/abptt_documentation.php:78
+#: admin/abptt_documentation.php:79
 msgid "Publish the booking and tour-list pages."
 msgstr ""
 
@@ -3756,7 +3759,7 @@ msgstr ""
 msgid "Radio"
 msgstr ""
 
-#: admin/abptt_configuration.php:564 admin/abptt_post.php:435
+#: admin/abptt_configuration.php:564 admin/abptt_post.php:446
 #: includes/abptt_layout.php:703
 msgid "Rating & Reviews"
 msgstr ""
@@ -3781,8 +3784,8 @@ msgstr ""
 msgid "Related Post"
 msgstr ""
 
-#: admin/abptt_documentation.php:143 admin/abptt_post.php:185
-#: admin/abptt_post.php:453 tt_templates/layout/related_item.php:21
+#: admin/abptt_documentation.php:144 admin/abptt_post.php:196
+#: admin/abptt_post.php:464 tt_templates/layout/related_item.php:21
 msgid "Related Tour"
 msgstr ""
 
@@ -3831,11 +3834,11 @@ msgstr ""
 msgid "Reserve Quantity"
 msgstr ""
 
-#: admin/abptt_post.php:129
+#: admin/abptt_post.php:139
 msgid "Restore : "
 msgstr ""
 
-#: admin/abptt_post.php:1018
+#: admin/abptt_post.php:1020
 msgid "Restored successfully...... !! "
 msgstr ""
 
@@ -3856,27 +3859,27 @@ msgstr ""
 msgid "Returnable or Not"
 msgstr ""
 
-#: admin/abptt_documentation.php:126
+#: admin/abptt_documentation.php:127
 msgid "reusable booking policy text."
 msgstr ""
 
-#: admin/abptt_documentation.php:118
+#: admin/abptt_documentation.php:119
 msgid "reusable guest fields collected at checkout (name, email, phone…)."
 msgstr ""
 
-#: admin/abptt_documentation.php:119
+#: admin/abptt_documentation.php:120
 msgid "reusable meeting points with address and map position."
 msgstr ""
 
-#: admin/abptt_documentation.php:117
+#: admin/abptt_documentation.php:118
 msgid "reusable paid add-ons with their own prices."
 msgstr ""
 
-#: admin/abptt_documentation.php:124
+#: admin/abptt_documentation.php:125
 msgid "reusable questions and answers."
 msgstr ""
 
-#: admin/abptt_documentation.php:125
+#: admin/abptt_documentation.php:126
 msgid "reusable trust reasons (icon, title, description) shown on tour pages."
 msgstr ""
 
@@ -3888,15 +3891,15 @@ msgstr ""
 msgid "Route"
 msgstr ""
 
-#: admin/abptt_post.php:231
+#: admin/abptt_post.php:242
 msgid "Sale continue?"
 msgstr ""
 
-#: admin/abptt_post.php:118
+#: admin/abptt_post.php:128
 msgid "Sale Off"
 msgstr ""
 
-#: admin/abptt_post.php:118
+#: admin/abptt_post.php:128
 msgid "Sale On"
 msgstr ""
 
@@ -3995,7 +3998,7 @@ msgstr ""
 msgid "Search address / place on the map"
 msgstr ""
 
-#: admin/abptt_documentation.php:211
+#: admin/abptt_documentation.php:215
 msgid ""
 "search form + tour listing + booking flow. Ideal for your Booking page. "
 "Supports style, cat_id, loc_id, organizer_id, guide_id, top_pick, show, "
@@ -4028,11 +4031,11 @@ msgid "Seat Plan"
 msgstr ""
 
 #. %d: seat plan number.
-#: admin/abptt_dummy_import.php:448
+#: admin/abptt_dummy_import.php:426
 msgid "Seat Plan %d"
 msgstr ""
 
-#: admin/abptt_documentation.php:168
+#: admin/abptt_documentation.php:169
 msgid "Seat Plan (assigned seating)"
 msgstr ""
 
@@ -4159,11 +4162,10 @@ msgstr ""
 msgid "Session Started"
 msgstr ""
 
-#: includes/abptt_woocommerce.php:238
+#: includes/abptt_woocommerce.php:240 includes/abptt_woocommerce.php:321
 msgid "Session Time"
 msgstr ""
 
-#: includes/abptt_woocommerce.php:319
 #: tt_templates/layout/display_cart_item.php:32
 msgid "Session Time: "
 msgstr ""
@@ -4201,16 +4203,16 @@ msgstr ""
 msgid "Shift+Click"
 msgstr ""
 
-#: admin/abptt_post.php:496
+#: admin/abptt_post.php:507
 msgid "Shipping only"
 msgstr ""
 
-#: admin/abptt_post.php:289
+#: admin/abptt_post.php:300
 msgid "Short Description"
 msgstr ""
 
 #: admin/abptt_category.php:179 admin/abptt_organizer.php:177
-#: admin/abptt_post.php:88
+#: admin/abptt_post.php:98
 msgid "Shortcode"
 msgstr ""
 
@@ -4218,7 +4220,7 @@ msgstr ""
 msgid "Shortcode Post"
 msgstr ""
 
-#: admin/abptt_documentation.php:208
+#: admin/abptt_documentation.php:212
 msgid "Shortcodes you can place anywhere"
 msgstr ""
 
@@ -4246,7 +4248,7 @@ msgstr ""
 msgid "Showing Item"
 msgstr ""
 
-#: admin/abptt_documentation.php:201
+#: admin/abptt_documentation.php:205
 msgid ""
 "shows a map for the tour location. Add a Google Maps API key in Global "
 "Configuration if you have one; without a key a key-free embedded map is used "
@@ -4255,7 +4257,7 @@ msgstr ""
 
 #: admin/abptt_category.php:175 admin/abptt_guide.php:314
 #: admin/abptt_location.php:238 admin/abptt_organizer.php:173
-#: admin/abptt_post.php:84
+#: admin/abptt_post.php:94
 msgid "SI"
 msgstr ""
 
@@ -4263,7 +4265,7 @@ msgstr ""
 msgid "Single"
 msgstr ""
 
-#: admin/abptt_configuration.php:223 admin/abptt_documentation.php:127
+#: admin/abptt_configuration.php:223 admin/abptt_documentation.php:128
 msgid "Slider"
 msgstr ""
 
@@ -4371,7 +4373,7 @@ msgid ""
 "horizontal grid line row layout."
 msgstr ""
 
-#: admin/abptt_post.php:506
+#: admin/abptt_post.php:517
 msgid "Standard"
 msgstr ""
 
@@ -4379,7 +4381,7 @@ msgstr ""
 msgid "Start Date"
 msgstr ""
 
-#: admin/abptt_configuration.php:557 admin/abptt_post.php:411
+#: admin/abptt_configuration.php:557 admin/abptt_post.php:422
 #: includes/abptt_layout.php:680
 msgid "Start Point"
 msgstr ""
@@ -4393,16 +4395,16 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: admin/abptt_configuration.php:536 admin/abptt_post.php:356
+#: admin/abptt_configuration.php:536 admin/abptt_post.php:367
 #: includes/abptt_layout.php:626
 msgid "Stay Night"
 msgstr ""
 
-#: admin/abptt_documentation.php:146
+#: admin/abptt_documentation.php:147
 msgid "stops or landmarks with image and description."
 msgstr ""
 
-#: admin/abptt_post.php:277
+#: admin/abptt_post.php:288
 msgid "Sub Title"
 msgstr ""
 
@@ -4414,7 +4416,7 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
-#: admin/abptt_dummy_import.php:792
+#: admin/abptt_dummy_import.php:760
 msgid "Sunset Finale"
 msgstr ""
 
@@ -4422,7 +4424,7 @@ msgstr ""
 msgid "support@example.com"
 msgstr ""
 
-#: admin/abptt_documentation.php:199
+#: admin/abptt_documentation.php:203
 msgid ""
 "switch Tour Timeline ON in Global Configuration → Feature ON/OFF and Active "
 "Timeline ? ON in the tour's Timeline tab, then add entries. The design "
@@ -4433,23 +4435,23 @@ msgstr ""
 msgid "System Status"
 msgstr ""
 
-#: admin/abptt_documentation.php:147 admin/abptt_post.php:194
+#: admin/abptt_documentation.php:148 admin/abptt_post.php:205
 msgid "Tax"
 msgstr ""
 
-#: admin/abptt_post.php:503
+#: admin/abptt_post.php:514
 msgid "Tax Class"
 msgstr ""
 
-#: admin/abptt_post.php:484
+#: admin/abptt_post.php:495
 msgid "Tax Configuration"
 msgstr ""
 
-#: admin/abptt_post.php:492
+#: admin/abptt_post.php:503
 msgid "Tax Status"
 msgstr ""
 
-#: admin/abptt_post.php:495
+#: admin/abptt_post.php:506
 msgid "Taxable"
 msgstr ""
 
@@ -4457,13 +4459,13 @@ msgstr ""
 msgid "TBA"
 msgstr ""
 
-#: admin/abptt_post.php:238
+#: admin/abptt_post.php:249
 msgid "Template"
 msgstr ""
 
 #: admin/abptt_configuration.php:220 admin/abptt_configuration.php:494
-#: admin/abptt_documentation.php:126 admin/abptt_documentation.php:150
-#: admin/abptt_post.php:202 admin/abptt_tc.php:64
+#: admin/abptt_documentation.php:127 admin/abptt_documentation.php:151
+#: admin/abptt_post.php:213 admin/abptt_tc.php:64
 #: tt_templates/layout/term_condition.php:20
 msgid "Term & Conditions"
 msgstr ""
@@ -4472,7 +4474,7 @@ msgstr ""
 msgid "Term & Conditions  Saved Successfully..... !!"
 msgstr ""
 
-#: admin/abptt_documentation.php:85
+#: admin/abptt_documentation.php:86
 msgid "Test & Go Live"
 msgstr ""
 
@@ -4484,7 +4486,7 @@ msgstr ""
 msgid "Textarea"
 msgstr ""
 
-#: admin/abptt_documentation.php:79
+#: admin/abptt_documentation.php:80
 msgid ""
 "The Dashboard's System Status card can create a Booking page ([abptt-booking]"
 "), a Tour List page ([abptt-post]) and a Gallery page ([abptt-gallery]) for "
@@ -4492,7 +4494,7 @@ msgid ""
 "place the shortcodes into any page yourself."
 msgstr ""
 
-#: admin/abptt_documentation.php:188
+#: admin/abptt_documentation.php:189
 msgid ""
 "The plugin does not keep a separate stock counter. Availability is "
 "calculated live from the stored orders, so the only thing you configure is "
@@ -4506,19 +4508,19 @@ msgid ""
 "plugin uses WooCommerce for checkout and payments."
 msgstr ""
 
-#: admin/abptt_documentation.php:106
+#: admin/abptt_documentation.php:107
 msgid ""
 "The tab bar also has a + button for a new tour, plus quick popup buttons for "
 "adding a location and (when enabled) a category without leaving the screen."
 msgstr ""
 
-#: admin/abptt_documentation.php:224
+#: admin/abptt_documentation.php:228
 msgid ""
 "The tour post type supports Gutenberg and Polylang, so tours can be edited "
 "in the block editor and translated for multilingual sites."
 msgstr ""
 
-#: admin/abptt_post.php:948
+#: admin/abptt_post.php:950
 msgid "The WooCommerce product could not be linked to this tour."
 msgstr ""
 
@@ -4529,11 +4531,11 @@ msgid ""
 "searchable documentation is also available online."
 msgstr ""
 
-#: admin/abptt_documentation.php:105
+#: admin/abptt_documentation.php:106
 msgid "this guide, plus links to the online documentation and live demo."
 msgstr ""
 
-#: admin/abptt_documentation.php:191
+#: admin/abptt_documentation.php:195
 msgid ""
 "This one setting powers the tour page availability, the seat map colours, "
 "the Dashboard session counts and the admin order list."
@@ -4551,7 +4553,7 @@ msgstr ""
 msgid "Ticket"
 msgstr ""
 
-#: admin/abptt_documentation.php:138 admin/abptt_post.php:172
+#: admin/abptt_documentation.php:139 admin/abptt_post.php:183
 msgid "Ticket & Price"
 msgstr ""
 
@@ -4567,7 +4569,7 @@ msgstr ""
 msgid "Ticket Info"
 msgstr ""
 
-#: includes/abptt_woocommerce.php:239 includes/abptt_woocommerce.php:320
+#: includes/abptt_woocommerce.php:241 includes/abptt_woocommerce.php:322
 msgid "Ticket Information"
 msgstr ""
 
@@ -4588,11 +4590,11 @@ msgstr ""
 msgid "Ticket Type"
 msgstr ""
 
-#: admin/abptt_post.php:87
+#: admin/abptt_post.php:97
 msgid "Ticket Type & Qty"
 msgstr ""
 
-#: admin/abptt_documentation.php:162
+#: admin/abptt_documentation.php:163
 msgid "Ticket Type (general admission)"
 msgstr ""
 
@@ -4620,15 +4622,15 @@ msgstr ""
 msgid "Ticket Type Switching... Please Wait......."
 msgstr ""
 
-#: admin/abptt_documentation.php:155
+#: admin/abptt_documentation.php:156
 msgid "Ticket Type vs Seat Plan — made clear"
 msgstr ""
 
-#: admin/abptt_documentation.php:61
+#: admin/abptt_documentation.php:62
 msgid "Ticket Types & Seat Plans"
 msgstr ""
 
-#: admin/abptt_documentation.php:63
+#: admin/abptt_documentation.php:64
 msgid ""
 "Ticket Types are the reusable categories you sell (Adult, Child, VIP…). Seat "
 "Plans are visual layouts for assigned seating (theatre, bus, hall). Both "
@@ -4639,13 +4641,13 @@ msgstr ""
 msgid "Ticket types Saved Successfully..........!!"
 msgstr ""
 
-#: admin/abptt_documentation.php:138
+#: admin/abptt_documentation.php:139
 msgid ""
 "ticket-only or seat-plan selling, ticket types, prices, quantity, reserved "
 "quantity and min/max per order."
 msgstr ""
 
-#: includes/abptt_function.php:541
+#: includes/abptt_function.php:519
 msgid "Ticket/Seat"
 msgstr ""
 
@@ -4653,7 +4655,7 @@ msgstr ""
 msgid "Ticket/Seat : "
 msgstr ""
 
-#: admin/abptt_admin.php:103 admin/abptt_documentation.php:103
+#: admin/abptt_admin.php:103 admin/abptt_documentation.php:104
 msgid "Ticket/Seat Plan"
 msgstr ""
 
@@ -4661,7 +4663,7 @@ msgstr ""
 msgid "Tickets Sold"
 msgstr ""
 
-#: admin/abptt_timeline.php:71 tt_templates/details_theme/default.php:105
+#: admin/abptt_timeline.php:70 tt_templates/details_theme/default.php:105
 msgid "Time"
 msgstr ""
 
@@ -4677,11 +4679,11 @@ msgstr ""
 msgid "Time Format"
 msgstr ""
 
-#: admin/abptt_documentation.php:148
+#: admin/abptt_documentation.php:149
 msgid "time-by-time itinerary entries (time, title, description)."
 msgstr ""
 
-#: admin/abptt_documentation.php:148 admin/abptt_post.php:196
+#: admin/abptt_documentation.php:149 admin/abptt_post.php:207
 msgid "Timeline"
 msgstr ""
 
@@ -4689,11 +4691,11 @@ msgstr ""
 msgid "Timeline Configuration"
 msgstr ""
 
-#: admin/abptt_timeline.php:76 admin/abptt_why_book.php:78
+#: admin/abptt_timeline.php:75 admin/abptt_why_book.php:78
 msgid "Title"
 msgstr ""
 
-#: admin/abptt_documentation.php:137
+#: admin/abptt_documentation.php:138
 msgid ""
 "title, short description, detail template, SKU, icon, taxonomies, Top Pick "
 "and the other basics."
@@ -4790,13 +4792,13 @@ msgstr ""
 msgid "Tour"
 msgstr ""
 
-#: admin/abptt_documentation.php:120
+#: admin/abptt_documentation.php:121
 msgid "tour categories."
 msgstr ""
 
-#: includes/abptt_layout.php:877 includes/abptt_layout.php:1331
-#: includes/abptt_my_account.php:123 includes/abptt_woocommerce.php:237
-#: includes/abptt_woocommerce.php:318
+#: includes/abptt_layout.php:877 includes/abptt_layout.php:1332
+#: includes/abptt_my_account.php:123 includes/abptt_woocommerce.php:239
+#: includes/abptt_woocommerce.php:320
 msgid "Tour Date"
 msgstr ""
 
@@ -4812,7 +4814,7 @@ msgstr ""
 msgid "Tour Date and Time List"
 msgstr ""
 
-#: includes/abptt_layout.php:1343
+#: includes/abptt_layout.php:1344
 msgid "Tour Date Between"
 msgstr ""
 
@@ -4820,16 +4822,16 @@ msgstr ""
 msgid "Tour Description"
 msgstr ""
 
-#: admin/abptt_configuration.php:529 admin/abptt_post.php:335
+#: admin/abptt_configuration.php:529 admin/abptt_post.php:346
 #: includes/abptt_layout.php:609
 msgid "Tour Duration"
 msgstr ""
 
-#: admin/abptt_documentation.php:134
+#: admin/abptt_documentation.php:135
 msgid "Tour editor tabs"
 msgstr ""
 
-#: admin/abptt_configuration.php:522 admin/abptt_documentation.php:200
+#: admin/abptt_configuration.php:522 admin/abptt_documentation.php:204
 msgid "Tour Guide"
 msgstr ""
 
@@ -4837,15 +4839,15 @@ msgstr ""
 msgid "Tour Highlights"
 msgstr ""
 
-#: admin/abptt_configuration.php:360 admin/abptt_post.php:267
+#: admin/abptt_configuration.php:360 admin/abptt_post.php:278
 msgid "Tour Icon"
 msgstr ""
 
-#: admin/abptt_post.php:257
+#: admin/abptt_post.php:268
 msgid "Tour ID"
 msgstr ""
 
-#: admin/abptt_documentation.php:212
+#: admin/abptt_documentation.php:216
 msgid ""
 "tour listing without the search form. Ideal for a dedicated Tour List page. "
 "Accepts the same listing parameters."
@@ -4855,7 +4857,7 @@ msgstr ""
 msgid "Tour Route"
 msgstr ""
 
-#: admin/abptt_configuration.php:367 admin/abptt_post.php:279
+#: admin/abptt_configuration.php:367 admin/abptt_post.php:290
 msgid "Tour Sub Title"
 msgstr ""
 
@@ -4874,13 +4876,13 @@ msgstr ""
 msgid "Tour Time Slots"
 msgstr ""
 
-#: admin/abptt_configuration.php:508 admin/abptt_documentation.php:199
+#: admin/abptt_configuration.php:508 admin/abptt_documentation.php:203
 #: tt_templates/timeline/default.php:11 tt_templates/timeline/light.php:12
 #: tt_templates/timeline/modern.php:15
 msgid "Tour Timeline"
 msgstr ""
 
-#: admin/abptt_post.php:960
+#: admin/abptt_post.php:962
 msgid "Tour was saved as draft because its configuration is incomplete:"
 msgstr ""
 
@@ -4900,8 +4902,8 @@ msgid "Trash : "
 msgstr ""
 
 #: admin/abptt_configuration.php:197 admin/abptt_dashboard.php:154
-#: admin/abptt_documentation.php:118 admin/abptt_documentation.php:141
-#: admin/abptt_post.php:178
+#: admin/abptt_documentation.php:119 admin/abptt_documentation.php:142
+#: admin/abptt_post.php:189
 msgid "Traveler Forms"
 msgstr ""
 
@@ -4913,7 +4915,7 @@ msgstr ""
 msgid "Traveler Forms Configuration Saved Successfully..... !! "
 msgstr ""
 
-#: admin/abptt_documentation.php:86
+#: admin/abptt_documentation.php:87
 msgid "Try it with demo data, then watch the orders."
 msgstr ""
 
@@ -4933,7 +4935,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: admin/abptt_post.php:414
+#: admin/abptt_post.php:425
 msgid "Type Start Point..."
 msgstr ""
 
@@ -4992,19 +4994,19 @@ msgstr ""
 msgid "Use image Post as featured image"
 msgstr ""
 
-#: admin/abptt_documentation.php:214
+#: admin/abptt_documentation.php:218
 msgid "Use post_id=\"…\" on any of them to show one specific tour."
 msgstr ""
 
-#: admin/abptt_documentation.php:149
+#: admin/abptt_documentation.php:150
 msgid "use the global FAQ, import it, or write tour-only questions."
 msgstr ""
 
-#: admin/abptt_documentation.php:141
+#: admin/abptt_documentation.php:142
 msgid "use the global form, import it, or build tour-specific fields."
 msgstr ""
 
-#: admin/abptt_documentation.php:150
+#: admin/abptt_documentation.php:151
 msgid "use the global terms, import them, or write tour-specific terms."
 msgstr ""
 
@@ -5045,7 +5047,7 @@ msgid ""
 "default, this option is set to ON."
 msgstr ""
 
-#: includes/abptt_layout.php:1399 includes/abptt_layout.php:1401
+#: includes/abptt_layout.php:1400 includes/abptt_layout.php:1402
 msgid "User Name"
 msgstr ""
 
@@ -5057,7 +5059,7 @@ msgstr ""
 msgid "Value Option"
 msgstr ""
 
-#: admin/abptt_post.php:133 admin/abptt_seat_plan.php:117
+#: admin/abptt_post.php:143 admin/abptt_seat_plan.php:117
 msgid "View : "
 msgstr ""
 
@@ -5101,7 +5103,7 @@ msgstr ""
 msgid "We see, this id are not valid !"
 msgstr ""
 
-#: admin/abptt_guide.php:141 includes/abptt_function.php:507
+#: admin/abptt_guide.php:141 includes/abptt_function.php:485
 #: tt_templates/guide/default.php:75 tt_templates/guide/light.php:73
 #: tt_templates/guide/modern.php:66
 msgid "Website"
@@ -5129,7 +5131,7 @@ msgstr ""
 msgid "Welcome back, %s!"
 msgstr ""
 
-#: admin/abptt_documentation.php:173
+#: admin/abptt_documentation.php:174
 msgid "What is a \"Ticket Type\"?"
 msgstr ""
 
@@ -5142,23 +5144,23 @@ msgid ""
 "table, and all options) is permanently deleted on uninstall."
 msgstr ""
 
-#: admin/abptt_documentation.php:225
+#: admin/abptt_documentation.php:229
 msgid ""
 "When you uninstall the plugin, your data is preserved by default so you can "
 "reinstall later without losing anything. Turn ON \"Remove All Data on "
 "Uninstall\" in Feature ON/OFF only if you really want to delete everything."
 msgstr ""
 
-#: admin/abptt_documentation.php:177
+#: admin/abptt_documentation.php:178
 msgid "Where do prices go?"
 msgstr ""
 
-#: admin/abptt_configuration.php:578 admin/abptt_documentation.php:202
+#: admin/abptt_configuration.php:578 admin/abptt_documentation.php:206
 #: tt_templates/layout/why_book_us.php:14
 msgid "Why Book With Us"
 msgstr ""
 
-#: admin/abptt_configuration.php:217 admin/abptt_documentation.php:125
+#: admin/abptt_configuration.php:217 admin/abptt_documentation.php:126
 msgid "Why Book With Us ?"
 msgstr ""
 
@@ -5199,7 +5201,7 @@ msgstr ""
 msgid "WooCommerce Plugin"
 msgstr ""
 
-#: admin/abptt_documentation.php:147
+#: admin/abptt_documentation.php:148
 msgid "WooCommerce tax status and tax class for this tour."
 msgstr ""
 
@@ -5231,7 +5233,7 @@ msgstr ""
 msgid "You can buy max ticket :"
 msgstr ""
 
-#: admin/abptt_documentation.php:223
+#: admin/abptt_documentation.php:227
 msgid ""
 "You can configure a global traveler form and additional services once, then "
 "import them into any tour and fine-tune them there."

@@ -463,45 +463,57 @@ window.abptt_image_selection = function ($this) {
     abptt_media_uploader.current_target = $this.closest('.image_selection');
     abptt_media_uploader.open();
 };
-//==========Post Pagination=================//
+
 
 (function ($) {
     "use strict";
-    $(document).on('click', 'div.abptt_area .post_list .pagination_area button[data-page]', function () {
+    //==========Post Pagination=================//
+    $(document).on('click', 'div.abptt_admin .post_list .pagination_area button[data-page]', function () {
         let $this = jQuery(this);
         if (!$this.hasClass('abp_active')) {
-            let parent = $this.closest('.abptt_posts');
-            let target = parent.find('.post_list');
             let filter_args = {};
-            if (parent.find("[name='select_hidden_post_status']").length > 0) {
-                filter_args['status'] = parent.find("[name='select_hidden_post_status']").val();
-            }
             filter_args['page_number'] = parseInt($this.attr('data-page'));
-            if (parent.find("[name='page_item']").length > 0) {
-                filter_args['page_item'] = parseInt(parent.find("[name='page_item']").val());
-            }
-            if (target.length > 0) {
-                jQuery.ajax({
-                    type: 'POST', url: abptt_admin_data.ajax_url, data: {
-                        "action": "abptt_reload_post_list", "filter_args": filter_args, 'nonce': abptt_admin_data.nonce
-                    }, beforeSend: function () {
-                        abptt_spinner(parent);
-                        abptt_toast_msg(abptt_admin_data.msg.post_loading);
-                    }, success: function (response) {
-                        if (response.data && response.data.hasOwnProperty('html')) {
-                            target.html(response.data.html);
-                        }
-                        abptt_spinner_remove(parent);
-                        abptt_toast_msg(response.data.msg, response.data.type);
-                    }, error: function (xhr) {
-                        abptt_ajx_error(xhr, parent);
-                    }
-                });
-            } else {
-                parent.find('.post_tab').trigger('click');
-            }
+            abptt_load_post_list($this, filter_args)
         }
     });
+    $(document).on('abp_trigger', 'div.abptt_admin .abptt_posts [name="post_title"]', function () {
+        let $this = $(this);
+        let filter_args = {};
+        filter_args['post_title'] = $this.val();
+        abptt_load_post_list($this, filter_args)
+    });
+    function abptt_load_post_list($this, filter_args) {
+        let parent = $this.closest('.abptt_posts');
+        let target = parent.find('.post_list');
+
+        if (parent.find("[name='select_hidden_post_status']").length > 0) {
+            filter_args['status'] = parent.find("[name='select_hidden_post_status']").val();
+        }
+
+        if (parent.find("[name='page_item']").length > 0) {
+            filter_args['page_item'] = parseInt(parent.find("[name='page_item']").val());
+        }
+        if (target.length > 0) {
+            jQuery.ajax({
+                type: 'POST', url: abptt_admin_data.ajax_url, data: {
+                    "action": "abptt_reload_post_list", "filter_args": filter_args, 'nonce': abptt_admin_data.nonce
+                }, beforeSend: function () {
+                    abptt_spinner(parent);
+                    abptt_toast_msg(abptt_admin_data.msg.post_loading);
+                }, success: function (response) {
+                    if (response.data && response.data.hasOwnProperty('html')) {
+                        target.html(response.data.html);
+                    }
+                    abptt_spinner_remove(parent);
+                    abptt_toast_msg(response.data.msg, response.data.type);
+                }, error: function (xhr) {
+                    abptt_ajx_error(xhr, parent);
+                }
+            });
+        } else {
+            parent.find('.post_tab').trigger('click');
+        }
+    }
     //==========ticket config=================//
     abptt_parent.on('abp_trigger', '.ticket_configuration .add_new_hook', function () {
         abptt_ticket_type_selection();
